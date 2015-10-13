@@ -17,3 +17,36 @@ L'application réalisée devra offrir deux interfaces distinctes :
     les consommateurs/acheteurs qui peuvent consulter des articles, les placer dans leur caddie et valider une commande. 
 
 Chaque groupe devra élaborer un cahier des charges précis de l'application en termes de fonctionnalités et de critères d'ergonomie. Par ailleurs, le projet devra être réalisé en employant les méthodes et technologies présentées en cours. Ces différents aspects devront être validés par l'équipe pédagogique tout au long du projet. 
+
+L'équipe 
+--------
+
+L’équipe est constituée de cinq étudiants en cinquième année de RICM. Trois viennent de l’option Système et réseau, les deux autres viennent de l’option Communication multimédia.
+
+* Chef de projet : Alan Damotte
+* Scrum Master : Quentin Torck
+* Responsable développement : Jérémy Hammerer
+* Responsable graphique : Rama Codazzi
+* Responsable utilisabilité : Kai Guo
+* Développeur : Toute l’équipe 
+
+Wiki : http://air.imag.fr/index.php/ECOM_RICM5_Groupe2_2015
+
+Ressources
+----------
+
+.. image:: IHM_abstraite.png
+
+Voici la première maquette correspondant à la vue principale en arrivant sur notre site web : 
+
+.. image:: Maquette1.png
+
+La maquette correspondant à la première étape de personnalisation d'un sticker : 
+
+.. image:: Maquette2.png
+
+La maquette suivante présente la gestion du panier utilisateur : 
+
+.. image:: Maquette3.png
+
+
