@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+    <filter>
+        <filter-name>Set Character Encoding</filter-name>
+        <filter-class>org.apache.catalina.filters.SetCharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>ignore</param-name>
+            <param-value>false</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>Set Character Encoding</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <servlet>
+        <servlet-name>ClientCreation</servlet-name>
+        <servlet-class>com.ecom.servlets.ClientCreation</servlet-class>
+        <init-param>
+			<param-name>path</param-name> 
+			<param-value>/home/alan/Documents/RICM5/eCOM-RICM5-2015/file/images/</param-value> 
+		</init-param>
+		<multipart-config>
+			<location>/home/alan/Documents/RICM5/eCOM-RICM5-2015/file/images</location>
+			<max-file-size>2097152</max-file-size> <!-- 2 Mo -->
+			<max-request-size>10485760</max-request-size> <!-- 5 x 2Mo -->
+			<file-size-threshold>1048576</file-size-threshold> <!-- 1 Mo -->
+		</multipart-config>
+    </servlet>
+    <servlet>
+        <servlet-name>ClientsList</servlet-name>
+    <servlet-class>com.ecom.servlets.ClientsList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ClientRemoval</servlet-name>
+        <servlet-class>com.ecom.servlets.ClientRemoval</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CommandCreation</servlet-name>
+        <servlet-class>com.ecom.servlets.CommandCreation</servlet-class>
+        <init-param>
+			<param-name>path</param-name> 
+			<param-value>/home/alan/Documents/RICM5/eCOM-RICM5-2015/file/images/</param-value> 
+		</init-param>
+		<multipart-config>
+			<location>/home/alan/Documents/RICM5/eCOM-RICM5-2015/file/images</location>
+			<max-file-size>2097152</max-file-size> <!-- 2 Mo -->
+			<max-request-size>10485760</max-request-size> <!-- 5 x 2Mo -->
+			<file-size-threshold>1048576</file-size-threshold> <!-- 1 Mo -->
+		</multipart-config>
+    </servlet>
+    <servlet>
+        <servlet-name>CommandsList</servlet-name>
+        <servlet-class>com.ecom.servlets.CommandsList</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CommandRemoval</servlet-name>
+        <servlet-class>com.ecom.servlets.CommandRemoval</servlet-class>
+    </servlet>
+    <servlet>
+		<servlet-name>Image</servlet-name>
+		<servlet-class>com.ecom.servlets.Image</servlet-class>
+		<init-param>
+			<param-name>path</param-name> 
+			<param-value>/home/alan/Documents/RICM5/eCOM-RICM5-2015/file/images/</param-value> 
+		</init-param>
+	</servlet>
+	
+    <servlet-mapping>
+        <servlet-name>ClientCreation</servlet-name>
+        <url-pattern>/clientCreation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClientsList</servlet-name>
+        <url-pattern>/clientsList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ClientRemoval</servlet-name>
+        <url-pattern>/clientRemoval</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CommandCreation</servlet-name>
+        <url-pattern>/commandCreation</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CommandsList</servlet-name>
+        <url-pattern>/commandsList</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CommandRemoval</servlet-name>
+        <url-pattern>/commandRemoval</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+		<servlet-name>Image</servlet-name>
+		<url-pattern>/images/*</url-pattern>
+	</servlet-mapping>
+</web-app>
