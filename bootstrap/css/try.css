@@ -1,0 +1,34 @@
+.zoomarticle {
+	height: auto;
+	float: left;
+	margin-bottom: 1.65em;
+	margin-left: 3%;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	list-style: none;
+}
+ 
+.article_big_img {
+	width: 365px;
+	height: 195px;
+	overflow: hidden;
+	padding: 2px;
+}
+ 
+.article_big_img > img {
+	width: 365px;
+	height: 195px;
+	transition: all 1s;
+	-moz-transition: all 1s;
+	-webkit-transition: all 1s;
+	-o-transition: all 1s;
+}
+ 
+.zoomarticle:hover > .article_big_img > img {
+	transform: scale(1.05);
+	-ms-transform: scale(1.05);
+	-webkit-transform: scale(1.05);
+	-o-transform: scale(1.05);
+	-moz-transform: scale(1.05);
+}
