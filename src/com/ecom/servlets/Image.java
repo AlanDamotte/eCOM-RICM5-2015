@@ -8,10 +8,13 @@ import java.io.IOException;
 import java.net.URLDecoder;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.WebInitParam;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+@WebServlet(name = "Image", urlPatterns = { "/images/*" }, initParams = @WebInitParam( name = "path", value = "/home/alan/Documents/RICM5/eCOM-RICM5-2015/file/images/" ) )
 public class Image extends HttpServlet {
     public static final int BUFFER_SIZE = 10240; // 10ko
 

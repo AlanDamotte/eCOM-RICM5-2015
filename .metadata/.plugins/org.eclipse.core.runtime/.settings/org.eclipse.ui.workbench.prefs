@@ -1,0 +1,4 @@
+//org.eclipse.ui.orders/state/org.eclipse.ui.navigator.resources.nested.changeProjectPresentation/org.eclipse.ui.orders.radioState=false
+//org.eclipse.ui.orders/state/org.eclipse.wst.xml.views.XPathView.processor.xpathprocessor/org.eclipse.ui.orders.radioState=xpath10
+PLUGINS_NOT_ACTIVATED_ON_STARTUP=org.eclipse.m2e.discovery;
+eclipse.preferences.version=1
