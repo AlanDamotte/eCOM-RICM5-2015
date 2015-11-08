@@ -4,13 +4,13 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <title>Création d'une Command</title>
+        <title>Création d'une order</title>
         <link type="text/css" rel="stylesheet" href="<c:url value="/inc/style.css"/>" />
     </head>
     <body>
         <c:import url="/inc/menu.jsp" />
         <div>
-            <form method="post" action="<c:url value="/commandCreation"/>" enctype="multipart/form-data">
+            <form method="post" action="<c:url value="/orderCreation"/>" enctype="multipart/form-data">
                 <fieldset>
                     <legend>Informations client</legend>
                     <%-- Si et seulement si la Map des clients en session n'est pas vide, alors on propose un choix à l'utilisateur --%>
@@ -21,9 +21,9 @@
                         <br/><br />
                     </c:if>
                     
-                    <c:set var="client" value="${ command.client }" scope="request" />
+                    <c:set var="client" value="${ order.client }" scope="request" />
                     <div id="newClient">
-                        <c:import url="/inc/inc_client_form.jsp" />
+                        <c:import url="/inc/inc_customer_form.jsp" />
                     </div>
                     
                     <%-- Si et seulement si la Map des clients en session n'est pas vide, alors on crée la liste déroulante --%>
@@ -42,36 +42,36 @@
                     </c:if>
                 </fieldset>
                 <fieldset>
-                    <legend>Informations Command</legend>
+                    <legend>Informations order</legend>
                     
-                    <label for="dateCommand">Date <span class="requis">*</span></label>
-                    <input type="text" id="v" name="dateCommand" value="<c:out value="${Command.date}"/>" size="30" maxlength="30" disabled />
-                    <span class="erreur">${form.errors['dateCommand']}</span>
+                    <label for="dateOrder">Date <span class="requis">*</span></label>
+                    <input type="text" id="dateOrder" name="dateOrder" value="<c:out value="${order.date}"/>" size="30" maxlength="30" disabled />
+                    <span class="erreur">${form.errors['dateOrder']}</span>
                     <br />
                     
-                    <label for="amountCommand">Montant <span class="requis">*</span></label>
-                    <input type="text" id="amountCommand" name="amountCommand" value="<c:out value="${Command.montant}"/>" size="30" maxlength="30" />
-                    <span class="erreur">${form.errors['amountCommand']}</span>
+                    <label for="amountOrder">Montant <span class="requis">*</span></label>
+                    <input type="text" id="amountOrder" name="amountOrder" value="<c:out value="${order.amount}"/>" size="30" maxlength="30" />
+                    <span class="erreur">${form.errors['amountOrder']}</span>
                     <br />
                     
-                    <label for="paymentModeCommand">Mode de paiement <span class="requis">*</span></label>
-                    <input type="text" id="paymentModeCommand" name="paymentModeCommand" value="<c:out value="${Command.modePaiement}"/>" size="30" maxlength="30" />
-                    <span class="erreur">${form.errors['paymentModeCommand']}</span>
+                    <label for="paymentModeOrder">Mode de paiement <span class="requis">*</span></label>
+                    <input type="text" id="paymentModeOrder" name="paymentModeOrder" value="<c:out value="${order.paymentMode}"/>" size="30" maxlength="30" />
+                    <span class="erreur">${form.errors['paymentModeOrder']}</span>
                     <br />
                     
-                    <label for="paymentStatusCommand">Statut du paiement</label>
-                    <input type="text" id="paymentStatusCommand" name="paymentStatusCommand" value="<c:out value="${Command.statutPaiement}"/>" size="30" maxlength="30" />
-                    <span class="erreur">${form.errors['paymentStatusCommand']}</span>
+                    <label for="paymentStatusOrder">Statut du paiement</label>
+                    <input type="text" id="paymentStatusOrder" name="paymentStatusOrder" value="<c:out value="${order.paymentStatus}"/>" size="30" maxlength="30" />
+                    <span class="erreur">${form.errors['paymentStatusOrder']}</span>
                     <br />
                     
-                    <label for="deliveryModeCommand">Mode de livraison <span class="requis">*</span></label>
-                    <input type="text" id="deliveryModeCommand" name="deliveryModeCommand" value="<c:out value="${Command.modeLivraison}"/>" size="30" maxlength="30" />
-                    <span class="erreur">${form.errors['deliveryModeCommand']}</span>
+                    <label for="deliveryModeOrder">Mode de livraison <span class="requis">*</span></label>
+                    <input type="text" id="deliveryModeOrder" name="deliveryModeOrder" value="<c:out value="${order.deliveryMode}"/>" size="30" maxlength="30" />
+                    <span class="erreur">${form.errors['deliveryModeOrder']}</span>
                     <br />
                     
-                    <label for="deliveryStatusCommand">Statut de la livraison</label>
-                    <input type="text" id="deliveryStatusCommand" name="deliveryStatusCommand" value="<c:out value="${Command.statutLivraison}"/>" size="30" maxlength="30" />
-                    <span class="erreur">${form.errors['deliveryStatusCommand']}</span>
+                    <label for="deliveryStatusOrder">Statut de la livraison</label>
+                    <input type="text" id="deliveryStatusOrder" name="deliveryStatusOrder" value="<c:out value="${order.deliveryStatus}"/>" size="30" maxlength="30" />
+                    <span class="erreur">${form.errors['deliveryStatusOrder']}</span>
                     <br />
                     
                     <p class="info">${ form.result }</p>

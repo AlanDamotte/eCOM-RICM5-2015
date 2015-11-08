@@ -7,7 +7,7 @@ Génération de la documentation
 ------------------------------
 1. Installer [Sphinx](http://sphinx-doc.org/latest/install.html#debian-ubuntu-install-sphinx-using-packaging-system)
 2. Aller dans le dossier *doc* du répertoire
-3. Effectuer la commande suivante : 
+3. Effectuer la ordere suivante : 
 
 	```
 	make html

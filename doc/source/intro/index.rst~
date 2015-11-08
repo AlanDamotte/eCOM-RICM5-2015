@@ -13,8 +13,8 @@ En outre, une deuxième motivation forte du projet eCOM est qu'il intègre des t
 
 L'application réalisée devra offrir deux interfaces distinctes :
 
-    les administrateurs qui gèrent les stocks de produits, les comptes des utilisateurs de l'application et le suivi des commandes ;
-    les consommateurs/acheteurs qui peuvent consulter des articles, les placer dans leur caddie et valider une commande. 
+    les administrateurs qui gèrent les stocks de produits, les comptes des utilisateurs de l'application et le suivi des orderes ;
+    les consommateurs/acheteurs qui peuvent consulter des articles, les placer dans leur caddie et valider une ordere. 
 
 Chaque groupe devra élaborer un cahier des charges précis de l'application en termes de fonctionnalités et de critères d'ergonomie. Par ailleurs, le projet devra être réalisé en employant les méthodes et technologies présentées en cours. Ces différents aspects devront être validés par l'équipe pédagogique tout au long du projet. 
 

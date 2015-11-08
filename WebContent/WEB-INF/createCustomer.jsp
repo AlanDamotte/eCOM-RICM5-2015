@@ -10,10 +10,10 @@
     <body>
         <c:import url="/inc/menu.jsp" />
         <div>
-            <form method="post" action="<c:url value="/clientCreation"/>" enctype="multipart/form-data">
+            <form method="post" action="<c:url value="/customerCreation"/>" enctype="multipart/form-data">
                <fieldset>
                     <legend>Informations client</legend>
-                    <c:import url="/inc/inc_client_form.jsp" />
+                    <c:import url="/inc/inc_customer_form.jsp" />
                 </fieldset>
                 <p class="info">${ form.result }</p>
                 <input type="submit" value="Valider"  />
