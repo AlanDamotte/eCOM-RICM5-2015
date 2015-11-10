@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ecom.dao.ProductDao;
+import com.ecom.dao.ProductDaoLocal;
 import com.ecom.entities.Product;
 import com.ecom.forms.ProductCreationForm;
 
@@ -27,7 +27,7 @@ public class ProductCreation extends HttpServlet {
 	public static final String VIEW_FORM = "/WEB-INF/addProduct.jsp";
 
 	@EJB
-	private ProductDao productDao;
+	private ProductDaoLocal productDao;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* À la réception d'une requête GET, simple affichage du formulaire */

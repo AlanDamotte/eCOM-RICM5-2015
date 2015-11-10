@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.ecom.dao.OrderDao;
+import com.ecom.dao.OrderDaoLocal;
 import com.ecom.dao.DAOException;
 import com.ecom.entities.Order;
 
@@ -24,7 +25,7 @@ public class OrderRemoval extends HttpServlet {
 	public static final String VIEW = "/ordersList";
 
 	@EJB
-	private OrderDao orderDao;
+	private OrderDaoLocal orderDao;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* Récupération du paramètre */

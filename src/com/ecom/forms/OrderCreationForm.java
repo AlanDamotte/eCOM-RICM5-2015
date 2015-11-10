@@ -8,8 +8,8 @@ import javax.servlet.http.HttpSession;
 
 import org.joda.time.DateTime;
 
-import com.ecom.dao.CustomerDao;
-import com.ecom.dao.OrderDao;
+import com.ecom.dao.CustomerDaoLocal;
+import com.ecom.dao.OrderDaoLocal;
 import com.ecom.entities.Customer;
 import com.ecom.entities.Order;
 import com.ecom.dao.DAOException;
@@ -32,10 +32,10 @@ public final class OrderCreationForm {
 	private String result;
 	private Map<String, String> errors = new HashMap<String, String>();
 
-	private CustomerDao customerDao;
-	private OrderDao orderDao;
+	private CustomerDaoLocal customerDao;
+	private OrderDaoLocal orderDao;
 
-	public OrderCreationForm( CustomerDao customerDao, OrderDao orderDao ) {
+	public OrderCreationForm( CustomerDaoLocal customerDao, OrderDaoLocal orderDao ) {
         this.customerDao = customerDao;
         this.orderDao = orderDao;
     }

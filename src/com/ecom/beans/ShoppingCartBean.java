@@ -1,32 +1,33 @@
 package com.ecom.beans;
 
-import javax.annotation.ManagedBean;
 import javax.ejb.EJB;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
-import javax.enterprise.context.SessionScoped;
 
-import com.ecom.dao.ProductDao;
+import com.ecom.dao.CartDaoLocal;
+import com.ecom.dao.ProductDaoLocal;
 import com.ecom.entities.Product;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 @Stateful(mappedName = "ShoppingCartBean")
-@EJB(name = "shoppingCartBean", beanInterface = ShoppingCart.class)
-public class ShoppingCartBean implements ShoppingCart, ShoppingCartLocal {
+@EJB(name = "ShoppingCartBean", beanInterface = ShoppingCartLocal.class)
+public class ShoppingCartBean implements ShoppingCartLocal, ShoppingCart {
 
 	private Map<Long, Integer> items = new HashMap<Long, Integer>();
 	private boolean initialised = false;
 	private double total;
 	
 	@EJB 
-	ProductDao productDao;
+	ProductDaoLocal productDao;
+	
+	@EJB 
+	CartDaoLocal cartDao;
 
 	@Override
 	public void initialize() {
@@ -73,7 +74,7 @@ public class ShoppingCartBean implements ShoppingCart, ShoppingCartLocal {
 
 	@Override
 	public void removeProduct(Product product, int quantity) {
-		int initialQuantity = getQuantity(product);
+		int initialQuantity = getQuantity(product.getId());
 		if(initialQuantity - quantity > 0){
 			items.replace(product.getId(), initialQuantity - quantity);
 		}
@@ -116,14 +117,14 @@ public class ShoppingCartBean implements ShoppingCart, ShoppingCartLocal {
 		return list;
 	}
 
-	@Override
+	/*@Override
 	public int getQuantity(Product product) {
 		int quantity = 0;
 		if (items.containsKey(product.getId())){
 			quantity = items.get(product.getId());
 		}
 		return quantity;
-	}
+	}*/
 
 	@Override
 	public int getQuantity(Long id) {
@@ -149,5 +150,21 @@ public class ShoppingCartBean implements ShoppingCart, ShoppingCartLocal {
 		   cart.put(key, productDao.find(key));
 		}
 		return cart;
+	}
+
+	@Override
+	public void updateQuantity(Product product, int quantity) {
+		double subtotal1 = product.getPrice() * getQuantity(product.getId());
+		double subtotal = this.total - subtotal1;
+		subtotal = subtotal + product.getPrice() * quantity;
+		items.replace(product.getId(), quantity);
+		this.total = subtotal;
+		
+	}
+	
+	//Méthode de sauvegarde du panier associé à l'utilisateur
+	@Remove
+	public void saveCart(){
+		//TODO
 	}
 }

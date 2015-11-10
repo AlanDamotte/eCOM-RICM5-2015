@@ -15,11 +15,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ecom.beans.ShoppingCart;
+import com.ecom.beans.ShoppingCartLocal;
 import com.ecom.dao.DAOException;
-import com.ecom.dao.ProductDao;
-import com.ecom.entities.Product;
-import com.ecom.forms.FormValidationException;
+import com.ecom.dao.ProductDaoLocal;
 
 @WebServlet(name = "CartManagement", urlPatterns = { "/cartManagement", "/addToCart", "/removeFromCart" })
 public class CartManagement extends HttpServlet {
@@ -34,15 +32,15 @@ public class CartManagement extends HttpServlet {
 	public static final String VIEWCART = "/cartManagement";
 
 	@EJB
-	private ProductDao productDao;
+	private ProductDaoLocal productDao;
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ShoppingCart shoppingCart = (ShoppingCart) request.getSession().getAttribute(CART_PRODUCTS_SESSION);
+		ShoppingCartLocal shoppingCart = (ShoppingCartLocal) request.getSession().getAttribute(CART_PRODUCTS_SESSION);
 		if (shoppingCart == null) {
 			try {
 				InitialContext ctx = new InitialContext();
-				shoppingCart = (ShoppingCart) ctx.lookup("ShoppingCartBean");
+				shoppingCart = (ShoppingCartLocal) ctx.lookup("java:comp/env/ShoppingCartBean");
 
 				// put EJB in HTTP session for future servlet calls
 				request.getSession().setAttribute(CART_PRODUCTS_SESSION, shoppingCart);
@@ -101,13 +99,11 @@ public class CartManagement extends HttpServlet {
 		/*
 		 * À la réception d'une requête GET, affichage de la liste des clients
 		 */
-		ShoppingCart shoppingCart = (ShoppingCart) request.getSession().getAttribute(CART_PRODUCTS_SESSION);
+		ShoppingCartLocal shoppingCart = (ShoppingCartLocal) request.getSession().getAttribute(CART_PRODUCTS_SESSION);
 		if (shoppingCart == null) {
-			// EJB is not present in the HTTP session
-			// so let's fetch a new one from the container
 			try {
 				InitialContext ctx = new InitialContext();
-				shoppingCart = (ShoppingCart) ctx.lookup("ShoppingCartBean");
+				shoppingCart = (ShoppingCartLocal) ctx.lookup("java:comp/env/ShoppingCartBean");
 
 				// put EJB in HTTP session for future servlet calls
 				request.getSession().setAttribute(CART_PRODUCTS_SESSION, shoppingCart);

@@ -1,6 +1,7 @@
 package com.ecom.entities;
 
 import java.io.Serializable;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,33 +19,41 @@ public class Cart implements Serializable {
 	/* Propriétés du bean */
 	private Integer id;
 
-	@Column(nullable = false)
-	private Long productId;
-	
-	@Column(nullable = false)
-	private Integer quantity;
-	
-	public void setId( Integer id ) {
-        this.id = id;
-    }
+	private Customer customer;
 
-    public int getId() {
-        return id;
-    }
-    
-    public void setProductId( Long productId ) {
-        this.productId = productId;
-    }
+	private Map<Long, Integer> cart;
 
-    public Long getProductId() {
-        return productId;
-    }
-    
-	public void setQuantity(int quantity){
-		this.quantity = quantity;
+	private double totalPrice;
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
-	
-	public int getQuantity(){
-		return quantity;
+
+	public int getId() {
+		return id;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public Customer getCustomer() {
+		return this.customer;
+	}
+
+	public Map<Long, Integer> getCart() {
+		return this.cart;
+	}
+
+	public void setCart(Map<Long, Integer> cart) {
+		this.cart = cart;
+	}
+
+	public double getTotalPrice() {
+		return this.totalPrice;
+	}
+
+	public void setTotalPrice(double totalPrice) {
+		this.totalPrice = totalPrice;
 	}
 }

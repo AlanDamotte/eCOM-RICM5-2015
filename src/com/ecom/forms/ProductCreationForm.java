@@ -6,7 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.ecom.dao.DAOException;
-import com.ecom.dao.ProductDao;
+import com.ecom.dao.ProductDaoLocal;
 import com.ecom.entities.Product;
 
 public class ProductCreationForm {
@@ -18,9 +18,9 @@ public class ProductCreationForm {
 	public static final String FIELD_DISPONIBILITYP = "disponibilityp";
 
 	private String result;
-	private ProductDao productDao;
+	private ProductDaoLocal productDao;
 
-	public ProductCreationForm(ProductDao productDao) {
+	public ProductCreationForm(ProductDaoLocal productDao) {
 		this.productDao = productDao;
 	}
 

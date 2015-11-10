@@ -7,36 +7,49 @@ import javax.persistence.*;
 @Entity
 public class Customer implements Serializable {
 
-    @Id
-    @Column(name = "id_customer")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@Column(name = "id_customer")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	/* Propriétés du bean */
 	private Long id;
-    
-    @Column(nullable = false)
-	private String lastname;
-    
-    @Column(nullable = false)
-	private String firstname;
-    
-    @Column(nullable = false)
-	private String address;
-    
-	private String phonenumber;
-    
-    @Column(nullable = false)
-	private String email;
-    
-	private String image;
-	
-	public void setId( Long id ) {
-        this.id = id;
-    }
 
-    public Long getId() {
-        return id;
-    }
-	
+	@Column(nullable = false)
+	private String lastname;
+
+	@Column(nullable = false)
+	private String password;
+
+	@Column(nullable = false)
+	private String firstname;
+
+	@Column(nullable = false)
+	private String address;
+
+	@Column(nullable = false)
+	private String postCode;
+
+	private String phonenumber;
+
+	@Column(nullable = false)
+	private String email;
+
+	private String image;
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Long getId() {
+		return id;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
@@ -58,6 +71,14 @@ public class Customer implements Serializable {
 		this.address = address;
 	}
 
+	public String getPostCode() {
+		return postCode;
+	}
+
+	public void setPostCode(String postCode) {
+		this.postCode = postCode;
+	}
+
 	public String getAddress() {
 		return address;
 	}
@@ -77,7 +98,7 @@ public class Customer implements Serializable {
 	public String getEmail() {
 		return email;
 	}
-	
+
 	public void setImage(String image) {
 		this.image = image;
 	}

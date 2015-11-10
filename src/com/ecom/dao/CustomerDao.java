@@ -5,15 +5,13 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceContextType;
 import javax.persistence.TypedQuery;
 
 import com.ecom.entities.Customer;
 
-@Stateless
-public class CustomerDao {
-
-    // Injection du manager, qui s'occupe de la connexion avec la BDD
+@Stateless(mappedName = "CustomerDao")
+public class CustomerDao implements CustomerDaoLocal{
+	// Injection du manager, qui s'occupe de la connexion avec la BDD
     @PersistenceContext( unitName = "ecom_PU")
     private EntityManager em;
 

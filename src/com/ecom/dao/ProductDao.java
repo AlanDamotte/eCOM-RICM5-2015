@@ -2,15 +2,15 @@ package com.ecom.dao;
 
 import java.util.List;
 
-import javax.ejb.Stateful;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import com.ecom.entities.Product;
 
-@Stateful
-public class ProductDao{
+@Stateless(mappedName = "ProductDao")
+public class ProductDao implements ProductDaoLocal{
 
 	// Injection du manager, qui s'occupe de la connexion avec la BDD
 	@PersistenceContext(unitName = "ecom_PU")

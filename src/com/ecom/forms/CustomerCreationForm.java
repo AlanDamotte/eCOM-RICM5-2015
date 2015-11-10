@@ -13,7 +13,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 
-import com.ecom.dao.CustomerDao;
+import com.ecom.dao.CustomerDaoLocal;
 import com.ecom.dao.DAOException;
 import com.ecom.entities.Customer;
 
@@ -31,9 +31,9 @@ public class CustomerCreationForm {
 	private static final int BUFFER_SIZE = 10240; // 10ko
 
 	private String result;
-	private CustomerDao customerDao;
+	private CustomerDaoLocal customerDao;
 
-	public CustomerCreationForm(CustomerDao customerDao) {
+	public CustomerCreationForm(CustomerDaoLocal customerDao) {
 
 		this.customerDao = customerDao;
 

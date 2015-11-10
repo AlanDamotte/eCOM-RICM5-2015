@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ecom.dao.CustomerDao;
-import com.ecom.dao.OrderDao;
+import com.ecom.dao.CustomerDaoLocal;
+import com.ecom.dao.OrderDaoLocal;
 import com.ecom.entities.Customer;
 import com.ecom.entities.Order;
 import com.ecom.forms.OrderCreationForm;
@@ -35,9 +35,9 @@ public class OrderCreation extends HttpServlet {
 	public static final String VIEW_FORM = "/WEB-INF/createOrder.jsp";
 
 	@EJB
-	private CustomerDao customerDao;
+	private CustomerDaoLocal customerDao;
 	@EJB
-	private OrderDao orderDao;
+	private OrderDaoLocal orderDao;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* À la réception d'une requête GET, simple affichage du formulaire */

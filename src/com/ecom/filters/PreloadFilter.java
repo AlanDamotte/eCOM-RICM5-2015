@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import javax.ejb.EJB;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -16,9 +18,10 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import com.ecom.dao.CustomerDao;
-import com.ecom.dao.OrderDao;
-import com.ecom.dao.ProductDao;
+import com.ecom.beans.ShoppingCartLocal;
+import com.ecom.dao.CustomerDaoLocal;
+import com.ecom.dao.OrderDaoLocal;
+import com.ecom.dao.ProductDaoLocal;
 import com.ecom.entities.Customer;
 import com.ecom.entities.Order;
 import com.ecom.entities.Product;
@@ -28,13 +31,16 @@ public class PreloadFilter implements Filter {
 	public static final String ATT_CLIENTS_SESSION = "customers";
 	public static final String ATT_ORDERS_SESSION = "orders";
 	public static final String ATT_PRODUCTS_SESSION = "products";
+	public static final String CART_PRODUCTS_SESSION = "cart_products";
 
 	@EJB
-	private CustomerDao customerDao;
+	private CustomerDaoLocal customerDao;
+	
 	@EJB
-	private OrderDao orderDao;
+	private OrderDaoLocal orderDao;
+	
 	@EJB
-	private ProductDao productDao;
+	private ProductDaoLocal productDao;
 	
 	public void init( FilterConfig filterConfig ) throws ServletException {
     }
@@ -93,6 +99,7 @@ public class PreloadFilter implements Filter {
 			}
 			session.setAttribute(ATT_PRODUCTS_SESSION, mapProducts);
 		}
+				
 
 		/* Pour terminer, poursuite de la requête en cours */
 		chain.doFilter(request, res);

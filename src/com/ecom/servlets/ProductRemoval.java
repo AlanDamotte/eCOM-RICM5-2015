@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.ecom.dao.ProductDao;
+import com.ecom.dao.ProductDaoLocal;
 import com.ecom.dao.DAOException;
 import com.ecom.entities.Product;
 
@@ -24,7 +25,7 @@ public class ProductRemoval extends HttpServlet {
 	public static final String VIEW = "/productsList";
 
 	@EJB
-	private ProductDao productDao;
+	private ProductDaoLocal productDao;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println(request.getRequestURI() + request.getContextPath());

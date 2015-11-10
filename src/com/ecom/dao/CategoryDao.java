@@ -8,43 +8,43 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
-import com.ecom.entities.Order;
+import com.ecom.entities.Category;
 
-@Stateless(mappedName = "OrderDao")
-public class OrderDao implements OrderDaoLocal{
+@Stateless(mappedName = "CategoryDao")
+public class CategoryDao implements CategoryDaoLocal {
 
-	// Injection du manager, qui s'occupe de la connexion avec la BDD
 	@PersistenceContext(unitName = "ecom_PU")
 	private EntityManager em;
+	Category category;
 
-	public Order find(long id) throws DAOException {
+	public Category find(long id) throws DAOException {
 		try {
-			return em.find(Order.class, id);
+			return em.find(Category.class, id);
 		} catch (Exception e) {
 			throw new DAOException(e);
 		}
 	}
 
-	public void create(Order order) throws DAOException {
+	public void create(Category category) throws DAOException {
 		try {
-			em.persist(order);
+			em.persist(category);
 		} catch (Exception e) {
 			throw new DAOException(e);
 		}
 	}
 
-	public List<Order> list() throws DAOException {
+	public List<Category> list() throws DAOException {
 		try {
-			TypedQuery<Order> query = em.createQuery("SELECT o FROM Order o ORDER BY o.id", Order.class);
+			TypedQuery<Category> query = em.createQuery("SELECT c FROM Category c ORDER BY c.id", Category.class);
 			return query.getResultList();
 		} catch (Exception e) {
 			throw new DAOException(e);
 		}
 	}
 
-	public void remove(Order order) throws DAOException {
+	public void remove(Category category) throws DAOException {
 		try {
-			em.remove(em.merge(order));
+			em.remove(em.merge(category));
 		} catch (Exception e) {
 			throw new DAOException(e);
 		}
