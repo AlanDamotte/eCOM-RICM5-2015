@@ -8,17 +8,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "OrdersList", urlPatterns = { "/ordersList" } )
-public class OrdersList extends HttpServlet {
-	public static final String ATT_ORDER = "order";
-	public static final String ATT_FORM = "form";
+@WebServlet(name = "Administration", urlPatterns = { "/administration" })
+public class Administration extends HttpServlet {
 
-	public static final String VIEW = "/WEB-INF/ordersList.jsp";
+	public static final String VIEW = "/WEB-INF/administration.jsp";
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*
-		 * À la réception d'une requête GET, affichage de la liste des orderes
-		 */
+
 		this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 	}
 }

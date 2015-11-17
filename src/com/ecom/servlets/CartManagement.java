@@ -15,11 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ecom.beans.ShoppingCartLocal;
+import com.ecom.beans.ShoppingCart;
+import com.ecom.dao.CustomerDaoRemote;
 import com.ecom.dao.DAOException;
-import com.ecom.dao.ProductDaoLocal;
+import com.ecom.dao.ProductDaoRemote;
 
-@WebServlet(name = "CartManagement", urlPatterns = { "/cartManagement", "/addToCart", "/removeFromCart" })
+@WebServlet(name = "CartManagement", urlPatterns = { "/cartManagement", "/addToCart", "/removeFromCart", "/addToCartFromSearch" })
 public class CartManagement extends HttpServlet {
 	public static final String ATT_PRODUCT = "product";
 	public static final String ATT_FORM = "form";
@@ -27,20 +28,32 @@ public class CartManagement extends HttpServlet {
 
 	public static final String PARAM_ID_PRODUCT = "idProduct";
 	public static final String CART_PRODUCTS_SESSION = "cart_products";
-	public static final String VIEWPRODUCT = "/productsList";
+	public static final String VIEWPRODUCT = "/catalog";
+	public static final String VIEWSEARCH = "/search";
 
 	public static final String VIEWCART = "/cartManagement";
-
-	@EJB
-	private ProductDaoLocal productDao;
+	
+	private ProductDaoRemote productDao;
+	
+	InitialContext ctx;
+	{
+		try {
+			ctx = new InitialContext();
+			productDao = (ProductDaoRemote) ctx.lookup("ProductDao");
+		} catch (NamingException ex) {
+			ex.printStackTrace();
+		}
+	}
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ShoppingCartLocal shoppingCart = (ShoppingCartLocal) request.getSession().getAttribute(CART_PRODUCTS_SESSION);
+		ShoppingCart shoppingCart = (ShoppingCart) request.getSession().getAttribute(CART_PRODUCTS_SESSION);
 		if (shoppingCart == null) {
 			try {
 				InitialContext ctx = new InitialContext();
-				shoppingCart = (ShoppingCartLocal) ctx.lookup("java:comp/env/ShoppingCartBean");
+				//shoppingCart = (ShoppingCart) ctx.lookup("java:comp/env/ShoppingCartBean");
+				shoppingCart = (ShoppingCart) ctx.lookup("ShoppingCartBean");
+
 
 				// put EJB in HTTP session for future servlet calls
 				request.getSession().setAttribute(CART_PRODUCTS_SESSION, shoppingCart);
@@ -71,6 +84,29 @@ public class CartManagement extends HttpServlet {
 			session.setAttribute(CART_PRODUCTS_SESSION, shoppingCart);
 			/* Redirection vers la fiche récapitulative */
 			response.sendRedirect(request.getContextPath() + VIEWPRODUCT);
+		}else if (request.getRequestURI().equals(request.getContextPath() + "/addToCartFromSearch")) {
+
+			String idProduct = getValueParameter(request, PARAM_ID_PRODUCT);
+			Long id = Long.parseLong(idProduct);
+
+			/* Récupération de la Map des products enregistrés en session */
+			HttpSession session = request.getSession();
+			
+			String quantityCart = getValueParameter(request, "quantityCart");
+			int quantity = Integer.parseInt(quantityCart);
+			
+			/* Si l'id du client et la Map des products ne sont pas vides */
+			if (id != null) {
+				try {
+					shoppingCart.addProduct(id, quantity);
+				} catch (DAOException e) {
+					e.printStackTrace();
+				}
+			}
+
+			session.setAttribute(CART_PRODUCTS_SESSION, shoppingCart);
+			/* Redirection vers la fiche récapitulative */
+			response.sendRedirect(request.getContextPath() + VIEWSEARCH);
 		}else if (request.getRequestURI().equals(request.getContextPath() + "/removeFromCart")) {
 			String idProduct = getValueParameter(request, PARAM_ID_PRODUCT);
 			Long id = Long.parseLong(idProduct);
@@ -99,11 +135,12 @@ public class CartManagement extends HttpServlet {
 		/*
 		 * À la réception d'une requête GET, affichage de la liste des clients
 		 */
-		ShoppingCartLocal shoppingCart = (ShoppingCartLocal) request.getSession().getAttribute(CART_PRODUCTS_SESSION);
+		ShoppingCart shoppingCart = (ShoppingCart) request.getSession().getAttribute(CART_PRODUCTS_SESSION);
 		if (shoppingCart == null) {
 			try {
 				InitialContext ctx = new InitialContext();
-				shoppingCart = (ShoppingCartLocal) ctx.lookup("java:comp/env/ShoppingCartBean");
+				shoppingCart = (ShoppingCart) ctx.lookup("ShoppingCartBean");
+				//shoppingCart = (ShoppingCart) ctx.lookup("java:comp/env/ShoppingCartBean");
 
 				// put EJB in HTTP session for future servlet calls
 				request.getSession().setAttribute(CART_PRODUCTS_SESSION, shoppingCart);

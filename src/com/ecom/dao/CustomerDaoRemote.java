@@ -2,12 +2,12 @@ package com.ecom.dao;
 
 import java.util.List;
 
-import javax.ejb.Local;
+import javax.ejb.Remote;
 
 import com.ecom.entities.Customer;
 
-@Local
-public interface CustomerDaoLocal {
+@Remote
+public interface CustomerDaoRemote {
 	public Customer find(long id);
 
 	public void create(Customer customer);

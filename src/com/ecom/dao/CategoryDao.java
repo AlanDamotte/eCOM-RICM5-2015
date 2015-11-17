@@ -11,7 +11,8 @@ import javax.persistence.TypedQuery;
 import com.ecom.entities.Category;
 
 @Stateless(mappedName = "CategoryDao")
-public class CategoryDao implements CategoryDaoLocal {
+@EJB(name = "CategoryDao", beanInterface = CategoryDaoRemote.class)
+public class CategoryDao implements CategoryDaoLocal, CategoryDaoRemote {
 
 	@PersistenceContext(unitName = "ecom_PU")
 	private EntityManager em;

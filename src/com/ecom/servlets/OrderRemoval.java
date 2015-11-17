@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.ejb.EJB;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.ecom.dao.OrderDao;
-import com.ecom.dao.OrderDaoLocal;
+import com.ecom.dao.OrderDaoRemote;
+import com.ecom.dao.CustomerDaoRemote;
 import com.ecom.dao.DAOException;
 import com.ecom.entities.Order;
 
@@ -24,8 +27,17 @@ public class OrderRemoval extends HttpServlet {
 
 	public static final String VIEW = "/ordersList";
 
-	@EJB
-	private OrderDaoLocal orderDao;
+	private OrderDaoRemote orderDao;
+	
+	InitialContext ctx;
+	{
+		try {
+			ctx = new InitialContext();
+			orderDao = (OrderDaoRemote) ctx.lookup("OrderDao");
+		} catch (NamingException ex) {
+			ex.printStackTrace();
+		}
+	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* Récupération du paramètre */

@@ -8,7 +8,7 @@
         <link type="text/css" rel="stylesheet" href="<c:url value="/inc/style.css"/>" />
     </head>
     <body>
-        <c:import url="/inc/menu.jsp" />
+        <c:import url="/inc/adminMenu.jsp" />
         <div>
             <form method="post" action="<c:url value="/orderCreation"/>" enctype="multipart/form-data">
                 <fieldset>
@@ -42,7 +42,7 @@
                     </c:if>
                 </fieldset>
                 <fieldset>
-                    <legend>Informations order</legend>
+                    <legend>Informations commande</legend>
                     
                     <label for="dateOrder">Date <span class="requis">*</span></label>
                     <input type="text" id="dateOrder" name="dateOrder" value="<c:out value="${order.date}"/>" size="30" maxlength="30" disabled />

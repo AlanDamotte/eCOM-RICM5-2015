@@ -5,20 +5,27 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.ejb.EJB;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
+import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ecom.dao.ProductDaoLocal;
+import com.ecom.dao.CustomerDaoRemote;
+import com.ecom.dao.OrderDaoRemote;
+import com.ecom.dao.ProductDaoRemote;
 import com.ecom.entities.Product;
 import com.ecom.forms.ProductCreationForm;
 
-@WebServlet(name = "ProductCreation", urlPatterns = { "/productCreation" })
+@WebServlet(name = "ProductCreation", urlPatterns = { "/productCreation" }, initParams = @WebInitParam( name = "path", value = "/home/alan/Documents/RICM5/eCOM-RICM5-2015/file/images/") )
+@MultipartConfig( location = "/home/alan/Documents/RICM5/eCOM-RICM5-2015/file/images", maxFileSize = 2 * 1024 * 1024, maxRequestSize = 10 * 1024 * 1024, fileSizeThreshold = 1024 * 1024 )
 public class ProductCreation extends HttpServlet {
-	
+	public static final String PATH = "path";
 	public static final String ATT_PRODUCT = "product";
 	public static final String ATT_FORM = "form";
 	public static final String PRODUCTS_SESSION = "products";
@@ -26,8 +33,18 @@ public class ProductCreation extends HttpServlet {
 	public static final String VIEW_SUCCES = "/WEB-INF/displayProduct.jsp";
 	public static final String VIEW_FORM = "/WEB-INF/addProduct.jsp";
 
-	@EJB
-	private ProductDaoLocal productDao;
+	private ProductDaoRemote productDao;
+	
+	InitialContext ctx;
+	{
+		try {
+			ctx = new InitialContext();
+			productDao = (ProductDaoRemote) ctx.lookup("ProductDao");
+			
+		} catch (NamingException ex) {
+			ex.printStackTrace();
+		}
+	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* À la réception d'une requête GET, simple affichage du formulaire */
@@ -35,11 +52,17 @@ public class ProductCreation extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		/*
+		 * Lecture du paramètre 'path' passé à la servlet via la déclaration
+		 * dans le web.xml
+		 */
+		String path = this.getServletConfig().getInitParameter(PATH);
+		
 		/* Préparation de l'objet formulaire */
 		ProductCreationForm form = new ProductCreationForm(productDao);
 		
 		/* Traitement de la requête et récupération du bean en résultant */
-		Product product = form.createProduct(request);
+		Product product = form.createProduct(request,path);
 
 		/* Ajout du bean et de l'objet métier à l'objet requête */
 		request.setAttribute(ATT_PRODUCT, product);

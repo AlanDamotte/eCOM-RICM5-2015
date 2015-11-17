@@ -3,13 +3,15 @@ package com.ecom.forms;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.joda.time.DateTime;
 
-import com.ecom.dao.CustomerDaoLocal;
-import com.ecom.dao.OrderDaoLocal;
+import com.ecom.dao.CustomerDaoRemote;
+import com.ecom.dao.OrderDaoRemote;
 import com.ecom.entities.Customer;
 import com.ecom.entities.Order;
 import com.ecom.dao.DAOException;
@@ -32,10 +34,21 @@ public final class OrderCreationForm {
 	private String result;
 	private Map<String, String> errors = new HashMap<String, String>();
 
-	private CustomerDaoLocal customerDao;
-	private OrderDaoLocal orderDao;
+	private CustomerDaoRemote customerDao;
+	private OrderDaoRemote orderDao;
+	
+	InitialContext ctx;
+	{
+		try {
+			ctx = new InitialContext();
+			customerDao = (CustomerDaoRemote) ctx.lookup("CustomerDao");
+			orderDao = (OrderDaoRemote) ctx.lookup("OrderDao");
+		} catch (NamingException ex) {
+			ex.printStackTrace();
+		}
+	}
 
-	public OrderCreationForm( CustomerDaoLocal customerDao, OrderDaoLocal orderDao ) {
+	public OrderCreationForm( CustomerDaoRemote customerDao, OrderDaoRemote orderDao ) {
         this.customerDao = customerDao;
         this.orderDao = orderDao;
     }
@@ -48,7 +61,7 @@ public final class OrderCreationForm {
 		return result;
 	}
 
-	public Order createOrder(HttpServletRequest request, String path) {
+	public Order createOrder(HttpServletRequest request) {
 		
 		Customer customer;
 		/*
@@ -72,7 +85,7 @@ public final class OrderCreationForm {
 			 * existant et de récupérer l'objet Customer créé.
 			 */
 			CustomerCreationForm customerForm = new CustomerCreationForm(customerDao);
-			customer = customerForm.createCustomer(request, path);
+			customer = customerForm.createCustomer(request);
 
 			/*
 			 * Et très important, il ne faut pas oublier de récupérer le contenu

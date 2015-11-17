@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.ejb.EJB;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebInitParam;
@@ -14,12 +16,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ecom.dao.CustomerDaoLocal;
+import com.ecom.dao.CategoryDaoRemote;
+import com.ecom.dao.CustomerDaoRemote;
 import com.ecom.entities.Customer;
 import com.ecom.forms.CustomerCreationForm;
 
-@WebServlet( name = "CustomerCreation", urlPatterns = { "/customerCreation" }, initParams = @WebInitParam( name = "path", value = "/home/alan/Documents/RICM5/eCOM-RICM5-2015/file/images/") )
-@MultipartConfig( location = "/home/alan/Documents/RICM5/eCOM-RICM5-2015/file/images", maxFileSize = 2 * 1024 * 1024, maxRequestSize = 10 * 1024 * 1024, fileSizeThreshold = 1024 * 1024 )
+@WebServlet( name = "CustomerCreation", urlPatterns = { "/customerCreation" })
 public class CustomerCreation extends HttpServlet {
 	public static final String PATH = "path";
 	public static final String ATT_CLIENT = "customer";
@@ -29,8 +31,17 @@ public class CustomerCreation extends HttpServlet {
 	public static final String VIEW_SUCCES = "/WEB-INF/displayCustomer.jsp";
 	public static final String VIEW_FORM = "/WEB-INF/createCustomer.jsp";
 
-	@EJB
-	private CustomerDaoLocal customerDao;
+
+	private CustomerDaoRemote customerDao;	
+	InitialContext ctx;
+	{
+		try {
+			ctx = new InitialContext();
+			customerDao = (CustomerDaoRemote) ctx.lookup("CustomerDao");
+		} catch (NamingException ex) {
+			ex.printStackTrace();
+		}
+	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* À la réception d'une requête GET, simple affichage du formulaire */
@@ -38,17 +49,12 @@ public class CustomerCreation extends HttpServlet {
 	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		/*
-		 * Lecture du paramètre 'path' passé à la servlet via la déclaration
-		 * dans le web.xml
-		 */
-		String path = this.getServletConfig().getInitParameter(PATH);
 
 		/* Préparation de l'objet formulaire */
 		CustomerCreationForm form = new CustomerCreationForm(customerDao);
 
 		/* Traitement de la requête et récupération du bean en résultant */
-		Customer customer = form.createCustomer(request, path);
+		Customer customer = form.createCustomer(request);
 
 		/* Ajout du bean et de l'objet métier à l'objet requête */
 		request.setAttribute(ATT_CLIENT, customer);

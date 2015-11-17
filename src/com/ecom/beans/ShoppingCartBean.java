@@ -5,7 +5,9 @@ import javax.ejb.Remove;
 import javax.ejb.Stateful;
 
 import com.ecom.dao.CartDaoLocal;
+import com.ecom.dao.CustomerDaoLocal;
 import com.ecom.dao.ProductDaoLocal;
+import com.ecom.entities.Cart;
 import com.ecom.entities.Product;
 
 import java.util.ArrayList;
@@ -16,7 +18,7 @@ import java.util.Map;
 import java.util.Set;
 
 @Stateful(mappedName = "ShoppingCartBean")
-@EJB(name = "ShoppingCartBean", beanInterface = ShoppingCartLocal.class)
+@EJB(name = "ShoppingCartBean", beanInterface = ShoppingCart.class)
 public class ShoppingCartBean implements ShoppingCartLocal, ShoppingCart {
 
 	private Map<Long, Integer> items = new HashMap<Long, Integer>();
@@ -28,6 +30,9 @@ public class ShoppingCartBean implements ShoppingCartLocal, ShoppingCart {
 	
 	@EJB 
 	CartDaoLocal cartDao;
+	
+	@EJB 
+	CustomerDaoLocal customerDao;
 
 	@Override
 	public void initialize() {
@@ -158,13 +163,17 @@ public class ShoppingCartBean implements ShoppingCartLocal, ShoppingCart {
 		double subtotal = this.total - subtotal1;
 		subtotal = subtotal + product.getPrice() * quantity;
 		items.replace(product.getId(), quantity);
-		this.total = subtotal;
-		
+		this.total = subtotal;		
 	}
 	
 	//Méthode de sauvegarde du panier associé à l'utilisateur
 	@Remove
 	public void saveCart(){
 		//TODO
+//		Cart cart = new Cart();
+//		cart.setCustomer(customerDao.find(customerId));
+//		cart.setTotalPrice(total);
+//		cart.setCart(items);
+//		cartDao.create(cart);
 	}
 }

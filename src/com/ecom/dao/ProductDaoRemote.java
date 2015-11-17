@@ -2,12 +2,12 @@ package com.ecom.dao;
 
 import java.util.List;
 
-import javax.ejb.Local;
+import javax.ejb.Remote;
 
 import com.ecom.entities.Product;
 
-@Local
-public interface ProductDaoLocal {
+@Remote
+public interface ProductDaoRemote {
 
 	public Product find(long id);
 

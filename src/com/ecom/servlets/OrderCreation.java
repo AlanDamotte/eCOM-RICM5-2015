@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.ejb.EJB;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebInitParam;
@@ -14,8 +16,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ecom.dao.CustomerDaoLocal;
-import com.ecom.dao.OrderDaoLocal;
+import com.ecom.dao.CustomerDaoRemote;
+import com.ecom.dao.OrderDaoRemote;
 import com.ecom.entities.Customer;
 import com.ecom.entities.Order;
 import com.ecom.forms.OrderCreationForm;
@@ -34,10 +36,19 @@ public class OrderCreation extends HttpServlet {
 	public static final String VIEW_SUCCES = "/WEB-INF/displayOrder.jsp";
 	public static final String VIEW_FORM = "/WEB-INF/createOrder.jsp";
 
-	@EJB
-	private CustomerDaoLocal customerDao;
-	@EJB
-	private OrderDaoLocal orderDao;
+	private CustomerDaoRemote customerDao;
+	private OrderDaoRemote orderDao;
+	
+	InitialContext ctx;
+	{
+		try {
+			ctx = new InitialContext();
+			customerDao = (CustomerDaoRemote) ctx.lookup("CustomerDao");
+			orderDao = (OrderDaoRemote) ctx.lookup("OrderDao");
+		} catch (NamingException ex) {
+			ex.printStackTrace();
+		}
+	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* À la réception d'une requête GET, simple affichage du formulaire */
@@ -55,7 +66,7 @@ public class OrderCreation extends HttpServlet {
 		OrderCreationForm form = new OrderCreationForm(customerDao, orderDao);
 
 		/* Traitement de la requête et récupération du bean en résultant */
-		Order order = form.createOrder(request, path);
+		Order order = form.createOrder(request);
 
 		/* Ajout du bean et de l'objet métier à l'objet requête */
 		request.setAttribute(ATT_ORDER, order);

@@ -8,7 +8,7 @@
         <link type="text/css" rel="stylesheet" href="<c:url value="/inc/style.css"/>" />
     </head>
     <body>
-        <c:import url="/inc/menu.jsp" />
+        <c:import url="/inc/adminMenu.jsp" />
         <div id="corps">
         <c:choose>
             <%-- Si aucun customer n'existe en session, affichage d'un message par défaut. --%>

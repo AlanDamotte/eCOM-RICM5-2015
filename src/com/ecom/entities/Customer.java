@@ -27,6 +27,9 @@ public class Customer implements Serializable {
 
 	@Column(nullable = false)
 	private String postCode;
+	
+	@Column(nullable = false)
+	private String city;
 
 	private String phonenumber;
 
@@ -77,6 +80,14 @@ public class Customer implements Serializable {
 
 	public void setPostCode(String postCode) {
 		this.postCode = postCode;
+	}
+	
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
 	}
 
 	public String getAddress() {

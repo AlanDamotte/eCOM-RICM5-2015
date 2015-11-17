@@ -11,7 +11,8 @@ import javax.persistence.TypedQuery;
 import com.ecom.entities.Order;
 
 @Stateless(mappedName = "OrderDao")
-public class OrderDao implements OrderDaoLocal{
+@EJB(name = "OrderDao", beanInterface = OrderDaoRemote.class)
+public class OrderDao implements OrderDaoLocal, OrderDaoRemote{
 
 	// Injection du manager, qui s'occupe de la connexion avec la BDD
 	@PersistenceContext(unitName = "ecom_PU")

@@ -2,15 +2,18 @@ package com.ecom.dao;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import com.ecom.beans.ShoppingCart;
 import com.ecom.entities.Cart;
 
 @Stateless(mappedName = "CartDao")
-public class CartDao implements CartDaoLocal{
+@EJB(name = "CartDao", beanInterface = CartDaoRemote.class)
+public class CartDao implements CartDaoLocal, CartDaoRemote{
 	
 	@PersistenceContext(unitName = "ecom_PU")
 	private EntityManager em;

@@ -10,9 +10,29 @@
 <span class="erreur">${form.errors['firstnameCustomer']}</span>
 <br />
 
+<label for="password">Mot de passe <span class="requis">*</span></label>
+<input type="password" id="password" name="password" size="30" maxlength="60" />
+<span class="erreur">${form.errors['password']}</span>
+<br />
+
+<label for="confirmation">Confirmation du mot de passe <span class="requis">*</span></label>
+<input type="password" id="confirmation" name="confirmation" size="30" maxlength="60" />
+<span class="erreur">${form.errors['confirmation']}</span>
+<br />
+
 <label for="addressCustomer">Adresse de livraison <span class="requis">*</span></label>
 <input type="text" id="addressCustomer" name="addressCustomer" value="<c:out value="${customer.address}"/>" size="30" maxlength="60" />
 <span class="erreur">${form.errors['addressCustomer']}</span>
+<br />
+
+<label for=postCodeCustomer>Code postal <span class="requis">*</span></label>
+<input type="text" id="postCodeCustomer" name="postCodeCustomer" value="<c:out value="${customer.postCode}"/>" size="30" maxlength="60" />
+<span class="erreur">${form.errors['postCodeCustomer']}</span>
+<br />
+
+<label for="cityCustomer">Ville<span class="requis">*</span></label>
+<input type="text" id="cityCustomer" name="cityCustomer" value="<c:out value="${customer.city}"/>" size="30" maxlength="60" />
+<span class="erreur">${form.errors['cityCustomer']}</span>
 <br />
 
 <label for="phonenumberCustomer">Numéro de téléphone <span class="requis">*</span></label>
@@ -23,9 +43,4 @@
 <label for="emailCustomer">Adresse email</label>
 <input type="email" id="emailCustomer" name="emailCustomer" value="<c:out value="${customer.email}"/>" size="30" maxlength="60" />
 <span class="erreur">${form.errors['emailCustomer']}</span>
-<br />
-
-<label for="imageCustomer">Image</label>
-<input type="file" id="imageCustomer" name="imageCustomer" />
-<span class="erreur">${form.errors['imageCustomer']}</span>
 <br />

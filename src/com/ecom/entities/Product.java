@@ -1,6 +1,7 @@
 package com.ecom.entities;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.persistence.*;
 
@@ -10,6 +11,7 @@ public class Product implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name="PRODUCT_ID")
     private Long id;
     private String name;
     private String description;
@@ -18,6 +20,16 @@ public class Product implements Serializable {
     private double price;
     private boolean availability;
     private int quantity;
+    
+    @ManyToMany(mappedBy="products")
+    private List<Category> categories;
+    
+    @ElementCollection
+    @CollectionTable(
+            name="TAGS",
+            joinColumns=@JoinColumn(name="ID")
+      )
+    private List<String> tags;
 
     public int getQuantity() {
         return quantity;
@@ -26,11 +38,19 @@ public class Product implements Serializable {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
+    
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(List<String> tags) {
+        this.tags = tags;
+    }
 
     public Product() {
     }
 
-    public Product(String name, String description, String image, int quantity, String type, double price, boolean availability) {
+    public Product(String name, String description, String image, int quantity, String type, double price, boolean availability, List<String> tags) {
         this.name = name;
         this.availability = availability;
         this.description = description;
@@ -38,6 +58,7 @@ public class Product implements Serializable {
         this.quantity = quantity;
         this.price = price;
         this.type = type;
+        this.tags = tags;
     }
 
     public String getDescription() {

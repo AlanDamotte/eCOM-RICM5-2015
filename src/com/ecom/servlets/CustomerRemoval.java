@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.ejb.EJB;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.ecom.dao.CustomerDao;
-import com.ecom.dao.CustomerDaoLocal;
+import com.ecom.dao.CustomerDaoRemote;
 import com.ecom.dao.DAOException;
 import com.ecom.entities.Customer;
 
@@ -24,8 +26,16 @@ public class CustomerRemoval extends HttpServlet {
 
 	public static final String VIEW = "/customersList";
 
-	@EJB
-	private CustomerDaoLocal customerDao;
+	private CustomerDaoRemote customerDao;
+	InitialContext ctx;
+	{
+		try {
+			ctx = new InitialContext();
+			customerDao = (CustomerDaoRemote) ctx.lookup("CustomerDao");
+		} catch (NamingException ex) {
+			ex.printStackTrace();
+		}
+	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* Récupération du paramètre */

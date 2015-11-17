@@ -8,19 +8,19 @@
         <link type="text/css" rel="stylesheet" href="<c:url value="/inc/style.css"/>" />
     </head>
     <body>
-    	<c:import url="/inc/menu.jsp" />
+    	<c:import url="/inc/adminMenu.jsp" />
         <div>
-            <form method="post" action="<c:url value="/productCreation"/>">
+            <form method="post" action="<c:url value="/productCreation"/>"  enctype="multipart/form-data">
                 <fieldset>
                     <legend>Informations Produit</legend>
                     
-                    <label for="namep">Nom <span class="requis">*</span></label>
-                    <input type="text" id="namep" name="namep" value="<c:out value="${product.nameP}"/>" size="30" maxlength="30" />
+                    <label for="name">Nom <span class="requis">*</span></label>
+                    <input type="text" id="name" name="name" value="<c:out value="${product.name}"/>" size="30" maxlength="30" />
                     <span class="erreur">${form.errors['namep']}</span>
                     <br />
                     
-                    <label for="pricep">Prix <span class="requis">*</span></label>
-                    <input type="text" id="pricep" name="pricep" value="<c:out value="${product.priceP}"/>" size="30" maxlength="30" />
+                    <label for="price">Prix <span class="requis">*</span></label>
+                    <input type="text" id="price" name="price" value="<c:out value="${product.price}"/>" size="30" maxlength="30" />
                     <span class="erreur">${form.errors['pricep']}</span>
                     <br />
                     
@@ -34,10 +34,20 @@
                     <span class="erreur">${form.errors['description']}</span>
                     <br />
                     
-                    <label for="disponibilityp">Disponibilité<span class="requis">*</span></label>
-                    <input type="text" id="disponibilityp" name="disponibilityp" value="<c:out value="${product.disponibilityP}"/>" size="30" maxlength="30" />
-                    <span class="erreur">${form.errors['disponibility']}</span>
+                    <label for="availability">Disponibilité<span class="requis">*</span></label>
+                    <input type="text" id="availability" name="availability" value="<c:out value="${product.availability}"/>" size="30" maxlength="30" />
+                    <span class="erreur">${form.errors['availability']}</span>
                     <br />
+                    
+                    <label for="tags">Tags<span class="requis">*</span></label>
+                    <input type="text" id="tags" name="tags" value="<c:out value="${product.tags}"/>" size="30" maxlength="30" />
+                    <span class="erreur">${form.errors['tags']}</span>
+                    <br />
+                    
+                    <label for="image">Image</label>
+					<input type="file" id="image" name="image" />
+					<span class="erreur">${form.errors['image']}</span>
+					<br />
                     
                     <p class="info">${ form.result }</p>
                 </fieldset>

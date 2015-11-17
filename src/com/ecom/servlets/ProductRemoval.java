@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.ejb.EJB;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.ecom.dao.ProductDao;
-import com.ecom.dao.ProductDaoLocal;
+import com.ecom.dao.ProductDaoRemote;
 import com.ecom.dao.DAOException;
 import com.ecom.entities.Product;
 
@@ -24,8 +26,18 @@ public class ProductRemoval extends HttpServlet {
 
 	public static final String VIEW = "/productsList";
 
-	@EJB
-	private ProductDaoLocal productDao;
+	private ProductDaoRemote productDao;
+	
+	InitialContext ctx;
+	{
+		try {
+			ctx = new InitialContext();
+			productDao = (ProductDaoRemote) ctx.lookup("ProductDao");
+			
+		} catch (NamingException ex) {
+			ex.printStackTrace();
+		}
+	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println(request.getRequestURI() + request.getContextPath());
