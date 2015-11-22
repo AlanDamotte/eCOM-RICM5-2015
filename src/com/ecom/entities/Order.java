@@ -21,6 +21,10 @@ import com.ecom.tools.JodaDateTimeConverter;
 @Entity
 @Table(name = "OrderT")
 public class Order implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -33,12 +37,8 @@ public class Order implements Serializable {
 	private DateTime date;
 	@Column(name = "amount")
 	private Double amount;
-	@Column(name = "payment_mode")
-	private String paymentMode;
 	@Column(name = "payment_status")
 	private String paymentStatus;
-	@Column(name = "delivery_mode")
-	private String deliveryMode;
 	@Column(name = "delivery_status")
 	private String deliveryStatus;
 
@@ -74,28 +74,12 @@ public class Order implements Serializable {
 		this.amount = amount;
 	}
 
-	public String getPaymentMode() {
-		return paymentMode;
-	}
-
-	public void setPaymentMode(String paymentMode) {
-		this.paymentMode = paymentMode;
-	}
-
 	public String getPaymentStatus() {
 		return paymentStatus;
 	}
 
 	public void setPaymentStatus(String paymentStatus) {
 		this.paymentStatus = paymentStatus;
-	}
-
-	public String getDeliveryMode() {
-		return deliveryMode;
-	}
-
-	public void setDeliveryMode(String deliveryMode) {
-		this.deliveryMode = deliveryMode;
 	}
 
 	public String getDeliveryStatus() {

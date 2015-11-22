@@ -8,4 +8,5 @@
       <description>Keep a copy of the generated servlet class java code.</description>
     </property>
   </jsp-config>
+    <property name="alternatedocroot_1" value="from=/images/* dir=/home/alan/Documents/RICM5/eCOM-RICM5-2015/file"/>
 </glassfish-web-app>

@@ -1,9 +1,12 @@
 package com.ecom.dao;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.ejb.Local;
+import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,11 +15,14 @@ import javax.persistence.TypedQuery;
 import com.ecom.entities.Product;
 
 @Stateless(mappedName = "ProductDao")
-@EJB(name = "ProductDao", beanInterface = ProductDaoRemote.class)
-public class ProductDao implements ProductDaoLocal, ProductDaoRemote{
-	
-	private static final String SQL_SELECT_TAGS  = "SELECT * FROM PRODUCT WHERE id IN ((SELECT ID FROM ecom.TAGS WHERE TAGS = ?) ORDER BY id";
+@Remote(ProductDaoRemote.class)
+@Local(ProductDaoLocal.class)
+public class ProductDao implements ProductDaoLocal, ProductDaoRemote, Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// Injection du manager, qui s'occupe de la connexion avec la BDD
 	@PersistenceContext(unitName = "ecom_PU")
 	private EntityManager em;

@@ -52,6 +52,9 @@
                 </c:forEach>
             </table>
             <p>Total : <c:out value="${ sessionScope.cart_products.getTotal() }"/> euros</p>
+            <a href="<c:url value="/customerInformationManagement"></c:url>">
+            	Passer commande
+            </a>
             </c:otherwise>
         </c:choose>
         </div>

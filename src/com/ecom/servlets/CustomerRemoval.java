@@ -26,16 +26,8 @@ public class CustomerRemoval extends HttpServlet {
 
 	public static final String VIEW = "/customersList";
 
+	@EJB
 	private CustomerDaoRemote customerDao;
-	InitialContext ctx;
-	{
-		try {
-			ctx = new InitialContext();
-			customerDao = (CustomerDaoRemote) ctx.lookup("CustomerDao");
-		} catch (NamingException ex) {
-			ex.printStackTrace();
-		}
-	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* Récupération du paramètre */

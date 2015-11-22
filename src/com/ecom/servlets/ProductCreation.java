@@ -2,7 +2,9 @@ package com.ecom.servlets;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
+import java.util.Set;
 
 import javax.ejb.EJB;
 import javax.naming.InitialContext;
@@ -33,18 +35,9 @@ public class ProductCreation extends HttpServlet {
 	public static final String VIEW_SUCCES = "/WEB-INF/displayProduct.jsp";
 	public static final String VIEW_FORM = "/WEB-INF/addProduct.jsp";
 
+	@EJB
 	private ProductDaoRemote productDao;
 	
-	InitialContext ctx;
-	{
-		try {
-			ctx = new InitialContext();
-			productDao = (ProductDaoRemote) ctx.lookup("ProductDao");
-			
-		} catch (NamingException ex) {
-			ex.printStackTrace();
-		}
-	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* À la réception d'une requête GET, simple affichage du formulaire */
@@ -72,17 +65,6 @@ public class ProductCreation extends HttpServlet {
 		if (form.getErrors().isEmpty()) {
 			/* Alors récupération de la map des clients dans la session */
 			HttpSession session = request.getSession();
-			Map<Long, Product> products = (HashMap<Long, Product>) session.getAttribute(PRODUCTS_SESSION);
-			/*
-			 * Si aucune map n'existe, alors initialisation d'une nouvelle map
-			 */
-			if (products == null) {
-				products = new HashMap<Long, Product>();
-			}
-			/* Puis ajout du client courant dans la map */
-			products.put(product.getId(), product);
-			/* Et enfin (ré)enregistrement de la map en session */
-			session.setAttribute(PRODUCTS_SESSION, products);
 
 			/* Affichage de la fiche récapitulative */
 			this.getServletContext().getRequestDispatcher(VIEW_SUCCES).forward(request, response);

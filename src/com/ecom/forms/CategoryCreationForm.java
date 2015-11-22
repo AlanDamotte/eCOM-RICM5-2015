@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.ejb.EJB;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
@@ -21,16 +22,8 @@ public class CategoryCreationForm {
 	private static final int BUFFER_SIZE = 10240; // 10ko
 
 	private String result;
+	
 	private CategoryDaoRemote categoryDao;
-	InitialContext ctx;
-	{
-		try {
-			ctx = new InitialContext();
-			categoryDao = (CategoryDaoRemote) ctx.lookup("CategoryDao");
-		} catch (NamingException ex) {
-			ex.printStackTrace();
-		}
-	}
 
 	public CategoryCreationForm(CategoryDaoRemote categoryDao) {
 

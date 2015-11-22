@@ -1,8 +1,11 @@
 package com.ecom.dao;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.ejb.Local;
+import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -11,9 +14,14 @@ import javax.persistence.TypedQuery;
 import com.ecom.entities.Category;
 
 @Stateless(mappedName = "CategoryDao")
-@EJB(name = "CategoryDao", beanInterface = CategoryDaoRemote.class)
-public class CategoryDao implements CategoryDaoLocal, CategoryDaoRemote {
+@Remote(CategoryDaoRemote.class)
+@Local(CategoryDaoLocal.class)
+public class CategoryDao implements CategoryDaoLocal, CategoryDaoRemote, Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@PersistenceContext(unitName = "ecom_PU")
 	private EntityManager em;
 	Category category;

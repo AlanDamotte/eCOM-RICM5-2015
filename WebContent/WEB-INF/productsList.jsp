@@ -36,7 +36,6 @@
                     <td><c:out value="${ mapProducts.value.price }"/></td>
                     <td><c:out value="${ mapProducts.value.quantity }"/></td>
                     <td><c:out value="${ mapProducts.value.availability }"/></td>
-         		    <td><c:out value="${ mapProducts.value.image }"/></td>
                     <td class="action">
                         <a href="<c:url value="/productRemoval"><c:param name="idProduct" value="${ mapProducts.key }" /></c:url>">
                             <img src="<c:url value="/inc/supprimer.png"/>" alt="Supprimer" />

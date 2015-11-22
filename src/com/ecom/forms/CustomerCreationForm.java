@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.ejb.EJB;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -35,22 +36,13 @@ public class CustomerCreationForm {
 	public static final String FIELD_CITY = "cityCustomer";
 	public static final String FIELD_PHONENUMBER = "phonenumberCustomer";
 	public static final String FIELD_EMAIL = "emailCustomer";
-	private static final String FIELD_IMAGE = "imageCustomer";
 	private static final String FIELD_PASS = "password";
 	private static final String FIELD_CONF = "confirmation";
 
 	private String result;
+	
 	private CustomerDaoRemote customerDao;
 	
-	InitialContext ctx;
-	{
-		try {
-			ctx = new InitialContext();
-			customerDao = (CustomerDaoRemote) ctx.lookup("CustomerDao");
-		} catch (NamingException ex) {
-			ex.printStackTrace();
-		}
-	}
 
 	public CustomerCreationForm(CustomerDaoRemote customerDao) {
 
@@ -78,7 +70,6 @@ public class CustomerCreationForm {
 		String confirmation = getFieldValue(request, FIELD_CONF);
 		String phonenumber = getFieldValue(request, FIELD_PHONENUMBER);
 		String email = getFieldValue(request, FIELD_EMAIL);
-		String image = null;
 
 		Customer customer = new Customer();
 
@@ -258,7 +249,7 @@ public class CustomerCreationForm {
 		if (email == null) {
 			throw new FormValidationException("Merci d'entrer un email");
 		}
-		if(customerDao.emailAlreadyExists(email)){
+		if(customerDao.emailExists(email)){
 			throw new FormValidationException("Un compte client existe déjà avec cet email");
 		}
 	}

@@ -25,17 +25,9 @@ public class CategoryCreation extends HttpServlet {
 	public static final String VIEW_SUCCES = "/WEB-INF/administration.jsp";
 	public static final String VIEW_FORM = "/WEB-INF/createCategory.jsp";
 
+	@EJB
 	private CategoryDaoRemote categoryDao;
 	
-	InitialContext ctx;
-	{
-		try {
-			ctx = new InitialContext();
-			categoryDao = (CategoryDaoRemote) ctx.lookup("CategoryDao");
-		} catch (NamingException ex) {
-			ex.printStackTrace();
-		}
-	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* À la réception d'une requête GET, simple affichage du formulaire */

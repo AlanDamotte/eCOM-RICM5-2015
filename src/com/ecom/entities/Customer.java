@@ -7,6 +7,11 @@ import javax.persistence.*;
 @Entity
 public class Customer implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	@Id
 	@Column(name = "id_customer")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,8 +40,6 @@ public class Customer implements Serializable {
 
 	@Column(nullable = false)
 	private String email;
-
-	private String image;
 
 	public void setId(Long id) {
 		this.id = id;
@@ -108,13 +111,5 @@ public class Customer implements Serializable {
 
 	public String getEmail() {
 		return email;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
-	public String getImage() {
-		return image;
 	}
 }

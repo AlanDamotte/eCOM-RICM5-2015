@@ -26,5 +26,14 @@ public interface ShoppingCart {
 
 	int getQuantity(Long id);
 
+	void setId(Long id);
+
+	public Long getId();
+
+	public void initializeClientCart();
+
 	public void release();
+	
+	public void saveCart();
+
 }

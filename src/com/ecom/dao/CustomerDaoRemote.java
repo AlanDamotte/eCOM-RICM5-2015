@@ -18,5 +18,5 @@ public interface CustomerDaoRemote {
 
 	public void remove(Customer customer);
 	
-	boolean emailAlreadyExists(String email);
+	boolean emailExists(String email);
 }

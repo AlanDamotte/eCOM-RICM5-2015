@@ -1,12 +1,8 @@
 package com.ecom.servlets;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.ejb.EJB;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -14,48 +10,43 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.ecom.dao.ProductDao;
-import com.ecom.dao.ProductDaoRemote;
 import com.ecom.dao.DAOException;
+import com.ecom.dao.ProductDaoRemote;
 import com.ecom.entities.Product;
 
-@WebServlet( name = "ProductRemoval", urlPatterns = { "/productRemoval" } )
-public class ProductRemoval extends HttpServlet {
+@WebServlet(name = "ProductView", urlPatterns = { "/productView" })
+public class ProductView extends HttpServlet {
+
 	public static final String PARAM_ID_PRODUCT = "idProduct";
+	public static final String PARAM_PRODUCT_VIEW = "productView";
 	public static final String PRODUCTS_SESSION = "products";
 
-	public static final String VIEW = "/productsList";
+	public static final String VIEW_PRODUCT = "/WEB-INF/productView.jsp";
 
 	@EJB
 	private ProductDaoRemote productDao;
-	
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println(request.getRequestURI() + request.getContextPath());
+
 		/* Récupération du paramètre */
 		String idProduct = getValueParameter(request, PARAM_ID_PRODUCT);
 		Long id = Long.parseLong(idProduct);
 
 		/* Récupération de la Map des products enregistrés en session */
 		HttpSession session = request.getSession();
-		Map<Long, Product> products = (HashMap<Long, Product>) session.getAttribute(PRODUCTS_SESSION);
+
+		Product product = null;
 
 		/* Si l'id du client et la Map des products ne sont pas vides */
-		if (id != null && products != null) {
+		if (id != null) {
 			try {
-				/* Alors suppression du client de la BDD */
-				productDao.remove(products.get(id));
-				/* Puis suppression du client de la Map */
-				products.remove(id);
+				product = productDao.find(id);
 			} catch (DAOException e) {
 				e.printStackTrace();
 			}
-			/* Et remplacement de l'ancienne Map en session par la nouvelle */
-			session.setAttribute(PRODUCTS_SESSION, products);
+			session.setAttribute(PARAM_PRODUCT_VIEW, product);
 		}
-
-		/* Redirection vers la fiche récapitulative */
-		response.sendRedirect(request.getContextPath() + VIEW);
+		this.getServletContext().getRequestDispatcher(VIEW_PRODUCT).forward(request, response);
 	}
 
 	/*

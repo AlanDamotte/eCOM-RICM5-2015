@@ -31,17 +31,8 @@ public class CustomerCreation extends HttpServlet {
 	public static final String VIEW_SUCCES = "/WEB-INF/displayCustomer.jsp";
 	public static final String VIEW_FORM = "/WEB-INF/createCustomer.jsp";
 
-
-	private CustomerDaoRemote customerDao;	
-	InitialContext ctx;
-	{
-		try {
-			ctx = new InitialContext();
-			customerDao = (CustomerDaoRemote) ctx.lookup("CustomerDao");
-		} catch (NamingException ex) {
-			ex.printStackTrace();
-		}
-	}
+	@EJB
+	private CustomerDaoRemote customerDao;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* À la réception d'une requête GET, simple affichage du formulaire */
@@ -62,19 +53,6 @@ public class CustomerCreation extends HttpServlet {
 
 		/* Si aucune erreur */
 		if (form.getErrors().isEmpty()) {
-			/* Alors récupération de la map des customers dans la session */
-			HttpSession session = request.getSession();
-			Map<Long, Customer> customers = (HashMap<Long, Customer>) session.getAttribute(CLIENTS_SESSION);
-			/*
-			 * Si aucune map n'existe, alors initialisation d'une nouvelle map
-			 */
-			if (customers == null) {
-				customers = new HashMap<Long, Customer>();
-			}
-			/* Puis ajout du customer courant dans la map */
-			customers.put(customer.getId(), customer);
-			/* Et enfin (ré)enregistrement de la map en session */
-			session.setAttribute(CLIENTS_SESSION, customers);
 
 			/* Affichage de la fiche récapitulative */
 			this.getServletContext().getRequestDispatcher(VIEW_SUCCES).forward(request, response);

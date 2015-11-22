@@ -1,10 +1,12 @@
 package com.ecom.dao;
 
+import java.io.Serializable;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
-import javax.ejb.EJB;
+
+import javax.ejb.Local;
+import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -15,8 +17,14 @@ import org.jasypt.util.password.ConfigurablePasswordEncryptor;
 import com.ecom.entities.Customer;
 
 @Stateless(mappedName = "CustomerDao")
-@EJB(name = "CustomerDao", beanInterface = CustomerDaoRemote.class)
-public class CustomerDao implements CustomerDaoLocal, CustomerDaoRemote {
+@Remote(CustomerDaoRemote.class)
+@Local(CustomerDaoLocal.class)
+public class CustomerDao implements CustomerDaoLocal, CustomerDaoRemote, Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private static final String ENCRYPTION = "SHA-256";
 
@@ -59,7 +67,6 @@ public class CustomerDao implements CustomerDaoLocal, CustomerDaoRemote {
 
 	@Override
 	public Customer checkPassword(String email, String password) {
-		System.out.println("ON PASSE LA");
 		List<Customer> customerList;
 		Customer customer = null;
 		boolean goodPassword = false;
@@ -67,15 +74,12 @@ public class CustomerDao implements CustomerDaoLocal, CustomerDaoRemote {
 		passwordEncryptor.setAlgorithm(ENCRYPTION);
 		passwordEncryptor.setPlainDigest(false);
 		try {
-			TypedQuery<Customer> queryPW = em.createQuery("SELECT c FROM Customer c WHERE :email = c.email",
-					Customer.class);
+			TypedQuery<Customer> queryPW = em.createQuery("SELECT c FROM Customer c WHERE :email = c.email", Customer.class);
 			customerList = queryPW.setParameter("email", email).getResultList();
-			System.out.println("TOTO  = " + customerList.get(0).getFirstname() + customerList.get(1).getFirstname());
 			Iterator<Customer> it = customerList.iterator();
 			while (it.hasNext()) {
 				customer = (Customer) it.next();
 				goodPassword = passwordEncryptor.checkPassword(password, customer.getPassword());
-				System.out.println(goodPassword);
 			}
 			if (!goodPassword) {
 				return null;
@@ -88,7 +92,7 @@ public class CustomerDao implements CustomerDaoLocal, CustomerDaoRemote {
 	}
 
 	@Override
-	public boolean emailAlreadyExists(String email) {
+	public boolean emailExists(String email) {
 		try {
 			TypedQuery<Customer> queryPW = em.createQuery("SELECT c FROM Customer c WHERE :email = c.email",
 					Customer.class);
@@ -97,6 +101,5 @@ public class CustomerDao implements CustomerDaoLocal, CustomerDaoRemote {
 		} catch (Exception e) {
 			throw new DAOException(e);
 		}
-		
 	}
 }

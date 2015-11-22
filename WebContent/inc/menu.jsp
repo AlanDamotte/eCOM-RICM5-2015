@@ -11,6 +11,19 @@
 			${sessionScope.customerSession.firstname}
 			${sessionScope.customerSession.lastname}</p>
 		<p>
+			<br>
+		<p>
+			<a href="<c:url value="/disconnection"/>">Déconnexion</a>
+		</p>
+	</c:if>
+	<c:if test="${empty sessionScope.customerSession}">
+		<p>
+			<a href="<c:url value="/connection"/>">Connexion</a>
+
+		</p>
+		<p>
+			<a href="<c:url value="/customerCreation"/>">S'inscrire</a>
+		</p>
 	</c:if>
 
 	<a href="<c:url value="/catalog"/>">Voir les produits existants</a>

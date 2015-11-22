@@ -29,18 +29,9 @@ public class Search extends HttpServlet {
 	public static final String VIEWSEARCH = "/search";
 	public static final String VIEW = "/WEB-INF/search.jsp";
 
+	@EJB
 	private ProductDaoRemote productDao;
 	
-	InitialContext ctx;
-	{
-		try {
-			ctx = new InitialContext();
-			productDao = (ProductDaoRemote) ctx.lookup("ProductDao");
-			
-		} catch (NamingException ex) {
-			ex.printStackTrace();
-		}
-	}
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

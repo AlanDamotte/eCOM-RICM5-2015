@@ -12,13 +12,12 @@
         <div id="corps">
             <p class="info">${ form.result }</p>
             <p>Client</p>
-            <p>Nom : <c:out value="${ order.client.lastname }"/></p>
-            <p>Prénom : <c:out value="${ order.client.firstname }"/></p>
-            <p>Adresse : <c:out value="${ order.client.address }"/></p>
-            <p>Numéro de téléphone : <c:out value="${ order.client.phonenumber }"/></p>
-            <p>Email : <c:out value="${ order.client.email }"/></p>
-            <p>Image : <c:out value="${ order.client.image }"/></p>
-            <p>Ordere</p>
+            <p>Nom : <c:out value="${ order.customer.lastname }"/></p>
+            <p>Prénom : <c:out value="${ order.customer.firstname }"/></p>
+            <p>Adresse : <c:out value="${ order.customer.address }"/></p>
+            <p>Numéro de téléphone : <c:out value="${ order.customer.phonenumber }"/></p>
+            <p>Email : <c:out value="${ order.customer.email }"/></p>
+            <p>Commande</p>
             <p>Date  : <joda:format value="${ order.date }" pattern="dd/MM/yyyy HH:mm:ss"/></p> 
             <p>Montant  : <c:out value="${ order.amount }"/></p> 
             <p>Mode de paiement  : <c:out value="${ order.paymentMode }"/></p> 

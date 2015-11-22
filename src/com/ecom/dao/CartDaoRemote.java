@@ -14,6 +14,10 @@ public interface CartDaoRemote {
 	public void create(Cart cart);
 
 	public List<Cart> list();
+	
+	public Cart findCartByIdCustomer(long id);
 
 	public void remove(Cart cart);
+	
+	public void merge(Cart cart);
 }

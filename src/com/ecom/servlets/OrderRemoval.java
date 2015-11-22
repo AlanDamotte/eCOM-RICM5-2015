@@ -27,17 +27,9 @@ public class OrderRemoval extends HttpServlet {
 
 	public static final String VIEW = "/ordersList";
 
+	@EJB
 	private OrderDaoRemote orderDao;
 	
-	InitialContext ctx;
-	{
-		try {
-			ctx = new InitialContext();
-			orderDao = (OrderDaoRemote) ctx.lookup("OrderDao");
-		} catch (NamingException ex) {
-			ex.printStackTrace();
-		}
-	}
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		/* Récupération du paramètre */

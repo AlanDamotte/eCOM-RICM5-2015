@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.ejb.EJB;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.ServletException;
@@ -21,6 +22,7 @@ import javax.servlet.http.Part;
 import com.ecom.dao.CustomerDaoRemote;
 import com.ecom.dao.DAOException;
 import com.ecom.dao.OrderDaoRemote;
+import com.ecom.dao.ProductDaoLocal;
 import com.ecom.dao.ProductDaoRemote;
 import com.ecom.entities.Customer;
 import com.ecom.entities.Product;
@@ -40,17 +42,18 @@ public class ProductCreationForm {
 	private static final int BUFFER_SIZE = 10240; // 10ko
 	
 	private String result;
+
 	private ProductDaoRemote productDao;
 	
-	InitialContext ctx;
-	{
-		try {
-			ctx = new InitialContext();
-			productDao = (ProductDaoRemote) ctx.lookup("ProductDao");
-		} catch (NamingException ex) {
-			ex.printStackTrace();
-		}
-	}
+//	InitialContext ctx;
+//	{
+//		try {
+//			ctx = new InitialContext();
+//			productDao = (ProductDaoRemote) ctx.lookup("ProductDao");
+//		} catch (NamingException ex) {
+//			ex.printStackTrace();
+//		}
+//	}
 
 	public ProductCreationForm(ProductDaoRemote productDao) {
 		this.productDao = productDao;

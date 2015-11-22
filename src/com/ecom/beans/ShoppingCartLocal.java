@@ -21,6 +21,14 @@ public interface ShoppingCartLocal extends ShoppingCart {
 	Map<Long, Product> getMapProducts();
 
 	List<Product> getProducts();
+	
+	void setId(Long id);
+	
+	public Long getId();
+	
+	public void initializeClientCart();
 
 	public void release();
+
+	public void saveCart();
 }

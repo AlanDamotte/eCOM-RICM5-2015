@@ -36,19 +36,14 @@ public class PreloadFilter implements Filter {
 	public static final String ATT_PRODUCTS_SESSION = "products";
 	public static final String CART_PRODUCTS_SESSION = "cart_products";
 
+	@EJB
 	private CustomerDaoRemote customerDao;
+	@EJB
 	private OrderDaoRemote orderDao;
+	@EJB
 	private ProductDaoRemote productDao;
+	@EJB
 	private CategoryDaoRemote categoryDao;
-
-	InitialContext ctx;
-	{
-		try {
-			ctx = new InitialContext();
-		} catch (NamingException ex) {
-			ex.printStackTrace();
-		}
-	}
 
 	public void init(FilterConfig filterConfig) throws ServletException {
 	}
@@ -60,15 +55,17 @@ public class PreloadFilter implements Filter {
 
 		/* Récupération de la session depuis la requête */
 		HttpSession session = request.getSession();
-		
-		try {
-			customerDao = (CustomerDaoRemote) ctx.lookup("CustomerDao");
-			categoryDao = (CategoryDaoRemote) ctx.lookup("CategoryDao");
-			productDao = (ProductDaoRemote) ctx.lookup("ProductDao");
-			orderDao = (OrderDaoRemote) ctx.lookup("OrderDao");
-		} catch (NamingException ex) {
-			ex.printStackTrace();
-		}
+
+//		InitialContext ctx;
+//		try {
+//			ctx = new InitialContext();
+//			customerDao = (CustomerDaoRemote) ctx.lookup("CustomerDao");
+//			categoryDao = (CategoryDaoRemote) ctx.lookup("CategoryDao");
+//			productDao = (ProductDaoRemote) ctx.lookup("ProductDao");
+//			orderDao = (OrderDaoRemote) ctx.lookup("OrderDao");
+//		} catch (NamingException ex) {
+//			ex.printStackTrace();
+//		}
 
 		/*
 		 * Si la map des customers n'existe pas en session, alors l'utilisateur
@@ -125,7 +122,7 @@ public class PreloadFilter implements Filter {
 		if (session.getAttribute(ATT_CATEGORIES_SESSION) == null) {
 
 			/*
-			 * Récupération de la list des customers existants, et
+			 * Récupération de la list des catégories existantes, et
 			 * enregistrement en session
 			 */
 			List<Category> listCategory = categoryDao.list();

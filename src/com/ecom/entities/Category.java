@@ -1,6 +1,7 @@
 package com.ecom.entities;
 
 import java.awt.Dimension;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.GeneratedValue;
@@ -9,8 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.*;;
 
 @Entity
-public class Category {
+public class Category implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name="CATEGORY_ID")

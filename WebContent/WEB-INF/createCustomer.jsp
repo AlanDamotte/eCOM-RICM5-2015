@@ -10,7 +10,7 @@
     <body>
         <c:import url="/inc/adminMenu.jsp" />
         <div>
-            <form method="post" action="<c:url value="/customerCreation"/>" enctype="multipart/form-data">
+            <form method="post" action="<c:url value="/customerCreation"/>">
                <fieldset>
                     <legend>Informations client</legend>
                     <c:import url="/inc/inc_customer_form.jsp" />

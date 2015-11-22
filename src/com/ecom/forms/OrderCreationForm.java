@@ -3,6 +3,7 @@ package com.ecom.forms;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.ejb.EJB;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
@@ -35,18 +36,19 @@ public final class OrderCreationForm {
 	private Map<String, String> errors = new HashMap<String, String>();
 
 	private CustomerDaoRemote customerDao;
+
 	private OrderDaoRemote orderDao;
 	
-	InitialContext ctx;
-	{
-		try {
-			ctx = new InitialContext();
-			customerDao = (CustomerDaoRemote) ctx.lookup("CustomerDao");
-			orderDao = (OrderDaoRemote) ctx.lookup("OrderDao");
-		} catch (NamingException ex) {
-			ex.printStackTrace();
-		}
-	}
+//	InitialContext ctx;
+//	{
+//		try {
+//			ctx = new InitialContext();
+//			customerDao = (CustomerDaoRemote) ctx.lookup("CustomerDao");
+//			orderDao = (OrderDaoRemote) ctx.lookup("OrderDao");
+//		} catch (NamingException ex) {
+//			ex.printStackTrace();
+//		}
+//	}
 
 	public OrderCreationForm( CustomerDaoRemote customerDao, OrderDaoRemote orderDao ) {
         this.customerDao = customerDao;
@@ -107,9 +109,7 @@ public final class OrderCreationForm {
 		DateTime dt = new DateTime();
 
 		String amount = getFieldValue(request, FIELD_AMOUNT);
-		String paymentMode = getFieldValue(request, FIELD_PAYMENT_MODE);
 		String paymentStatus = getFieldValue(request, FIELD_PAYMENT_STATUS);
-		String deliveryMode = getFieldValue(request, FIELD_DELIVERY_MODE);
 		String deliveryStatus = getFieldValue(request, FIELD_DELIVERY_STATUS);
 		
 		Order order = new Order();
@@ -120,9 +120,7 @@ public final class OrderCreationForm {
 	            order.setDate( dt );
 
 	            processAmount( amount, order );
-	            processPaymentMode( paymentMode, order );
 	            processPaymentStatus( paymentStatus, order );
-	            processDeliveryMode( deliveryMode, order );
 	            processDeliveryStatus( deliveryStatus, order );
 
 	            if ( errors.isEmpty() ) {
@@ -157,15 +155,6 @@ public final class OrderCreationForm {
 	        order.setAmount( valueAmount );
 	    }
 
-	    private void processPaymentMode( String paymentMode, Order order ) {
-	        try {
-	            paymentModeValidation( paymentMode );
-	        } catch ( FormValidationException e ) {
-	            setError( FIELD_PAYMENT_MODE, e.getMessage() );
-	        }
-	        order.setPaymentMode( paymentMode );
-	    }
-
 	    private void processPaymentStatus( String paymentStatus, Order order ) {
 	        try {
 	            paymentStatusValidation( paymentStatus );
@@ -173,15 +162,6 @@ public final class OrderCreationForm {
 	            setError( FIELD_PAYMENT_STATUS, e.getMessage() );
 	        }
 	        order.setPaymentStatus( paymentStatus );
-	    }
-
-	    private void processDeliveryMode( String deliveryMode, Order order ) {
-	        try {
-	            deliveryModeValidation( deliveryMode );
-	        } catch ( FormValidationException e ) {
-	            setError( FIELD_DELIVERY_MODE, e.getMessage() );
-	        }
-	        order.setDeliveryMode( deliveryMode );
 	    }
 
 	    private void processDeliveryStatus( String deliveryStatus, Order order ) {

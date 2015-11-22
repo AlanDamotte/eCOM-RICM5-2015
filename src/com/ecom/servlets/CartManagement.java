@@ -22,6 +22,10 @@ import com.ecom.dao.ProductDaoRemote;
 
 @WebServlet(name = "CartManagement", urlPatterns = { "/cartManagement", "/addToCart", "/removeFromCart", "/addToCartFromSearch" })
 public class CartManagement extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final String ATT_PRODUCT = "product";
 	public static final String ATT_FORM = "form";
 	public static final String VIEW = "/WEB-INF/cartManagement.jsp";
@@ -32,22 +36,16 @@ public class CartManagement extends HttpServlet {
 	public static final String VIEWSEARCH = "/search";
 
 	public static final String VIEWCART = "/cartManagement";
-	
+
+	@EJB
 	private ProductDaoRemote productDao;
 	
-	InitialContext ctx;
-	{
-		try {
-			ctx = new InitialContext();
-			productDao = (ProductDaoRemote) ctx.lookup("ProductDao");
-		} catch (NamingException ex) {
-			ex.printStackTrace();
-		}
-	}
+	ShoppingCart shoppingCart = null;
+
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		ShoppingCart shoppingCart = (ShoppingCart) request.getSession().getAttribute(CART_PRODUCTS_SESSION);
+		shoppingCart = (ShoppingCart) request.getSession().getAttribute(CART_PRODUCTS_SESSION);
 		if (shoppingCart == null) {
 			try {
 				InitialContext ctx = new InitialContext();
@@ -135,7 +133,7 @@ public class CartManagement extends HttpServlet {
 		/*
 		 * À la réception d'une requête GET, affichage de la liste des clients
 		 */
-		ShoppingCart shoppingCart = (ShoppingCart) request.getSession().getAttribute(CART_PRODUCTS_SESSION);
+		shoppingCart = (ShoppingCart) request.getSession().getAttribute(CART_PRODUCTS_SESSION);
 		if (shoppingCart == null) {
 			try {
 				InitialContext ctx = new InitialContext();
