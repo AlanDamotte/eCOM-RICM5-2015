@@ -49,12 +49,12 @@
                         </div>
                     </div>
                 </div>
-                <form class="navbar-form navbar-right" role="form">
+                <form class="navbar-form navbar-right" role="form" action="<c:url value="/search"/>">
                     <div class="input-group">
-                        <input type="text" style="width:150px" class="input-sm form-control" placeholder="Search">
+                        <input type="text" style="width:150px" class="input-sm form-control" id="search" name="search" placeholder="Search">
                         <span class="input-group-btn">
                             <button type="submit" class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-eye-open"></span>Search</button>
+                                <span class="glyphicon glyphicon-eye-open"></span>Recherche</button>
                         </span>
                     </div>
                 </form>
@@ -86,7 +86,7 @@
                                 <h2 class="text-muted" contenteditable="false">Crée ton propre sticker</h2>
                                 <p>it can be really fun to create really nice things</p>
                                 <p class="text-info">
-                                    <button data-toggle="modal" data-backdrop="false" href="#formulaire" class="btn btn-info">Rejoint notre communauté
+                                    <button data-toggle="modal" data-backdrop="false" href="#formulaire" class="btn btn-info">Rejoint notre communaut�
                                         <p></p>
                                     </button>
                                 </p>
