@@ -26,9 +26,6 @@
 			<c:out value="${ productView.quantity }" />
 		</p>
 		<p>
-			<c:out value="${ productView.availability }" />
-		</p>
-		<p>
 		<form method="post" action="<c:url value="/addToCart"/>">
 			<label for="quantityCart">Quantité<span class="requis">*</span></label>
 			<input type="text" id="quantityCart" name="quantityCart" size="30"

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.ejb.Local;
 
+import com.ecom.beans.ShoppingCart;
 import com.ecom.entities.Product;
 
 @Local
@@ -18,4 +19,6 @@ public interface ProductDaoLocal {
 	public void remove(Product product);
 	
 	public List<Product> listWithTag(List<String> tags);
+	
+	public void updateProductQuantity(ShoppingCart shoppingCart);
 }

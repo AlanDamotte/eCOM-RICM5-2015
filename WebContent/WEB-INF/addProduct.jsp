@@ -34,11 +34,6 @@
                     <span class="erreur">${form.errors['description']}</span>
                     <br />
                     
-                    <label for="availability">Disponibilité<span class="requis">*</span></label>
-                    <input type="text" id="availability" name="availability" value="<c:out value="${product.availability}"/>" size="30" maxlength="30" />
-                    <span class="erreur">${form.errors['availability']}</span>
-                    <br />
-                    
                     <label for="tags">Tags<span class="requis">*</span></label>
                     <input type="text" id="tags" name="tags" value="<c:out value="${product.tags}"/>" size="30" maxlength="30" />
                     <span class="erreur">${form.errors['tags']}</span>

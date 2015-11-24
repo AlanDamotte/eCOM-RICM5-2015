@@ -1,10 +1,12 @@
 package com.ecom.dao;
 
 import java.io.Serializable;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -12,6 +14,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
+import com.ecom.beans.ShoppingCart;
 import com.ecom.entities.Product;
 
 @Stateless(mappedName = "ProductDao")
@@ -73,6 +76,19 @@ public class ProductDao implements ProductDaoLocal, ProductDaoRemote, Serializab
 			em.remove(em.merge(product));
 		} catch (Exception e) {
 			throw new DAOException(e);
+		}
+	}
+
+	@Override
+	public void updateProductQuantity(ShoppingCart shoppingCart) {
+		Map<Long, Integer> mapProducts = shoppingCart.getCart();
+		Set<Long> keys = mapProducts.keySet();
+		Iterator<Long> it = keys.iterator();
+		while (it.hasNext()) {
+			Long key = (Long) it.next();
+			Product product = this.find(key);
+			product.setQuantity(product.getQuantity() - mapProducts.get(key));
+			em.merge(product);	
 		}
 	}
 }

@@ -25,6 +25,7 @@ public class PaymentManagement extends HttpServlet{
 	
 	public static final String FIELD_CARD_NAME = "cardName";
 	public static final String FIELD_CARD_NUMBER = "cardNumber";
+	public static final String FIELD_CARD_SECURITYCODE = "securityCode";
 	
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -38,9 +39,11 @@ public class PaymentManagement extends HttpServlet{
 
 		String cardName = getFieldValue(request, FIELD_CARD_NAME);
 		String cardNumber = getFieldValue(request, FIELD_CARD_NUMBER);
+		String securityCode = getFieldValue(request, FIELD_CARD_SECURITYCODE);
 		
 		session.setAttribute(FIELD_CARD_NAME, cardName);
 		session.setAttribute(FIELD_CARD_NUMBER, cardNumber);
+		session.setAttribute(FIELD_CARD_SECURITYCODE, securityCode);
 		
 		this.getServletContext().getRequestDispatcher(VIEW_SUCCESS).forward(request, response);
 	}
