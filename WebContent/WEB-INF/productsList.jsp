@@ -23,7 +23,6 @@
                     <th>Description</th>
                     <th>Prix</th>
                     <th>Quantité</th>
-                    <th>Disponibilité</th>
                     <th class="action">Action</th>                    
                 </tr>
                 <%-- Parcours de la Map des clients en session, et utilisation de l'objet varStatus. --%>
@@ -35,7 +34,6 @@
                     <td><c:out value="${ mapProducts.value.description }"/></td>
                     <td><c:out value="${ mapProducts.value.price }"/></td>
                     <td><c:out value="${ mapProducts.value.quantity }"/></td>
-                    <td><c:out value="${ mapProducts.value.availability }"/></td>
                     <td class="action">
                         <a href="<c:url value="/productRemoval"><c:param name="idProduct" value="${ mapProducts.key }" /></c:url>">
                             <img src="<c:url value="/inc/supprimer.png"/>" alt="Supprimer" />

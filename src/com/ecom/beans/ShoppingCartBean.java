@@ -130,7 +130,12 @@ public class ShoppingCartBean implements ShoppingCartLocal, ShoppingCart, Serial
 		double subtotal1 = productDao.find(id).getPrice() * getQuantity(id);
 		double subtotal = this.total - subtotal1;
 		subtotal = subtotal + productDao.find(id).getPrice() * quantity;
-		items.replace(id, quantity);
+		if(quantity == 0){
+			items.remove(id);
+		}else{
+			items.replace(id, quantity);
+			
+		}
 		this.total = subtotal;
 	}
 
@@ -262,5 +267,6 @@ public class ShoppingCartBean implements ShoppingCartLocal, ShoppingCart, Serial
 	@Override
 	public void clear(){
 		this.items.clear();
+		this.total = 0;
 	}
 }

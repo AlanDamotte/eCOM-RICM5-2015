@@ -34,8 +34,7 @@ public class CustomerOrderHistory extends HttpServlet {
 
 		HttpSession session = request.getSession();
 
-		List<OrderHistory> orderHistoryList = orderHistoryDao
-				.findHistoryByIdCustomer(((Customer) session.getAttribute(ATT_SESSION_CUSTOMER)).getId());
+		List<OrderHistory> orderHistoryList = orderHistoryDao.findHistoryByIdCustomer(((Customer) session.getAttribute(ATT_SESSION_CUSTOMER)).getId());
 
 		session.setAttribute(ATT_CUSTOMER_HISTORY, orderHistoryList);
 

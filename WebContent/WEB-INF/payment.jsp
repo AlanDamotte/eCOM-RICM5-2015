@@ -10,6 +10,10 @@
     <body>
         <c:import url="/inc/menu.jsp" />
         <div>
+        	<c:if test="${!empty sessionScope.paymentStatus}">
+                    <%-- Si l'utilisateur existe en session, alors on affiche son adresse email. --%>
+                	<p >Une erreur est survenue durant le paiement, veuillez vérifier vos coordonnées bancaire ou contacter votre banque.</p>
+            </c:if>
             <form method="post" action="<c:url value="/paymentManagement"/>">
                 <fieldset>
                     <legend>Informations de payment</legend>

@@ -13,7 +13,7 @@
 		<p>
 			<br>
 		<p>
-			<a href="<c:url value="/orderHistory"/>">Historique de commande</a>
+			<a href="<c:url value="/orderHistory"/>">Historique de commande</a><br>
 			<a href="<c:url value="/disconnection"/>">Déconnexion</a>
 		</p>
 	</c:if>

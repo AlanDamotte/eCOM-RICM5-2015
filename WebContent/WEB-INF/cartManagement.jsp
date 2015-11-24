@@ -50,7 +50,6 @@
                     <th>Description</th>
                     <th>Prix</th>
                     <th>Quantité</th>
-                    <th>Disponibilité</th>
                     <th class="action">Action</th>                    
                 </tr>
                 <%-- Parcours de la Map des clients en session, et utilisation de l'objet varStatus. --%>

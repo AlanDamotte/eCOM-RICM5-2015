@@ -24,8 +24,8 @@ import com.ecom.dao.ProductDaoRemote;
 import com.ecom.entities.Product;
 import com.ecom.forms.ProductCreationForm;
 
-@WebServlet(name = "ProductCreation", urlPatterns = { "/productCreation" }, initParams = @WebInitParam( name = "path", value = "/home/alan/Documents/RICM5/eCOM-RICM5-2015/file/images/") )
-@MultipartConfig( location = "/home/alan/Documents/RICM5/eCOM-RICM5-2015/file/images", maxFileSize = 2 * 1024 * 1024, maxRequestSize = 10 * 1024 * 1024, fileSizeThreshold = 1024 * 1024 )
+@WebServlet(name = "ProductCreation", urlPatterns = { "/productCreation" }, initParams = @WebInitParam( name = "path", value = "/Users/quentintorck/git/eCOM-RICM5-2015/6/WebContent/bootstrap/img/") )
+@MultipartConfig( location = "/Users/quentintorck/git/eCOM-RICM5-2015/6/WebContent/bootstrap/img/", maxFileSize = 2 * 1024 * 1024, maxRequestSize = 10 * 1024 * 1024, fileSizeThreshold = 1024 * 1024 )
 public class ProductCreation extends HttpServlet {
 	public static final String PATH = "path";
 	public static final String ATT_PRODUCT = "product";

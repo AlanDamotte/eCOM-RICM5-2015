@@ -15,7 +15,6 @@
             <p>Description : <c:out value="${ product.description }"/></p>
             <p>Prix : <c:out value="${ product.price }"/></p>
             <p>Quantité : <c:out value="${ product.quantity }"/></p>
-            <p>Disponibilité : <c:out value="${ product.availability }"/></p>
         </div>
     </body>
 </html>

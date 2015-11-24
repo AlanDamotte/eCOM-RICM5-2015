@@ -19,6 +19,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 
+import org.joda.time.DateTime;
+
 import com.ecom.dao.CustomerDaoRemote;
 import com.ecom.dao.DAOException;
 import com.ecom.dao.OrderDaoRemote;
@@ -75,7 +77,6 @@ public class ProductCreationForm {
 		String description = getFieldValue(request, FIELD_DESCRIPTION);
 		String pricep = getFieldValue(request, FIELD_PRICEP);
 		String quantity = getFieldValue(request, FIELD_QUANTITY);
-		String disponibility = getFieldValue(request, FIELD_DISPONIBILITYP);
 		String tags = getFieldValue(request, FIELD_TAGS);
 		String image = null;
 		
@@ -86,9 +87,11 @@ public class ProductCreationForm {
 		processDescription(description, product);
 		processPriceP(pricep, product);
 		processQuantity(quantity, product);
-		processDisponibility(disponibility, product);
 		processTags(tags, product);
 		processImage(product, request, path);
+		
+		DateTime dt = new DateTime();
+		product.setDate(dt);
 
 		try {
 			if (errors.isEmpty()) {
@@ -153,15 +156,6 @@ public class ProductCreationForm {
 		product.setQuantity(q);
 	}
 
-	private void processDisponibility(String disponibility, Product product) {
-		boolean dispo = false;
-		try {
-			dispo = dispoValidation(disponibility);
-		} catch (FormValidationException e) {
-			setError(FIELD_DISPONIBILITYP, e.getMessage());
-		}
-		product.setAvailability(dispo);
-	}
 
 	private void nameValidation(String name) throws FormValidationException {
 		if (name != null) {
@@ -171,14 +165,6 @@ public class ProductCreationForm {
 		} else {
 			throw new FormValidationException("Merci d'entrer un nom de produit.");
 		}
-	}
-
-	private boolean dispoValidation(String dispo) throws FormValidationException {
-		boolean disponibility = false;
-		if (dispo != null && dispo == "Oui") {
-			disponibility = true;
-		}
-		return disponibility;
 	}
 
 	private void descriptionValidation(String description) throws FormValidationException {

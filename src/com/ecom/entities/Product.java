@@ -5,6 +5,12 @@ import java.util.List;
 
 import javax.persistence.*;
 
+import org.eclipse.persistence.annotations.Convert;
+import org.eclipse.persistence.annotations.Converter;
+import org.joda.time.DateTime;
+
+import com.ecom.tools.JodaDateTimeConverter;
+
 @Entity
 public class Product implements Serializable {
 
@@ -18,8 +24,11 @@ public class Product implements Serializable {
     private String image;
     private String type;
     private double price;
-    private boolean availability;
     private int quantity;
+	@Column(columnDefinition = "TIMESTAMP")
+	@Converter(name = "dateTimeConverter", converterClass = JodaDateTimeConverter.class)
+	@Convert("dateTimeConverter")
+	private DateTime date;
     
     @ManyToMany(mappedBy="products")
     private List<Category> categories;
@@ -39,6 +48,14 @@ public class Product implements Serializable {
         this.quantity = quantity;
     }
     
+	public DateTime getDate() {
+		return date;
+	}
+
+	public void setDate(DateTime date) {
+		this.date = date;
+	}
+    
     public List<String> getTags() {
         return tags;
     }
@@ -52,7 +69,6 @@ public class Product implements Serializable {
 
     public Product(String name, String description, String image, int quantity, String type, double price, boolean availability, List<String> tags) {
         this.name = name;
-        this.availability = availability;
         this.description = description;
         this.image = image;
         this.quantity = quantity;
@@ -75,14 +91,6 @@ public class Product implements Serializable {
 
     public void setImage(String image) {
         this.image = image;
-    }
-
-    public boolean isAvailability() {
-        return availability;
-    }
-
-    public void setAvailability(boolean availability) {
-        this.availability = availability;
     }
 
     public String getName() {

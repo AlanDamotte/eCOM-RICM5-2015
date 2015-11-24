@@ -23,12 +23,14 @@
 						<th>Produit</th>
 					</tr>
 					<%-- Parcours de la Map des clients en session, et utilisation de l'objet varStatus. --%>
-					<c:forEach items="${ sessionScope.orderHistory }" var="listOrder"
-						varStatus="boucle">
+					<c:forEach items="${ sessionScope.orderHistory }" var="listOrder" varStatus="boucle">
 						<%-- Simple test de parité sur l'index de parcours, pour alterner la couleur de fond de chaque ligne du tableau. --%>
 						<tr class="${boucle.index % 2 == 0 ? 'pair' : 'impair'}">
+							<c:forEach items="${ listOrder.order.cart }" var="mapProducts" varStatus="boucle">
+							test
 							<%-- Affichage des propriétés du bean Client, qui est stocké en tant que valeur de l'entrée courante de la map --%>
-							<td><c:out value="${ order.id }" /></td>
+							<%-- <td><c:out value="${ mapProducts.value.name }" /></td> --%>
+							</c:forEach>
 						</tr>
 					</c:forEach>
 				</table>
