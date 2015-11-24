@@ -27,11 +27,26 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
   </head><body>
-    <div class="section text-right">
+    <div class="section">
       <div class="container">
         <div class="row">
-          <div class="col-md-12">
-            <a class="btn btn-info btn-lg" href="panier.html">Panier</a>
+          <div class="section">
+            <div class="container">
+              <div class="row"></div>
+              <div class="row">
+                <div class="col-md-3">
+                  <div class="col-md-12">
+                    <h1 class="text-muted">Stick-Gump</h1>
+                  </div>
+                </div>
+                <div class="col-sm-2 col-md-3"></div>
+                <div class="col-sm-2 col-md-3"></div>
+                <div class="col-md-3 col-sm-2 text-right">
+                  <a class="btn btn-info btn-lg" href="panier.html">Panier</a>
+                  <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href="#formulaire">Connecte toi</a>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -40,7 +55,6 @@
       <!-- The justified navigation menu is meant for single line per list item.
       Multiple lines will require custom code not provided by Bootstrap. -->
       <div class="masthead">
-        <h3 class="text-muted">Stick-Gump</h3>
         <form class="navbar-form navbar-right" role="form">
           <div class="input-group">
             <input type="text" style="width:150px" class="input-sm form-control" placeholder="Search">
@@ -70,26 +84,39 @@
         </nav>
       </div>
       <!-- Site footer -->
-      <p class="text-primary">
-        <button data-toggle="modal" data-backdrop="false" href="#formulaire" class="btn btn-block btn-info btn-lg">Sign up now
-          <p></p>
-        </button>
-      </p>
     </div>
     <div class="section">
       <div class="container">
-        <div class="row">
-          <div class="col-md-6">
+        <div class="row" style="display: block;">
+          <div class="col-md-6" style="display: block;">
             <h1>Name:</h1>
             <p>TabletStick</p>
-            <h1>Size:</h1>
-            <p>240X500</p>
-            <p>nzlneldenzlk</p>
+            <h1>Quantity</h1>
+            <h1>
+              <select class="form-control">
+                <option>1</option>
+                <option>2</option>
+                <option>3</option>
+                <option>50</option>
+                <option>500</option>
+              </select>Size / Format:</h1>
+            <p>240X500
+              <br>
+              <br>
+            </p>
+            <h1>
+              <select class="form-control">
+                <option>Rond</option>
+                <option>Carré</option>
+                <option>Rectangle</option>
+                <option>Triangulaire</option>
+              </select>
+            </h1>
             <h1>Price:</h1>
             <p class="text-muted">1,99 $</p>
           </div>
           <div class="col-md-6">
-            <img src="../../../../../Downloads/SensorsEVERYWHERE.jpg" class="img-responsive img-thumbnail" id="rt">
+            <img src="img/SensorsEVERYWHERE.jpg" class="img-responsive img-thumbnail" id="rt">
           </div>
         </div>
       </div>
@@ -102,11 +129,11 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-md-6">
-            <a href="index.html" class="btn btn-info btn-sm">Cancel</a>
+          <div class="col-md-6 text-center">
+            <a class="btn btn-info btn-lg">Ajout Panier</a>
           </div>
           <div class="col-md-6 text-center">
-            <a class="btn btn-info btn-lg" data-toggle="modal" data-target="Buy Now">Ajouter au Panier</a>
+            <a  href="index.html" class="btn btn-info btn-lg" >&nbsp; Retour &nbsp;&nbsp;</a>
           </div>
         </div>
       </div>
@@ -117,6 +144,7 @@
         <hr>
       </div>
     </div>
+    <br>
     <div class="modal fade" id="formulaire">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -127,12 +155,24 @@
           <div class="modal-body">
             <form action="test.php">
               <div class="form-group">
-                <label for="nom">Nom</label>
+                <label for="nom">* Nom</label>
                 <input type="text" class="form-control" name="nom" id="nom" placeholder="Votre nom">
               </div>
               <div class="form-group">
-                <label for="email">Email</label>
+                <label for="email">* Email</label>
                 <input type="email" class="form-control" name="email" id="email" placeholder="Votre Email">
+              </div>
+              <div class="form-group">
+                <label for="adresse">* Adresse</label>
+                <input type="adresse" class="form-control" name="adresse" id="adresse" placeholder="Rue des asticots">
+              </div>
+              <div class="form-group">
+                <label for="code-postal">* Code-postal</label>
+                <input type="adresse" class="form-control" name="adresse" id="adresse" placeholder="38400">
+              </div>
+              <div class="form-group">
+                <label for="telephone">* Téléphone</label>
+                <input type="adresse" class="form-control" name="Téléphone" id="adresse" placeholder="+33609785992">
               </div>
               <button type="submit" class="btn btn-default">Envoyer</button>
             </form>
@@ -147,19 +187,19 @@
     <script src="js/bootstrap.min.js"></script>
     <script>
       $(function(){
-                $("form").submit(function(e) {
-                  e.preventDefault();
-                  var $form = $(this);
-                  $.post($form.attr("action"), $form.serialize())
-                  .done(function(data) {
-                    $("#html").html(data);
-                    $("#formulaire").modal("hide"); 
-                  })
-                  .fail(function() {
-                    alert("ça marche pas...");
-                  });
-                });
-              });
+                                $("form").submit(function(e) {
+                                  e.preventDefault();
+                                  var $form = $(this);
+                                  $.post($form.attr("action"), $form.serialize())
+                                  .done(function(data) {
+                                    $("#html").html(data);
+                                    $("#formulaire").modal("hide"); 
+                                  })
+                                  .fail(function() {
+                                    alert("ça marche pas...");
+                                  });
+                                });
+                              });
     </script>
   
 
