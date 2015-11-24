@@ -35,6 +35,7 @@ public class PreloadFilter implements Filter {
 	public static final String ATT_ORDERS_SESSION = "orders";
 	public static final String ATT_PRODUCTS_SESSION = "products";
 	public static final String CART_PRODUCTS_SESSION = "cart_products";
+	public static final String ATT_MERGE_CART = "merge_cart";
 
 	@EJB
 	private CustomerDaoRemote customerDao;
@@ -66,12 +67,19 @@ public class PreloadFilter implements Filter {
 //		} catch (NamingException ex) {
 //			ex.printStackTrace();
 //		}
+		
+		//Attribut permettant de merge les paniers sessions et utilisateur qu'une seule fois par session.
+		if(session.getAttribute(ATT_MERGE_CART)==null){
+			session.setAttribute(ATT_MERGE_CART, "false");
+		}		
 
 		/*
 		 * Si la map des customers n'existe pas en session, alors l'utilisateur
 		 * se connecte pour la première fois et nous devons précharger en
 		 * session les infos contenues dans la BDD.
 		 */
+		
+		
 		if (session.getAttribute(ATT_CUSTOMERS_SESSION) == null) {
 
 			/*

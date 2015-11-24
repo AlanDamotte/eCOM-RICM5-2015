@@ -12,6 +12,7 @@ Contents:
    :maxdepth: 2
 
    intro/index
+   dev/index
 
 
 Indices and tables

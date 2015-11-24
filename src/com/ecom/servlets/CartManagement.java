@@ -40,7 +40,7 @@ public class CartManagement extends HttpServlet {
 	@EJB
 	private ProductDaoRemote productDao;
 	
-	ShoppingCart shoppingCart = null;
+	private ShoppingCart shoppingCart = null;
 
 	
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
