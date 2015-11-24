@@ -26,6 +26,7 @@ public class Connection extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	public static final String ATT_CUSTOMER = "customer";
 	public static final String ATT_FORM = "form";
+	public static final String ATT_MERGE_CART = "merge_cart";
 	public static final String CART_PRODUCTS_SESSION = "cart_products";
 	public static final String ATT_SESSION_CUSTOMER = "customerSession";
 	public static final String VIEW = "/WEB-INF/connection.jsp";
@@ -44,6 +45,7 @@ public class Connection extends HttpServlet {
 		} else if (request.getRequestURI().equals(request.getContextPath() + "/disconnection")) {
 			shoppingCart = (ShoppingCart) request.getSession().getAttribute(CART_PRODUCTS_SESSION);
 			shoppingCart.saveCart();
+			shoppingCart.setId(null);
 			HttpSession session = request.getSession();
 			session.removeAttribute(ATT_SESSION_CUSTOMER);
 			response.sendRedirect(request.getContextPath() + VIEW_CATALOG);
@@ -83,8 +85,13 @@ public class Connection extends HttpServlet {
 					/* Redirection vers la le catalogue */
 					response.sendRedirect(request.getContextPath() + VIEW_CATALOG);
 				}
-			}else{
+			} else {
 				shoppingCart.setId(customer.getId());
+				if (session.getAttribute(ATT_MERGE_CART).equals("false")) {
+					shoppingCart.mergeClientCart();
+					session.setAttribute(ATT_MERGE_CART, "true");
+				}
+
 				request.getSession().setAttribute(CART_PRODUCTS_SESSION, shoppingCart);
 				response.sendRedirect(request.getContextPath() + VIEW_CATALOG);
 			}

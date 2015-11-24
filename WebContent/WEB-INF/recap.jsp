@@ -11,12 +11,14 @@
 	<c:import url="/inc/menu.jsp" />
 	<div>
 			<p>
-				${sessionScope.customerSession.firstname}<br>
-				${sessionScope.customerSession.lastname}<br>
+				Informations clients :<br>
+				${sessionScope.customerSession.lastname}  ${sessionScope.customerSession.firstname}<br>
 				${sessionScope.customerSession.address}<br>
-				${sessionScope.customerSession.postCode}<br>
-				${sessionScope.customerSession.city}<br>
+				${sessionScope.customerSession.postCode} ${sessionScope.customerSession.city}<br>
 				${sessionScope.customerSession.phonenumber}<br>
+				Carte : <br>
+				${sessionScope.cardName}<br>
+				${sessionScope.cardNumber}<br>
 			</p>
 			<a href="<c:url value="/createOrder"/>">Payer</a>
 	</div>

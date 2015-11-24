@@ -34,6 +34,12 @@ public interface ShoppingCart {
 
 	public void release();
 	
+	public void mergeClientCart();
+	
+	public Map<Long, Integer> getCart();
+	
+	public void clear();
+	
 	public void saveCart();
 
 }

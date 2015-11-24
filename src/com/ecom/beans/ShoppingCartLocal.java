@@ -7,7 +7,7 @@ import java.util.Map;
 
 @Local
 public interface ShoppingCartLocal extends ShoppingCart {
-	
+
 	void initialize();
 
 	void addProduct(Product product, int quantity);
@@ -21,14 +21,20 @@ public interface ShoppingCartLocal extends ShoppingCart {
 	Map<Long, Product> getMapProducts();
 
 	List<Product> getProducts();
-	
+
 	void setId(Long id);
-	
+
 	public Long getId();
-	
+
 	public void initializeClientCart();
 
+	public void mergeClientCart();
+
+	public Map<Long, Integer> getCart();
+
 	public void release();
+
+	public void clear();
 
 	public void saveCart();
 }

@@ -1,16 +1,20 @@
 package com.ecom.entities;
 
 import java.io.Serializable;
+import java.util.Map;
 
 import org.joda.time.DateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.eclipse.persistence.annotations.Convert;
@@ -26,6 +30,7 @@ public class Order implements Serializable {
 	 */
 	private static final long serialVersionUID = 1L;
 	@Id
+	@Column(name = "id_order")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	@ManyToOne
@@ -42,12 +47,25 @@ public class Order implements Serializable {
 	@Column(name = "delivery_status")
 	private String deliveryStatus;
 
+	private Map<Long, Integer> cart;
+	
+    @OneToOne(mappedBy="order" ,cascade = CascadeType.PERSIST)
+	private OrderHistory orderHistory;
+
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+	
+	public Map<Long, Integer> getCart() {
+		return this.cart;
+	}
+
+	public void setCart(Map<Long, Integer> map) {
+		this.cart = map;
 	}
 
 	public Customer getCustomer() {

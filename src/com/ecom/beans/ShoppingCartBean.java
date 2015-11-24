@@ -1,13 +1,11 @@
 package com.ecom.beans;
 
 import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.ejb.EJB;
 import javax.ejb.Local;
 import javax.ejb.Remote;
 import javax.ejb.Remove;
 import javax.ejb.Stateful;
-import javax.ejb.StatefulTimeout;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -28,7 +26,6 @@ import java.util.Set;
 @Stateful(mappedName = "ShoppingCartBean")
 @Remote(ShoppingCart.class)
 @Local(ShoppingCartLocal.class)
-@StatefulTimeout(value=60, unit=java.util.concurrent.TimeUnit.SECONDS)
 public class ShoppingCartBean implements ShoppingCartLocal, ShoppingCart, Serializable {
 
 	/**
@@ -66,6 +63,24 @@ public class ShoppingCartBean implements ShoppingCartLocal, ShoppingCart, Serial
 			Cart cart = cartDao.findCartByIdCustomer(id);
 			this.items = cart.getCart();
 			this.total = cart.getTotalPrice();
+		}catch(Exception e){
+			
+		}
+	}
+	
+	@Override
+	public void mergeClientCart(){
+		try{
+			Cart cart = cartDao.findCartByIdCustomer(id);
+			Map<Long,Integer> clientCart = cart.getCart();
+			Set<Long> keys = clientCart.keySet();
+			Iterator<Long> it = keys.iterator();
+			while (it.hasNext()) {
+				Long key = (Long) it.next();
+				if(!items.containsKey(key)){
+					this.addProduct(key, clientCart.get(key));
+				}
+			}
 		}catch(Exception e){
 			
 		}
@@ -189,6 +204,11 @@ public class ShoppingCartBean implements ShoppingCartLocal, ShoppingCart, Serial
 		}
 		return cart;
 	}
+	
+	@Override
+	public Map<Long, Integer> getCart() {
+		return this.items;
+	}
 
 	@Override
 	public void updateQuantity(Product product, int quantity) {
@@ -220,7 +240,7 @@ public class ShoppingCartBean implements ShoppingCartLocal, ShoppingCart, Serial
 
 	// Méthode de sauvegarde du panier associé à l'utilisateur
 	@Override
-	@PreDestroy
+	@Remove
 	public void release() {
 		System.out.println("End of stateful container");
 		if (this.id != null) {
@@ -237,5 +257,10 @@ public class ShoppingCartBean implements ShoppingCartLocal, ShoppingCart, Serial
 				cartDao.create(cart);
 			}
 		}
+	}
+	
+	@Override
+	public void clear(){
+		this.items.clear();
 	}
 }
