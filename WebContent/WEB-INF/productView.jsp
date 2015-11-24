@@ -95,11 +95,11 @@
             <h1>Name:</h1>
             <p>
 			<c:out value="${ productView.name }" />
-<<<<<<< HEAD
+
 			</p>
             <h1>Quantity</h1>
             <p>
-=======
+
 		</p>
 		<p>
 			<c:out value="${ productView.description }" />
@@ -111,7 +111,6 @@
 			<c:out value="${ productView.quantity }" />
 		</p>
 		<p>
->>>>>>> branch 'v0.1-branch' of https://github.com/AlanDamotte/eCOM-RICM5-2015.git
 		<form method="post" action="<c:url value="/addToCart"/>">
 			<label for="quantityCart">Quantité<span class="requis">*</span></label>
 			<input type="text" id="quantityCart" name="quantityCart" size="30"
@@ -211,8 +210,8 @@
         </div>
       </div>
     </div>
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
+    <script src="bootstrap/js/jquery.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
     <script>
       $(function(){
                                 $("form").submit(function(e) {

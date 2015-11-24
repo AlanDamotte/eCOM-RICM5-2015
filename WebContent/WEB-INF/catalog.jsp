@@ -34,7 +34,9 @@
                                 <h1 class="text-muted">Stick-Gump</h1>
                             </div></div><div class="col-sm-2 col-md-3"></div><div class="col-sm-2 col-md-2"></div><div class="col-md-3 col-sm-2 text-center">
                                 <a class="btn btn-info btn-lg" href="panier.html">&nbsp; Panier &nbsp;&nbsp;</a>
+                                <c:if test="${empty sessionScope.customerSession}">
                                 <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href="#formulaire">Connecte toi</a>
+                                </c:if>
                             </div></div></div></div><div class="container">
             <!-- The justified navigation menu is meant for single line per list item.
             Multiple lines will require custom code not provided by Bootstrap. -->
@@ -116,28 +118,18 @@
                         <h4 class="modal-title">Vos infos :</h4>
                     </div>
                      <div class="modal-body">
-	                        <form action="test.php">
+	                     <form method="post" action="<c:url value="/connection" />">
 	                            <div class="form-group">
-	                                <label for="nom">* Nom</label>
-	                                <input type="text" class="form-control" name="nom" id="nom" placeholder="Votre nom">
+	                                <label for="name">Adresse email <span class="requis">*</span></label>
+					                <input type="email" class="form-control" id="email" name="email" value="<c:out value="${customer.email}"/>" size="20" maxlength="60" placeholder="Adresse"/>
+					                <span class="erreur">${form.errors['email']}</span>
 	                            </div>
 	                            <div class="form-group">
-	                                <label for="email">* Email</label>
-	                                <input type="email" class="form-control" name="email" id="email" placeholder="Votre Email">
+	                                <label for="password">Mot de passe <span class="requis">*</span></label>
+					                <input type="password" class="form-control" id="password" name="password" value="" size="20" maxlength="20" placeholder="Mot de passe"/>
+					                <span class="erreur">${form.errors['motdepasse']}</span>
 	                            </div>
-	                            <div class="form-group">
-	                                <label for="adresse">* Adresse</label>
-	                                <input type="adresse" class="form-control" name="adresse" id="adresse" placeholder="Rue des asticots">
-	                            </div>
-	                            <div class="form-group">
-	                                <label for="code-postal">* Code-postal</label>
-	                                <input type="adresse" class="form-control" name="adresse" id="adresse" placeholder="38400">
-	                            </div>
-	                            <div class="form-group">
-	                                <label for="telephone">* Téléphone</label>
-	                                <input type="adresse" class="form-control" name="Téléphone" id="adresse" placeholder="+33609785992">
-	                            </div>
-                            <button type="submit" class="btn btn-default">Envoyer</button>
+                            <input type="submit" class="btn btn-default">Connexion</button>
                         </form>
                     </div>
                     <div class="modal-footer">
