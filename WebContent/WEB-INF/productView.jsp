@@ -72,16 +72,16 @@
         <nav>
           <ul class="nav nav-justified">
             <li>
-              <a href="/addToCart">Home</a>
+              <a href="./index">Home</a>
             </li>
             <li class="disabled">
-              <a href="create-your.jsp">Create Your Sticker</a>
+              <a href="./create-your-stick">Create Your Sticker</a>
             </li>
             <li>
-              <a href="catalog.jsp">View Sticker List</a>
+              <a href="./catalog">View Sticker List</a>
             </li>
             <li>
-              <a href="contact-us.jsp">Contact Us</a>
+              <a href="./contact-us">Contact Us</a>
             </li>
           </ul>
         </nav>
