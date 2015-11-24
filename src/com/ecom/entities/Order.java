@@ -3,6 +3,8 @@ package com.ecom.entities;
 import java.io.Serializable;
 import java.util.Map;
 
+import org.eclipse.persistence.annotations.Convert;
+import org.eclipse.persistence.annotations.Converter;
 import org.joda.time.DateTime;
 
 import javax.persistence.CascadeType;
@@ -17,8 +19,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.eclipse.persistence.annotations.Convert;
-import org.eclipse.persistence.annotations.Converter;
 
 import com.ecom.tools.JodaDateTimeConverter;
 

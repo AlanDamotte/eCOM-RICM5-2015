@@ -11,6 +11,8 @@ import org.joda.time.DateTime;
 
 import com.ecom.tools.JodaDateTimeConverter;
 
+
+
 @Entity
 public class Product implements Serializable {
 
@@ -26,7 +28,7 @@ public class Product implements Serializable {
     private double price;
     private int quantity;
 	@Column(columnDefinition = "TIMESTAMP")
-	@Converter(name = "dateTimeConverter", converterClass = JodaDateTimeConverter.class)
+	@Converter(name="dateTimeConverter", converterClass = JodaDateTimeConverter.class)
 	@Convert("dateTimeConverter")
 	private DateTime date;
     
