@@ -19,7 +19,7 @@ import com.ecom.dao.CustomerDaoRemote;
 import com.ecom.dao.DAOException;
 import com.ecom.entities.Customer;
 
-@WebServlet( name = "CustomerRemoval", urlPatterns = { "/customerRemoval" } )
+@WebServlet(name = "CustomerRemoval", urlPatterns = { "/customerRemoval" })
 public class CustomerRemoval extends HttpServlet {
 	public static final String PARAM_ID_CLIENT = "idCustomer";
 	public static final String CLIENTS_SESSION = "customers";

@@ -1,3 +1,6 @@
+<%@ page pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html><head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -49,13 +52,11 @@
                         </div>
                     </div>
                 </div>
-                <form class="navbar-form navbar-right" role="form" action="<c:url value="/search"/>">
+                <form method="post" class="navbar-form navbar-right" action="<c:url value="/search"/>">
                     <div class="input-group">
-                        <input type="text" style="width:150px" class="input-sm form-control" id="search" name="search" placeholder="Search">
-                        <span class="input-group-btn">
-                            <button type="submit" class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-eye-open"></span>Recherche</button>
-                        </span>
+                        <input type="text" id="search" name="search" style="width:150px" class="input-sm form-control" placeholder="Search">
+                        <input type="submit" value="Rechercher" class="btn btn-primary btn-sm" />
+
                     </div>
                 </form>
                 <nav>
@@ -64,7 +65,7 @@
                             <a href="./index">Accueil</a>
                         </li>
                         <li class="">
-                            <a href="./create-your-stick">Imagine ton Sticker</a>
+                            <a href="./create-your">Imagine ton Sticker</a>
                         </li>
                         <li>
                             <a href="./catalog">&nbsp;Liste des stickers</a>
@@ -83,10 +84,10 @@
                         <div class="item active">
                             <img src="bootstrap/img/image-depart.jpg">
                             <div class="carousel-caption">
-                                <h2 class="text-muted" contenteditable="false">Crée ton propre sticker</h2>
+                                <h2 class="text-muted" contenteditable="false">CrÃ©e ton propre sticker</h2>
                                 <p>it can be really fun to create really nice things</p>
                                 <p class="text-info">
-                                    <button data-toggle="modal" data-backdrop="false" href="#formulaire" class="btn btn-info">Rejoint notre communaut�
+                                    <button data-toggle="modal" data-backdrop="false" href="#formulaire" class="btn btn-info">Rejoint notre communauté
                                         <p></p>
                                     </button>
                                 </p>
@@ -152,10 +153,10 @@
                 <div class="col-md-12">
                     <ul class="pager">
                         <li>
-                            <a href="#">←  Prev</a>
+                            <a href="#">â  Prev</a>
                         </li>
                         <li>
-                            <a href="#">Next  →</a>
+                            <a href="#">Next  â</a>
                         </li>
                     </ul>
                 </div>
@@ -163,7 +164,7 @@
         </div>
         <script src="bootstrap/js/jquery.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script>
+<!--         <script>
             $(function(){
                 $("form").submit(function(e) {
                   e.preventDefault();
@@ -174,11 +175,11 @@
                     $("#formulaire").modal("hide"); 
                   })
                   .fail(function() {
-                    alert("ça marche pas...");
+                    alert("Ã§a marche pas...");
                   });
                 });
               });
-        </script>
+        </script> -->
         <script src="bootstrap/js/jquery.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         <script>
@@ -239,7 +240,7 @@
             </div>
         </div>
         <footer class="footer">
-            <p>© ECOM Groupe 2 2015</p>
+            <p>Â© ECOM Groupe 2 2015</p>
         </footer>
         <div class="section">
             <div class="container">
@@ -306,8 +307,8 @@
                                 <input type="adresse" class="form-control" name="adresse" id="adresse" placeholder="38400">
                             </div>
                             <div class="form-group">
-                                <label for="telephone">* Téléphone</label>
-                                <input type="adresse" class="form-control" name="Téléphone" id="adresse" placeholder="+33609785992">
+                                <label for="telephone">* TÃ©lÃ©phone</label>
+                                <input type="adresse" class="form-control" name="TÃ©lÃ©phone" id="adresse" placeholder="+33609785992">
                             </div>
                             <button type="submit" class="btn btn-default">Envoyer</button>
                         </form>

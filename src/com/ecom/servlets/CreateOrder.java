@@ -23,6 +23,7 @@ import com.ecom.dao.ProductDaoRemote;
 import com.ecom.entities.Customer;
 import com.ecom.entities.Order;
 import com.ecom.entities.OrderHistory;
+import com.ecom.service.*;
 
 @WebServlet(name = "CreateOrder", urlPatterns = { "/createOrder" })
 public class CreateOrder extends HttpServlet {
@@ -32,18 +33,15 @@ public class CreateOrder extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	public static final String VIEW = "/WEB-INF/catalog.jsp";
+	public static final String VIEW_PAYMENT = "/WEB-INF/payment.jsp";
+
 	public static final String CART_PRODUCTS_SESSION = "cart_products";
 	public static final String ATT_SESSION_CUSTOMER = "customerSession";
 	public static final String ATT_PAYMENT_STATUS = "paymentStatus";
 
-	public static final String VIEW = "/WEB-INF/catalog.jsp";
-	public static final String VIEW_PAYMENT = "/WEB-INF/payment.jsp";
-
 	public static final String FIELD_CARD_NUMBER = "cardNumber";
 	public static final String FIELD_CARD_SECURITYCODE = "securityCode";
-	
-	@EJB
-	private MailSenderBean mailSender;
 
 	@EJB
 	private OrderDaoRemote orderDao;
@@ -53,12 +51,9 @@ public class CreateOrder extends HttpServlet {
 
 	@EJB
 	private OrderHistoryDaoRemote orderHistory;
-
-	Order order;
-
-	Customer customer;
 	
-	Bank bank = new Bank();
+	@EJB
+	private MailSenderBean mailSender;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -80,7 +75,8 @@ public class CreateOrder extends HttpServlet {
 //			String password = "xxx";
 //
 //			String toEmail = customer.getEmail();
-//			String subject = "Confirmation de commande"; //+ order.getId().toString();
+//			String subject = "Confirmation de commande"; // +
+//			order.getId().toString();
 //			String message = "Test";
 //
 //			// Call to mail sender bean
@@ -97,55 +93,18 @@ public class CreateOrder extends HttpServlet {
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
-		
+
 		session.removeAttribute(ATT_PAYMENT_STATUS);
 
-		ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute(CART_PRODUCTS_SESSION);
-		customer = (Customer) session.getAttribute(ATT_SESSION_CUSTOMER);
-		
-		Long cardNumber = Long.parseLong((String) session.getAttribute(FIELD_CARD_NUMBER));
-		int securityCode = Integer.parseInt((String) session.getAttribute(FIELD_CARD_SECURITYCODE));
-		
-		boolean validate = bank.paymentProcess(cardNumber, shoppingCart.getTotal(), securityCode);
-		if(validate){
-			/*
-			 * Récupération et conversion de la date en String selon le format
-			 * choisi.
-			 */
-			DateTime dt = new DateTime();
+		try {
+			UserServiceImpl.proceedPayment(request, orderDao, productDao, orderHistory, mailSender);
 
-			order = new Order();
-			order.setAmount(shoppingCart.getTotal());
-			order.setCart(shoppingCart.getCart());
-			order.setCustomer(customer);
-			order.setDate(dt);
-			// TODO
-			order.setDeliveryStatus("");
-			order.setPaymentStatus("");
-
-			// orderDao.create(order);
-
-			// Mise à jour des quantités de produits restantes
-			productDao.updateProductQuantity(shoppingCart);
-
-			shoppingCart.clear();
-			request.getSession().setAttribute(CART_PRODUCTS_SESSION, shoppingCart);
-
-			// TODO : Mise à jour de l'historique utilisateur
-
-			OrderHistory orderH = new OrderHistory();
-			orderH.setCustomer(customer);
-			orderH.setOrder(order);
-			orderHistory.create(orderH);
-
-			this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
-			//response.getWriter().append("Served at: ").append(request.getContextPath());
-		}else{
-			//TODO : Gestion erreur à améliorer
+		} catch (Exception e) {
 			session.setAttribute(ATT_PAYMENT_STATUS, "Error");
 			this.getServletContext().getRequestDispatcher(VIEW_PAYMENT).forward(request, response);
+		} finally {
+			this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 		}
-
 
 	}
 

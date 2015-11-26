@@ -7,6 +7,8 @@ import org.eclipse.persistence.annotations.Convert;
 import org.eclipse.persistence.annotations.Converter;
 import org.joda.time.DateTime;
 
+import com.ecom.tools.JodaDateTimeConverter;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,8 +20,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-
-import com.ecom.tools.JodaDateTimeConverter;
 
 @Entity
 @Table(name = "OrderT")
@@ -36,7 +36,6 @@ public class Order implements Serializable {
 	@JoinColumn(name = "id_customer")
 	private Customer customer;
 	@Column(columnDefinition = "TIMESTAMP")
-	@Converter(name = "dateTimeConverter", converterClass = JodaDateTimeConverter.class)
 	@Convert("dateTimeConverter")
 	private DateTime date;
 	@Column(name = "amount")
