@@ -1,6 +1,7 @@
 package com.ecom.service;
 
 import javax.annotation.Resource;
+import javax.ejb.Asynchronous;
 import javax.ejb.EJBContext;
 import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
@@ -32,6 +33,22 @@ public class UserServiceImpl {
 	public static final String FIELD_CARD_SECURITYCODE = "securityCode";
 	
 	@Resource static SessionContext context;
+	
+	@Asynchronous
+	public static void sendEmailOrderComplete(Customer customer, Order order, MailSenderBean mailSender){
+		String fromEmail = "alan.damotte@gmail.com";
+		String username = "alan.damotte";
+		String password = "XXX";
+
+		String toEmail = customer.getEmail();
+		//TODO : modifier le sujet et le corps de message
+		String subject = "Confirmation de commande" + order.getId().toString();
+		String message = "Bonjour M/Mme" + customer.getLastname() + customer.getFirstname() + ":\n"
+						+ "Nous vous confirmation votre commande numéro " + order.getId().toString() + "d'un montant de " + order.getAmount();
+
+		// Call to mail sender bean
+		mailSender.sendEmail(fromEmail, username, password, toEmail, subject, message);
+	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public synchronized static void proceedPayment(HttpServletRequest request, OrderDaoRemote orderDao, ProductDaoRemote productDao, OrderHistoryDaoRemote orderHistory, MailSenderBean mailSender) throws Exception {
@@ -64,7 +81,7 @@ public class UserServiceImpl {
 
 				order = new Order();
 				order.setAmount(shoppingCart.getTotal());
-				order.setCart(shoppingCart.getCart());
+				order.setCart(shoppingCart.getProductsMap());
 				order.setCustomer(customer);
 				order.setDate(dt);
 				// TODO
@@ -89,16 +106,7 @@ public class UserServiceImpl {
 				
 				System.out.println("Sending mail");
 				
-//				String fromEmail = "alan.damotte@gmail.com";
-//				String username = "alan.damotte";
-//				String password = "XXX";
-//
-//				String toEmail = customer.getEmail();
-//				String subject = "Confirmation de commande"; // + order.getId().toString();
-//				String message = "Test";
-//
-//				// Call to mail sender bean
-//				mailSender.sendEmail(fromEmail, username, password, toEmail, subject, message);
+				sendEmailOrderComplete(customer, order, mailSender);
 				
 				System.out.println("Mail sent");
 				

@@ -45,7 +45,7 @@ public class Order implements Serializable {
 	@Column(name = "delivery_status")
 	private String deliveryStatus;
 
-	private Map<Long, Integer> cart;
+	private Map<Product, Integer> cart;
 	
     @OneToOne(mappedBy="order" ,cascade = CascadeType.PERSIST)
 	private OrderHistory orderHistory;
@@ -58,11 +58,11 @@ public class Order implements Serializable {
 		this.id = id;
 	}
 	
-	public Map<Long, Integer> getCart() {
+	public Map<Product, Integer> getCart() {
 		return this.cart;
 	}
 
-	public void setCart(Map<Long, Integer> map) {
+	public void setCart(Map<Product, Integer> map) {
 		this.cart = map;
 	}
 

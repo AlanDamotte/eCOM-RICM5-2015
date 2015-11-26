@@ -62,7 +62,7 @@ public class OrderHistoryDao implements OrderHistoryDaoLocal, OrderHistoryDaoRem
 	public List<OrderHistory> findHistoryByIdCustomer(long id) {
 		List<OrderHistory> tempList = new LinkedList<OrderHistory>();
 		try {
-			TypedQuery<OrderHistory> query = em.createQuery("SELECT o FROM OrderHistory o WHERE :id = o.id", OrderHistory.class);
+			TypedQuery<OrderHistory> query = em.createQuery("SELECT o FROM OrderHistory o WHERE :id = o.customer.id", OrderHistory.class);
 			tempList = query.setParameter("id", id).getResultList();
 			return tempList;
 		} catch (Exception e) {

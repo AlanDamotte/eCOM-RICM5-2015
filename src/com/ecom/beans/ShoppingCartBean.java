@@ -211,6 +211,18 @@ public class ShoppingCartBean implements ShoppingCartLocal, ShoppingCart, Serial
 	}
 	
 	@Override
+	public Map<Product, Integer> getProductsMap() {
+		 Map<Product, Integer> cart = new HashMap<Product, Integer>();
+		Set<Long> keys = items.keySet();
+		Iterator<Long> it = keys.iterator();
+		while (it.hasNext()) {
+			Long key = (Long) it.next();
+			cart.put(productDao.find(key), this.getQuantity(key));
+		}
+		return cart;
+	}
+	
+	@Override
 	public Map<Long, Integer> getCart() {
 		return this.items;
 	}

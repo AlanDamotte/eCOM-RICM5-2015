@@ -19,6 +19,8 @@ public interface ShoppingCartLocal extends ShoppingCart {
 	public double getTotal();
 
 	Map<Long, Product> getMapProducts();
+	
+	public Map<Product, Integer> getProductsMap();
 
 	List<Product> getProducts();
 

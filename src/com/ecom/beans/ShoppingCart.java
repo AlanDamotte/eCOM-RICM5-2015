@@ -20,9 +20,11 @@ public interface ShoppingCart {
 
 	void removeProduct(Long id, int quantity);
 
-	List<Long> getProductsById();
+	public List<Long> getProductsById();
 
-	Map<Long, Product> getMapProducts();
+	public Map<Long, Product> getMapProducts();
+	
+	public Map<Product, Integer> getProductsMap();
 
 	int getQuantity(Long id);
 
