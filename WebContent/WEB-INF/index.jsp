@@ -65,7 +65,7 @@
                             <a href="./index">Accueil</a>
                         </li>
                         <li class="">
-                            <a href="./create-your">Imagine ton Sticker</a>
+                            <a href="./create-your-stick">Imagine ton Sticker</a>
                         </li>
                         <li>
                             <a href="./catalog">&nbsp;Liste des stickers</a>

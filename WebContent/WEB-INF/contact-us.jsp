@@ -1,3 +1,6 @@
+<%@ page pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html><head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -17,32 +20,43 @@
             <script src="../../assets/js/ie8-responsive-file-warning.js"></script>
         <![endif]-->
         <script src="bootstrap/js/ie-emulation-modes-warning.js"></script>
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements
-        and media queries -->
+        <!-- Fonts -->
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media
+        queries -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
-    </head><body>
+    </head><body data-spy="scroll">
         <div class="container">
             <!-- The justified navigation menu is meant for single line per list item.
             Multiple lines will require custom code not provided by Bootstrap. -->
             <div class="masthead">
                 <div class="section">
-                    <div class="section"><div class="container"><div class="row"></div><div class="row"><div class="col-md-3"><div class="col-md-12">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
                                 <h1 class="text-muted">Stick-Gump</h1>
-                            </div></div><div class="col-sm-2 col-md-3"></div><div class="col-sm-2 col-md-3"></div><div class="col-md-3 col-sm-2 text-center">
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            <div class="col-sm-2 col-md-2"></div><div class="col-sm-2 col-md-4"></div><div class="col-md-3 col-sm-2 text-center">
                                 <a class="btn btn-info btn-lg" href="./cartManagement">Panier</a>
                                 <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href="#formulaire">Connecte toi</a>
-                            </div></div></div></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <form class="navbar-form navbar-right" role="form">
+                <form method="post" class="navbar-form navbar-right" action="<c:url value="/search"/>">
                     <div class="input-group">
-                        <input type="text" style="width:150px" class="input-sm form-control" placeholder="Search">
-                        <span class="input-group-btn">
-                            <button type="submit" class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-eye-open"></span>Search</button>
-                        </span>
+                        <input type="text" id="search" name="search" style="width:150px" class="input-sm form-control" placeholder="Search">
+                        <input type="submit" value="Rechercher" class="btn btn-primary btn-sm" />
+
                     </div>
                 </form>
                 <nav>
@@ -85,7 +99,7 @@
                     </div>
                     <div class="col-md-4">
                         <img src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png" class="center-block img-circle img-responsive">
-                        <h3 class="text-center">Jéremy Hamerer</h3>
+                        <h3 class="text-center">JÃ©remy Hamerer</h3>
                         <p class="text-center">Developer</p>
                     </div>
                     <div class="col-md-4">
@@ -109,7 +123,7 @@
         <div class="section">
             <div class="container">
                 <footer class="footer">
-                    <p>© ECOM 2015</p>
+                    <p>Â© ECOM 2015</p>
                 </footer>
             </div>
         </div>
@@ -144,8 +158,8 @@
                                 <input type="adresse" class="form-control" name="adresse" id="adresse" placeholder="38400">
                             </div>
                             <div class="form-group">
-                                <label for="telephone">* Téléphone</label>
-                                <input type="adresse" class="form-control" name="Téléphone" id="adresse" placeholder="+33609785992">
+                                <label for="telephone">* TÃ©lÃ©phone</label>
+                                <input type="adresse" class="form-control" name="TÃ©lÃ©phone" id="adresse" placeholder="+33609785992">
                             </div>
                             <button type="submit" class="btn btn-default">Envoyer</button>
                         </form>
@@ -158,22 +172,7 @@
         </div>
         <script src="bootstrap/js/jquery.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script>
-            $(function(){
-                                $("form").submit(function(e) {
-                                  e.preventDefault();
-                                  var $form = $(this);
-                                  $.post($form.attr("action"), $form.serialize())
-                                  .done(function(data) {
-                                    $("#html").html(data);
-                                    $("#formulaire").modal("hide"); 
-                                  })
-                                  .fail(function() {
-                                    alert("ça marche pas...");
-                                  });
-                                });
-                              });
-        </script>
+        
     
 
 </body></html>

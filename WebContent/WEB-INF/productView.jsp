@@ -45,7 +45,7 @@
                 <div class="col-sm-2 col-md-3"></div>
                 <div class="col-sm-2 col-md-3"></div>
                 <div class="col-md-3 col-sm-2 text-right">
-                  <a class="btn btn-info btn-lg" href="panier.html">Panier</a>
+                  <a class="btn btn-info btn-lg" href="./cartManagement">Panier</a>
                   <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href="#formulaire">Connecte toi</a>
                 </div>
               </div>
@@ -58,30 +58,26 @@
       <!-- The justified navigation menu is meant for single line per list item.
       Multiple lines will require custom code not provided by Bootstrap. -->
       <div class="masthead">
-        <form class="navbar-form navbar-right" role="form">
-          <div class="input-group">
-            <input type="text" style="width:150px" class="input-sm form-control" placeholder="Search">
-            <span class="input-group-btn">
-              <button type="submit" class="btn btn-primary btn-sm">
-                <span class="glyphicon glyphicon-eye-open"></span>Search
-                <i class="fa fa-star fa-fw"></i>
-              </button>
-            </span>
-          </div>
-        </form>
+       <form method="post" class="navbar-form navbar-right" action="<c:url value="/search"/>">
+                    <div class="input-group">
+                        <input type="text" id="search" name="search" style="width:150px" class="input-sm form-control" placeholder="Search">
+                        <input type="submit" value="Rechercher" class="btn btn-primary btn-sm" />
+
+                    </div>
+                </form>
         <nav>
           <ul class="nav nav-justified">
             <li>
-              <a href="./index">Home</a>
+              <a href="./index">Accueil</a>
             </li>
             <li class="disabled">
-              <a href="./create-your-stick">Create Your Sticker</a>
+              <a href="./create-your-stick">Imagine ton sticker</a>
             </li>
             <li>
-              <a href="./catalog">View Sticker List</a>
+              <a href="./catalog">liste des Stickers</a>
             </li>
             <li>
-              <a href="./contact-us">Contact Us</a>
+              <a href="./contact-us">Rejoint Nous</a>
             </li>
           </ul>
         </nav>
@@ -92,24 +88,20 @@
       <div class="container">
         <div class="row" style="display: block;">
           <div class="col-md-6" style="display: block;">
-            <h1>Name:</h1>
+            <h1>Nom:</h1>
             <p>
 			<c:out value="${ productView.name }" />
 
 			</p>
-            <h1>Quantity</h1>
+            <h1>Quantité</h1>
             <p>
 
 		</p>
-		<p>
-			<c:out value="${ productView.description }" />
-		</p>
-		<p>
-			<c:out value="${ productView.price }" />
-		</p>
-		<p>
+
+		<h4>disponible : 
 			<c:out value="${ productView.quantity }" />
-		</p>
+			</h4>
+		
 		<p>
 		<form method="post" action="<c:url value="/addToCart"/>">
 			<label for="quantityCart">Quantité<span class="requis">*</span></label>
@@ -212,22 +204,7 @@
     </div>
     <script src="bootstrap/js/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script>
-      $(function(){
-                                $("form").submit(function(e) {
-                                  e.preventDefault();
-                                  var $form = $(this);
-                                  $.post($form.attr("action"), $form.serialize())
-                                  .done(function(data) {
-                                    $("#html").html(data);
-                                    $("#formulaire").modal("hide"); 
-                                  })
-                                  .fail(function() {
-                                    alert("ça marche pas...");
-                                  });
-                                });
-                              });
-    </script>
+   
   
 
 </body></html>

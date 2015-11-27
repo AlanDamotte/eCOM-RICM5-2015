@@ -35,55 +35,7 @@
         <link type="text/css" rel="stylesheet" href="<c:url value="/inc/style.css"/>" />
     </head>
     <body>
-        <c:import url="/inc/menu.jsp" />
-        <div id="corps">
-        <c:choose>
-            <%-- Si aucun client n'existe en session, affichage d'un message par défaut. --%>
-            <c:when test="${ empty sessionScope.cart_products }">
-                <p class="erreur">Panier vide.</p>
-            </c:when>
-            <%-- Sinon, affichage du tableau. --%>
-            <c:otherwise>
-            <table>
-                <tr>
-                    <th>Nom</th>
-                    <th>Description</th>
-                    <th>Prix</th>
-                    <th>Quantité</th>
-                    <th class="action">Action</th>                    
-                </tr>
-                <%-- Parcours de la Map des clients en session, et utilisation de l'objet varStatus. --%>
-                <c:forEach items="${ sessionScope.cart_products.getMapProducts() }" var="mapCartProducts" varStatus="boucle">
-                <%-- Simple test de parité sur l'index de parcours, pour alterner la couleur de fond de chaque ligne du tableau. --%>
-                <tr class="${boucle.index % 2 == 0 ? 'pair' : 'impair'}">
-                    <%-- Affichage des propriétés du bean Client, qui est stocké en tant que valeur de l'entrée courante de la map --%>
-                    <td><c:out value="${ mapCartProducts.value.name }"/></td>
-                    <td><c:out value="${ mapCartProducts.value.description }"/></td>
-                    <td><c:out value="${ mapCartProducts.value.price }"/></td>
-                    <td><c:out value="${ sessionScope.cart_products.getQuantity(mapCartProducts.key) }"/></td>
-                    <td>
-						<form method="post" action="<c:url value="/removeFromCart"/>">
-						<label for="quantityCart">Quantité<span class="requis">*</span></label>
-                    	<input type="text" id="quantityCart" name="quantityCart" size="30" maxlength="30"/>
-                    	<input type="hidden" name="idProduct" value="${ mapCartProducts.key }">
-						<input type="submit" value="Modifier la quantité"/>
-						</form>
-                    </td>
-                    <td class="action">
-                        <a href="<c:url value="/removeFromCart"><c:param name="idProduct" value="${ mapCartProducts.key }" /></c:url>">
-                            <img src="<c:url value="/inc/supprimer.png"/>" alt="Supprimer" />
-                        </a>
-                    </td>
-                </tr>
-                </c:forEach>
-            </table>
-            <p>Total : <c:out value="${ sessionScope.cart_products.getTotal() }"/> euros</p>
-            <a href="<c:url value="/customerInformationManagement"></c:url>">
-            	Passer commande
-            </a>
-            </c:otherwise>
-        </c:choose>
-        </div>
+      
    
     <div class="container">
       <!-- The justified navigation menu is meant for single line per list item.
@@ -103,15 +55,13 @@
             </div>
           </div>
         </div>
-        <form class="navbar-form navbar-right" role="form">
-          <div class="input-group">
-            <input type="text" style="width:150px" class="input-sm form-control" placeholder="Search">
-            <span class="input-group-btn">
-              <button type="submit" class="btn btn-primary btn-sm">
-                <span class="glyphicon glyphicon-eye-open"></span>Search</button>
-            </span>
-          </div>
-        </form>
+         <form method="post" class="navbar-form navbar-right" action="<c:url value="/search"/>">
+                    <div class="input-group">
+                        <input type="text" id="search" name="search" style="width:150px" class="input-sm form-control" placeholder="Search">
+                        <input type="submit" value="Rechercher" class="btn btn-primary btn-sm" />
+
+                    </div>
+                </form>
         <nav>
           <ul class="nav nav-justified nav-tabs">
             <li class="disabled">
@@ -124,7 +74,7 @@
               <a href="./catalog">&nbsp;Liste des stickers</a>
             </li>
             <li>
-              <a href=./contact-us">Nous Contacter</a>
+              <a href="./contact-us">Nous Contacter</a>
             </li>
           </ul>
         </nav>

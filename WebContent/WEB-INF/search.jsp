@@ -33,7 +33,7 @@
         <div class="section"><div class="container"><div class="row"></div><div class="row"><div class="col-md-4"><div class="col-md-12">
                                 <h1 class="text-muted">Stick-Gump</h1>
                             </div></div><div class="col-sm-2 col-md-3"></div><div class="col-sm-2 col-md-2"></div><div class="col-md-3 col-sm-2 text-center">
-                                <a class="btn btn-info btn-lg" href="panier.html">&nbsp; Panier &nbsp;&nbsp;</a>
+                                <a class="btn btn-info btn-lg" href="./cartManagement">&nbsp; Panier &nbsp;&nbsp;</a>
                                 <c:if test="${empty sessionScope.customerSession}">
                                 <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href="#formulaire">Connecte toi</a>
                                 </c:if>
@@ -42,13 +42,11 @@
             Multiple lines will require custom code not provided by Bootstrap. -->
             <div class="masthead">
                 
-                <form class="navbar-form navbar-right" role="form">
+                 <form method="post" class="navbar-form navbar-right" action="<c:url value="/search"/>">
                     <div class="input-group">
-                        <input type="text" style="width:150px" class="input-sm form-control" placeholder="Search">
-                        <span class="input-group-btn">
-                            <button type="submit" class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-eye-open"></span>Search</button>
-                        </span>
+                        <input type="text" id="search" name="search" style="width:150px" class="input-sm form-control" placeholder="Search">
+                        <input type="submit" value="Rechercher" class="btn btn-primary btn-sm" />
+
                     </div>
                 </form>
                 <nav>
@@ -57,7 +55,7 @@
                             <a href="./index">Accueil</a>
                         </li>
                         <li>
-                            <a href="./create-your">Imagine ton Sticker</a>
+                            <a href="./create-your-stick">Imagine ton Sticker</a>
                         </li>
                         <li class="active">
                             <a href="./catalog">View Sticker List</a>
@@ -140,22 +138,7 @@
         </div>
         <script src="bootstrap/js/jquery.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script>
-            $(function(){
-                                $("form").submit(function(e) {
-                                  e.preventDefault();
-                                  var $form = $(this);
-                                  $.post($form.attr("action"), $form.serialize())
-                                  .done(function(data) {
-                                    $("#html").html(data);
-                                    $("#formulaire").modal("hide"); 
-                                  })
-                                  .fail(function() {
-                                    alert("ça marche pas...");
-                                  });
-                                });
-                              });
-        </script>
+        
     
 
     </body>

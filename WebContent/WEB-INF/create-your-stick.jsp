@@ -1,3 +1,6 @@
+<%@ page pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
 <html><head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -16,15 +19,18 @@
         <!--[if lt IE 9]>
             <script src="../../assets/js/ie8-responsive-file-warning.js"></script>
         <![endif]-->
-        <script src="js/ie-emulation-modes-warning.js"></script>
-        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements
-        and media queries -->
+        <script src="bootstrap/js/ie-emulation-modes-warning.js"></script>
+        <!-- Fonts -->
+        <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="http://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media
+        queries -->
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
-    </head><body>
-          <div class="container">
+    </head><body data-spy="scroll">
+        <div class="container">
             <!-- The justified navigation menu is meant for single line per list item.
             Multiple lines will require custom code not provided by Bootstrap. -->
             <div class="masthead">
@@ -46,13 +52,11 @@
                         </div>
                     </div>
                 </div>
-                <form class="navbar-form navbar-right" role="form">
+                <form method="post" class="navbar-form navbar-right" action="<c:url value="/search"/>">
                     <div class="input-group">
-                        <input type="text" style="width:150px" class="input-sm form-control" placeholder="Search">
-                        <span class="input-group-btn">
-                            <button type="submit" class="btn btn-primary btn-sm">
-                                <span class="glyphicon glyphicon-eye-open"></span>Search</button>
-                        </span>
+                        <input type="text" id="search" name="search" style="width:150px" class="input-sm form-control" placeholder="Search">
+                        <input type="submit" value="Rechercher" class="btn btn-primary btn-sm" />
+
                     </div>
                 </form>
                 <nav>
@@ -79,7 +83,7 @@
     
 
 <div class="row"><div class="col-md-6"><hr></div></div><div class="section"><div class="container"><div class="row"><div class="col-md-8"><a href="#"><img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive"></a><a class="btn btn-block btn-info btn-lg">Ajouter au panier</a></div><div class="col-md-4"><a class="btn btn-block btn-info">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Forme &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</a><hr><a class="btn btn-block btn-info">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Support &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</a><hr><a class="btn btn-block btn-info">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Dimension &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</a><hr><a class="btn btn-block btn-info">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Prix &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</a><hr><a class="btn btn-block btn-info">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Personaliser le sticker &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</a></div></div></div></div><div class="row"><div class="col-md-12"><hr></div></div><div class="section"><div class="container"><div class="row"><div class="col-md-12"><footer class="footer">
-                <p>© ECOM 2015</p>
+                <p>Â© ECOM 2015</p>
             </footer></div></div></div></div><div class="modal fade" id="formulaire">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -107,42 +111,7 @@
                 </div>
             </div><script src="bootstrap/js/jquery.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script>
-            $(function(){
-                $("form").submit(function(e) {
-                  e.preventDefault();
-                  var $form = $(this);
-                  $.post($form.attr("action"), $form.serialize())
-                  .done(function(data) {
-                    $("#html").html(data);
-                    $("#formulaire").modal("hide"); 
-                  })
-                  .fail(function() {
-                    alert("ça marche pas...");
-                  });
-                });
-              });
-        </script>
-            
         
-        <script src="bootstrap/js/jquery.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script>
-            $(function(){
-                $("form").submit(function(e) {
-                  e.preventDefault();
-                  var $form = $(this);
-                  $.post($form.attr("action"), $form.serialize())
-                  .done(function(data) {
-                    $("#html").html(data);
-                    $("#formulaire").modal("hide"); 
-                  })
-                  .fail(function() {
-                    alert("ça marche pas...");
-                  });
-                });
-              });
-        </script>
                     
                 
             
