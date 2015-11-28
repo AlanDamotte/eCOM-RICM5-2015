@@ -47,7 +47,12 @@
                             
                             <div class="col-sm-2 col-md-2"></div><div class="col-sm-2 col-md-4"></div><div class="col-md-3 col-sm-2 text-center">
                                 <a class="btn btn-info btn-lg" href="./cartManagement">Panier</a>
+                                <c:if test="${empty sessionScope.customerSession}">
                                 <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href="#formulaire">Connecte toi</a>
+                                </c:if>
+                                <c:if test="${not empty sessionScope.customerSession}">
+                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./disconnection>Déconnexion</a>
+                                 </c:if>
                             </div>
                         </div>
                     </div>
@@ -82,9 +87,68 @@
         <script src="bootstrap/js/ie10-viewport-bug-workaround.js"></script>
     
 
+
+
 <div class="row"><div class="col-md-6"><hr></div></div><div class="section"><div class="container"><div class="row"><div class="col-md-8"><a href="#"><img src="http://pingendo.github.io/pingendo-bootstrap/assets/placeholder.png" class="img-responsive"></a><a class="btn btn-block btn-info btn-lg">Ajouter au panier</a></div><div class="col-md-4"><a class="btn btn-block btn-info">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Forme &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</a><hr><a class="btn btn-block btn-info">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Support &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</a><hr><a class="btn btn-block btn-info">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Dimension &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</a><hr><a class="btn btn-block btn-info">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Prix &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</a><hr><a class="btn btn-block btn-info">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Personaliser le sticker &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</a></div></div></div></div><div class="row"><div class="col-md-12"><hr></div></div><div class="section"><div class="container"><div class="row"><div class="col-md-12"><footer class="footer">
                 <p>© ECOM 2015</p>
-            </footer></div></div></div></div><div class="modal fade" id="formulaire">
+            </footer></div></div></div></div>
+            
+            
+            
+            
+            
+              <div id="formulaire" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">x</button>
+                        <h4 class="modal-title">Vos infos :</h4>
+                    </div>
+                     <form method="post" action="<c:url value="/connection" />">
+            <fieldset>
+                
+                <label for="email">  Email<span class="requis">*</span></label>
+                <input type="email" class="form-control" name="email" id="email" placeholder="Votre Email"  value="<c:out value="${customer.email}"/>">
+                <span class="erreur">${form.errors['email']}</span>
+                <br />
+
+                <label for="password">  Mot de passe <span class="requis">*</span></label>
+                <input type="password" class="form-control" id="password" name="password"placeholder="Votre Mots de passe" value="" size="20" maxlength="20" />
+                <span class="erreur">${form.errors['motdepasse']}</span>
+                <br />
+            
+                <label for="memory">  Se souvenir de moi</label>
+                <input type="checkbox" id="memory" name="memory" />
+                <br />
+
+                <button type="submit" class="btn btn-default">Envoyer</button>
+                <br />
+                
+                <p class="${empty form.errors ? 'succes' : 'erreur'}">${form.result}</p>
+                
+                <%-- Vérification de la présence d'un objet utilisateur en session --%>
+                <c:if test="${!empty sessionScope.customerSession}">
+                    <%-- Si l'utilisateur existe en session, alors on affiche son adresse email. --%>
+                	<p class="succes">Vous êtes connecté(e) avec l'adresse : ${sessionScope.customerSession.email}</p>
+                </c:if>
+            </fieldset>
+        </form>
+                    <div class="modal-footer">
+                        <button class="btn btn-info" data-dismiss="modal">Annuler</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="bootstrap/js/jquery.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+            
+            
+            
+            
+            
+            
+            
+            <div class="modal fade" id="formulaire2">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">

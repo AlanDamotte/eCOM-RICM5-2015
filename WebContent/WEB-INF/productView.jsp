@@ -46,7 +46,12 @@
                 <div class="col-sm-2 col-md-3"></div>
                 <div class="col-md-3 col-sm-2 text-right">
                   <a class="btn btn-info btn-lg" href="./cartManagement">Panier</a>
-                  <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href="#formulaire">Connecte toi</a>
+                   <c:if test="${empty sessionScope.customerSession}">
+                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href="#formulaire">Connecte toi</a>
+                                </c:if>
+                                <c:if test="${not empty sessionScope.customerSession}">
+                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./disconnection>Déconnexion</a>
+                                 </c:if>
                 </div>
               </div>
             </div>
@@ -163,8 +168,65 @@
         <hr>
       </div>
     </div>
+    
+    
+      <div id="formulaire" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">x</button>
+                        <h4 class="modal-title">Vos infos :</h4>
+                    </div>
+                     <form method="post" action="<c:url value="/connection" />">
+            <fieldset>
+                
+                <label for="email">  Email<span class="requis">*</span></label>
+                <input type="email" class="form-control" name="email" id="email" placeholder="Votre Email"  value="<c:out value="${customer.email}"/>">
+                <span class="erreur">${form.errors['email']}</span>
+                <br />
+
+                <label for="password">  Mot de passe <span class="requis">*</span></label>
+                <input type="password" class="form-control" id="password" name="password"placeholder="Votre Mots de passe" value="" size="20" maxlength="20" />
+                <span class="erreur">${form.errors['motdepasse']}</span>
+                <br />
+            
+                <label for="memory">  Se souvenir de moi</label>
+                <input type="checkbox" id="memory" name="memory" />
+                <br />
+
+                <button type="submit" class="btn btn-default">Envoyer</button>
+                <br />
+                
+                <p class="${empty form.errors ? 'succes' : 'erreur'}">${form.result}</p>
+                
+                <%-- Vérification de la présence d'un objet utilisateur en session --%>
+                <c:if test="${!empty sessionScope.customerSession}">
+                    <%-- Si l'utilisateur existe en session, alors on affiche son adresse email. --%>
+                	<p class="succes">Vous êtes connecté(e) avec l'adresse : ${sessionScope.customerSession.email}</p>
+                </c:if>
+            </fieldset>
+        </form>
+                    <div class="modal-footer">
+                        <button class="btn btn-info" data-dismiss="modal">Annuler</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="bootstrap/js/jquery.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <br>
-    <div class="modal fade" id="formulaire">
+    <div class="modal fade" id="formulaire2">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">

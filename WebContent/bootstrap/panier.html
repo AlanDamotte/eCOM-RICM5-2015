@@ -88,143 +88,72 @@
         </div>
       </div>
     </div>
-    <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <img src="img/SensorsEVERYWHERE.jpg" class="img-responsive">
-          </div>
-          <div class="col-md-6">
-            <h1>stick-test</h1>
-            <h3>A subtitle</h3>
-            <p>description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;</p>
-            <a class="btn btn-info btn-lg">Supprimer</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <hr>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <h1>Tarte aux mirtilles</h1>
-            <h3>A subtitle</h3>
-            <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-              ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
-              dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies
-              nec, pellentesque eu, pretium quis, sem. Nulla consequat massa quis enim.
-              Donec pede justo, fringilla vel, aliquet nec, vulputate eget, arcu. In
-              enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo. Nullam dictum
-              felis eu pede mollis pretium. Integer tincidunt. Cras dapibus. Vivamus
-              elementum semper nisi.</p>
-            <a class="btn btn-info btn-lg">Supprimer</a>
-          </div>
-          <div class="col-md-6">
-            <img src="img/tarte-myrtilles.jpg" class="img-responsive">
+    <c:foreach items="${ sessionScope.cart_products.getMapProducts() }" var="mapCartProducts" varstatus="boucle">
+      <div class="section">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-4">
+              <img src="${pageContext.request.contextPath}/img/${ mapCartProducts.value.image }" class="img-responsive img-thumbnail" id="rt" height="400" width="400">
+            </div>
+            <div class="col-md-5"> <h1>
+                <c:out value="${ mapCartProducts.value.name }"></c:out>
+              </h1>
+              <p>
+                <c:out value="${ mapCartProducts.value.description }"></c:out>
+              </p>
+              <form method="post" action="&lt;c:url value=" removefromcart="" "=" ">"&gt;
+              <label for="quantityCart">Quantité
+                <span class="requis">*</span>
+                </label>
+                <input type="text" id="quantityCart" name="quantityCart" size="30" maxlength="30">
+                <input type="hidden" name="idProduct" value="${ mapCartProducts.key }">
+                <input type="submit" class="btn btn-info btn-sm" value="Modifier">
+              </form>
+              <a href="&lt;c:url value=" removefromcart="" "=" "><c:param name="idProduct
+              " value="${ mapCartProducts.key } ">" class="btn btn-info btn-lg" &gt;Supprimer</c:param></a></div>
+            <div class="col-md-3"></div>
           </div>
         </div>
       </div>
-    </div>
-    <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <hr>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <img src="img/SensorsEVERYWHERE.jpg" class="img-responsive">
-          </div>
-          <div class="col-md-6 text-left">
-            <h1>stick-test</h1>
-            <h3>A subtitle</h3>
-            <p>description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description
-              <br>
-              <br>&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description
-              <br>
-              <br>&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description
-              <br>
-              <br>&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;descriptio
-              <br>
-              <br>n&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description&nbsp;description
-              <br>
-              <br>&nbsp;</p>
-            <a class="btn btn-info btn-lg">Supprimer</a>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-12">
-                  <hr>
+      <div id="formulaire" class="modal fade">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal">x</button>
+              <h4 class="modal-title">Réglement:</h4>
+            </div>
+            <div class="modal-body">
+              <form action="test.php">
+                <div class="form-group">
+                  <label for="nom">* Nom</label>
+                  <input type="text" class="form-control" name="nom" id="nom" placeholder="Votre nom">
                 </div>
-              </div>
-              <div class="row">
-                <div class="col-md-5 text-left">
-                  <button data-toggle="modal fade" data-backdrop="truc" href="#formulaire" class="btn btn-info">&nbsp; &nbsp; &nbsp; Payer &nbsp; &nbsp; &nbsp;</button>
+                <div class="form-group">
+                  <label for="email">* Email</label>
+                  <input type="email" class="form-control" name="email" id="email" placeholder="Votre Email">
                 </div>
-                <div class="col-md-6 text-right">
-                  <a class="btn btn-lg btn-warning" href="index.html">&nbsp; &nbsp;Annuler &nbsp;&nbsp;</a>
+                <div class="form-group">
+                  <label for="adresse">* Adresse</label>
+                  <input type="text" class="form-control" name="adresse" id="adresse" placeholder="Rue des asticots">
                 </div>
-              </div>
+                <div class="form-group">
+                  <label for="code-postal">* Code-postal</label>
+                  <input type="adresse" class="form-control" name="adresse" id="adresse" placeholder="38400">
+                </div>
+                <div class="form-group">
+                  <label for="telephone">* Téléphone</label>
+                  <input type="adresse" class="form-control" name="Téléphone" id="adresse" placeholder="+33609785992">
+                </div>
+                <button type="submit" class="btn btn-default">Envoyer</button>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-info" data-dismiss="modal">Annuler</button>
             </div>
           </div>
         </div>
       </div>
-    </div>
-    <div id="formulaire" class="modal fade">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal">x</button>
-            <h4 class="modal-title">Réglement:</h4>
-          </div>
-          <div class="modal-body">
-            <form action="test.php">
-              <div class="form-group">
-                <label for="nom">* Nom</label>
-                <input type="text" class="form-control" name="nom" id="nom" placeholder="Votre nom">
-              </div>
-              <div class="form-group">
-                <label for="email">* Email</label>
-                <input type="email" class="form-control" name="email" id="email" placeholder="Votre Email">
-              </div>
-              <div class="form-group">
-                <label for="adresse">* Adresse</label>
-                <input type="text" class="form-control" name="adresse" id="adresse" placeholder="Rue des asticots">
-              </div>
-              <div class="form-group">
-                <label for="code-postal">* Code-postal</label>
-                <input type="adresse" class="form-control" name="adresse" id="adresse" placeholder="38400">
-              </div>
-              <div class="form-group">
-                <label for="telephone">* Téléphone</label>
-                <input type="adresse" class="form-control" name="Téléphone" id="adresse" placeholder="+33609785992">
-              </div>
-              <button type="submit" class="btn btn-default">Envoyer</button>
-            </form>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-info" data-dismiss="modal">Annuler</button>
-          </div>
-        </div>
-      </div>
-    </div>
+    </c:foreach>
   
 
 </body></html>

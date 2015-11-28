@@ -47,7 +47,12 @@
                             
                             <div class="col-sm-2 col-md-2"></div><div class="col-sm-2 col-md-4"></div><div class="col-md-3 col-sm-2 text-center">
                                 <a class="btn btn-info btn-lg" href="./cartManagement">Panier</a>
+                                <c:if test="${empty sessionScope.customerSession}">
                                 <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href="#formulaire">Connecte toi</a>
+                                </c:if>
+                                <c:if test="${not empty sessionScope.customerSession}">
+                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./disconnection>Déconnexion</a>
+                                 </c:if>
                             </div>
                         </div>
                     </div>
@@ -239,86 +244,50 @@
                 </div>
             </div>
         </div>
-        <footer class="footer">
-            <p>Â© ECOM Groupe 2 2015</p>
-        </footer>
-        <div class="section">
-            <div class="container">
-                <div class="row text-center">
-                    <div class="col-xs-3 text-center">
-                        <a><i class="fa fa-5x fa-fw fa-instagram"></i></a>
-                    </div>
-                    <div class="col-xs-3">
-                        <a><i class="fa fa-5x fa-fw fa-twitter"></i></a>
-                    </div>
-                    <div class="col-xs-3">
-                        <a><i class="fa fa-5x fa-fw fa-facebook"></i></a>
-                    </div>
-                    <div class="col-xs-3 text-center">
-                        <a><i class="fa fa-5x fa-fw fa-github"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="section">
-            <div class="container">
-                <div class="row text-center">
-                    <div class="col-xs-3 text-center">
-                        <a><i class="fa fa-5x fa-fw fa-instagram"></i></a>
-                    </div>
-                    <div class="col-xs-3">
-                        <a><i class="fa fa-5x fa-fw fa-twitter"></i></a>
-                    </div>
-                    <div class="col-xs-3">
-                        <a><i class="fa fa-5x fa-fw fa-facebook"></i></a>
-                    </div>
-                    <div class="col-xs-3 text-center">
-                        <a><i class="fa fa-5x fa-fw fa-github"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- /container -->
-        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-        <script src="bootstrap/js/ie10-viewport-bug-workaround.js"></script>
-        <div class="modal fade" id="formulaire">
+           <div id="formulaire" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal">x</button>
                         <h4 class="modal-title">Vos infos :</h4>
                     </div>
-                    <div class="modal-body">
-                        <form action="test.php">
-                            <div class="form-group">
-                                <label for="nom">* Nom</label>
-                                <input type="text" class="form-control" name="nom" id="nom" placeholder="Votre nom">
-                            </div>
-                            <div class="form-group">
-                                <label for="email">* Email</label>
-                                <input type="email" class="form-control" name="email" id="email" placeholder="Votre Email">
-                            </div>
-                            <div class="form-group">
-                                <label for="adresse">* Adresse</label>
-                                <input type="adresse" class="form-control" name="adresse" id="adresse" placeholder="Rue des asticots">
-                            </div>
-                            <div class="form-group">
-                                <label for="code-postal">* Code-postal</label>
-                                <input type="adresse" class="form-control" name="adresse" id="adresse" placeholder="38400">
-                            </div>
-                            <div class="form-group">
-                                <label for="telephone">* TÃ©lÃ©phone</label>
-                                <input type="adresse" class="form-control" name="TÃ©lÃ©phone" id="adresse" placeholder="+33609785992">
-                            </div>
-                            <button type="submit" class="btn btn-default">Envoyer</button>
-                        </form>
-                    </div>
+                     <form method="post" action="<c:url value="/connection" />">
+            <fieldset>
+                
+                <label for="email">  Email<span class="requis">*</span></label>
+                <input type="email" class="form-control" name="email" id="email" placeholder="Votre Email"  value="<c:out value="${customer.email}"/>">
+                <span class="erreur">${form.errors['email']}</span>
+                <br />
+
+                <label for="password">  Mot de passe <span class="requis">*</span></label>
+                <input type="password" class="form-control" id="password" name="password"placeholder="Votre Mots de passe" value="" size="20" maxlength="20" />
+                <span class="erreur">${form.errors['motdepasse']}</span>
+                <br />
+            
+                <label for="memory">  Se souvenir de moi</label>
+                <input type="checkbox" id="memory" name="memory" />
+                <br />
+
+                <button type="submit" class="btn btn-default">Envoyer</button>
+                <br />
+                
+                <p class="${empty form.errors ? 'succes' : 'erreur'}">${form.result}</p>
+                
+                <%-- Vérification de la présence d'un objet utilisateur en session --%>
+                <c:if test="${!empty sessionScope.customerSession}">
+                    <%-- Si l'utilisateur existe en session, alors on affiche son adresse email. --%>
+                	<p class="succes">Vous êtes connecté(e) avec l'adresse : ${sessionScope.customerSession.email}</p>
+                </c:if>
+            </fieldset>
+        </form>
                     <div class="modal-footer">
                         <button class="btn btn-info" data-dismiss="modal">Annuler</button>
                     </div>
                 </div>
             </div>
         </div>
-    
+        <script src="bootstrap/js/jquery.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+       
 
 </body></html>

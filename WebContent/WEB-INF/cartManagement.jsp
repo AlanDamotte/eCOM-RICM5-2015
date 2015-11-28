@@ -50,7 +50,12 @@
               <div class="col-sm-2 col-md-2"></div>
               <div class="col-sm-2 col-md-5"></div>
               <div class="col-md-2 col-sm-2 text-center">
-                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href="#formulaire">Connecte toi</a>
+                 <c:if test="${empty sessionScope.customerSession}">
+                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href="#formulaire">Connecte toi</a>
+                                </c:if>
+                                <c:if test="${not empty sessionScope.customerSession}">
+                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./disconnection>Déconnexion</a>
+                                 </c:if>
               </div>
             </div>
           </div>
@@ -100,15 +105,17 @@
     <div class="section">
       <div class="container">
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-3">
              <img src="${pageContext.request.contextPath}/img/${ mapCartProducts.value.image }" class="img-responsive img-thumbnail" id="rt" height="400" width="400" >
           </div>
           <div class="col-md-6">
-            <h1><td><c:out value="${ mapCartProducts.value.name }"/></td></h1>
-            <p><td><c:out value="${ mapCartProducts.value.description }"/></td></p>
+            <h2><td><c:out value="${ mapCartProducts.value.name }"/></td></h2>
+            <p>Description :<td><c:out value="${ mapCartProducts.value.description }"/></td></p>
+            <p>Prix : <td><c:out value="${ mapCartProducts.value.price }"/></td><p>		
             <td>
 						<form method="post" action="<c:url value="/removeFromCart"/>">
-						<label for="quantityCart">Quantité<span class="requis">*</span></label>
+						<label for="quantityCart">Quantité : <td><c:out value="${ sessionScope.cart_products.getQuantity(mapCartProducts.key) }"/></td>		
+-                    <td>	 <span class="requis"></span></label>
                     	<input type="text" id="quantityCart" name="quantityCart" size="30" maxlength="30"/>
                     	<input type="hidden" name="idProduct" value="${ mapCartProducts.key }">
 						<input type="submit" class="btn btn-info btn-sm" value="Modifier" />
@@ -116,19 +123,14 @@
                     </td>
             <a href="<c:url value="/removeFromCart"><c:param name="idProduct" value="${ mapCartProducts.key }" /></c:url>" class="btn btn-info btn-lg">Supprimer</a>
           </div>
+         
+          <div class="col-md-3"> <p>Total : <c:out value="${ sessionScope.cart_products.getTotal() }"/> euros</p> </div>
+          
         </div>
       </div>
     </div>
-    <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <hr>
-          </div>
-        </div>
-      </div>
-    </div>
-    </c:forEach>
+</c:forEach>
+    
     
     
         </div>
@@ -155,9 +157,63 @@
             </div>
           </div>
         </div>
-      </div>
-    </div>
-    <div id="formulaire" class="modal fade">
+        
+        
+        
+          <div id="formulaire" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">x</button>
+                        <h4 class="modal-title">Vos infos :</h4>
+                    </div>
+                     <form method="post" action="<c:url value="/connection" />">
+            <fieldset>
+                
+                <label for="email">  Email<span class="requis">*</span></label>
+                <input type="email" class="form-control" name="email" id="email" placeholder="Votre Email"  value="<c:out value="${customer.email}"/>">
+                <span class="erreur">${form.errors['email']}</span>
+                <br />
+
+                <label for="password">  Mot de passe <span class="requis">*</span></label>
+                <input type="password" class="form-control" id="password" name="password"placeholder="Votre Mots de passe" value="" size="20" maxlength="20" />
+                <span class="erreur">${form.errors['motdepasse']}</span>
+                <br />
+            
+                <label for="memory">  Se souvenir de moi</label>
+                <input type="checkbox" id="memory" name="memory" />
+                <br />
+
+                <button type="submit" class="btn btn-default">Envoyer</button>
+                <br />
+                
+                <p class="${empty form.errors ? 'succes' : 'erreur'}">${form.result}</p>
+                
+                <%-- Vérification de la présence d'un objet utilisateur en session --%>
+                <c:if test="${!empty sessionScope.customerSession}">
+                    <%-- Si l'utilisateur existe en session, alors on affiche son adresse email. --%>
+                	<p class="succes">Vous êtes connecté(e) avec l'adresse : ${sessionScope.customerSession.email}</p>
+                </c:if>
+            </fieldset>
+        </form>
+                    <div class="modal-footer">
+                        <button class="btn btn-info" data-dismiss="modal">Annuler</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="bootstrap/js/jquery.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+        
+        
+        
+        
+        
+        
+        
+        
+    
+    <div id="formulaire2" class="modal fade">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">

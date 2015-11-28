@@ -37,6 +37,10 @@
                                 <c:if test="${empty sessionScope.customerSession}">
                                 <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href="#formulaire">Connecte toi</a>
                                 </c:if>
+                                <c:if test="${not empty sessionScope.customerSession}">
+                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./disconnection>Déconnexion</a>
+                                 </c:if>
+                             
                             </div></div></div></div><div class="container">
             <!-- The justified navigation menu is meant for single line per list item.
             Multiple lines will require custom code not provided by Bootstrap. -->
@@ -109,12 +113,7 @@
             </div>
         </div>
         
-    
-        
-        
-        
-        
-        
+  
         <div id="formulaire" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
@@ -122,28 +121,35 @@
                         <button type="button" class="close" data-dismiss="modal">x</button>
                         <h4 class="modal-title">Vos infos :</h4>
                     </div>
-                     <div class="modal-body">
-	                     <form method="post" action="<c:url value="/connection" />">
-	                            <div class="form-group">
-	                                <label for="name">Adresse email <span class="requis">*</span></label>
-					                <input type="email" class="form-control" id="email" name="email" value="<c:out value="${customer.email}"/>" size="20" maxlength="60" placeholder="Adresse"/>
-					                <span class="erreur">${form.errors['email']}</span>
-	                            </div>
-	                            <div class="form-group">
-	                                <label for="password">Mot de passe <span class="requis">*</span></label>
-					                <input type="password" class="form-control" id="password" name="password" value="" size="20" maxlength="20" placeholder="Mot de passe"/>
-					                <span class="erreur">${form.errors['motdepasse']}</span>
-	                            </div>
-	                            <button type="submit" class="btn btn-info" data-dismiss="modal">Connexion</button>
-                            <p class="${empty form.errors ? 'succes' : 'erreur'}">${form.result}</p>
+                     <form method="post" action="<c:url value="/connection" />">
+            <fieldset>
+                
+                <label for="email">  Email<span class="requis">*</span></label>
+                <input type="email" class="form-control" name="email" id="email" placeholder="Votre Email"  value="<c:out value="${customer.email}"/>">
+                <span class="erreur">${form.errors['email']}</span>
+                <br />
+
+                <label for="password">  Mot de passe <span class="requis">*</span></label>
+                <input type="password" class="form-control" id="password" name="password"placeholder="Votre Mots de passe" value="" size="20" maxlength="20" />
+                <span class="erreur">${form.errors['motdepasse']}</span>
+                <br />
+            
+                <label for="memory">  Se souvenir de moi</label>
+                <input type="checkbox" id="memory" name="memory" />
+                <br />
+
+                <button type="submit" class="btn btn-default">Envoyer</button>
+                <br />
+                
+                <p class="${empty form.errors ? 'succes' : 'erreur'}">${form.result}</p>
                 
                 <%-- Vérification de la présence d'un objet utilisateur en session --%>
                 <c:if test="${!empty sessionScope.customerSession}">
                     <%-- Si l'utilisateur existe en session, alors on affiche son adresse email. --%>
                 	<p class="succes">Vous êtes connecté(e) avec l'adresse : ${sessionScope.customerSession.email}</p>
                 </c:if>
-                        </form>
-                    </div>
+            </fieldset>
+        </form>
                     <div class="modal-footer">
                         <button class="btn btn-info" data-dismiss="modal">Annuler</button>
                     </div>
