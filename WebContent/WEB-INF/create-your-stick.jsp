@@ -67,16 +67,16 @@
                 <nav>
                     <ul class="nav nav-justified">
                         <li>
-                            <a href="./index">Home</a>
+                            <a href="./index">Accueil</a>
                         </li>
                         <li class="active">
-                            <a href="./create-your-stick">Create Your Sticker</a>
+                            <a href="./create-your-stick">Imagine ton Sticker</a>
                         </li>
                         <li>
-                            <a href="./catalog">View Sticker List</a>
+                            <a href="./catalog">Liste de Stickers</a>
                         </li>
                         <li>
-                            <a href="./contact-us">Contact Us</a>
+                            <a href="./contact-us">Nous Contacter</a>
                         </li>
                     </ul>
                 </nav>

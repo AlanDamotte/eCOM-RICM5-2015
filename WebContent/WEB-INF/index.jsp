@@ -89,8 +89,8 @@
                         <div class="item active">
                             <img src="bootstrap/img/image-depart.jpg">
                             <div class="carousel-caption">
-                                <h2 class="text-muted" contenteditable="false">CrÃ©e ton propre sticker</h2>
-                                <p>it can be really fun to create really nice things</p>
+                                <h2 class="text-muted" contenteditable="false">Crée ton propre sticker</h2>
+                                <p>Cela peut etre super cool de faire sa propre invention</p>
                                 <p class="text-info">
                                     <button data-toggle="modal" data-backdrop="false" href="#formulaire" class="btn btn-info">Rejoint notre communauté
                                         <p></p>
@@ -101,36 +101,36 @@
                         <div class="item">
                             <img src="bootstrap/img/images-5.png">
                             <div class="carousel-caption">
-                                <h2>Create your own stickers</h2>
-                                <p>Have fun ;)</p>
+                                <h2>Crée ton propre sticker</h2>
+                                <p>Amuse toi ;)</p>
                             </div>
                         </div>
                         <div class="item">
                             <img src="bootstrap/img/images-6.jpeg">
                             <div class="carousel-caption">
-                                <h2>Create your sticker</h2>
-                                <p>last creation of the month</p>
+                                <h2>Crée ton propre sticker</h2>
+                                <p>Les creations du mois</p>
                             </div>
                         </div>
                         <div class="item">
                             <img src="bootstrap/img/images-5.png">
                             <div class="carousel-caption">
-                                <h2>Create your own stickers</h2>
-                                <p>last creation of the month</p>
+                                <h2>Crée ton propre sticker</h2>
+                                <p>Les creations du mois</p>
                             </div>
                         </div>
                         <div class="item">
                             <img src="boostrap/img/images-5.png">
                             <div class="carousel-caption">
-                                <h2>Create your own stickers</h2>
-                                <p>last creation of the month</p>
+                                <h2>Crée ton propre sticker</h2>
+                                <p>Les creations du mois</p>
                             </div>
                         </div>
                         <div class="item">
                             <img src="boostrap/img/images-5.png">
                             <div class="carousel-caption">
-                                <h2>Create your own stickers</h2>
-                                <p>last creation of the month</p>
+                                <h2>Crée ton propre sticker</h2>
+                                <p>Les creations du mois</p>
                             </div>
                         </div>
                     </div>
@@ -158,10 +158,10 @@
                 <div class="col-md-12">
                     <ul class="pager">
                         <li>
-                            <a href="#">â  Prev</a>
+                            <a href="#"> <-- </a>
                         </li>
                         <li>
-                            <a href="#">Next  â</a>
+                            <a href="#">--></a>
                         </li>
                     </ul>
                 </div>
