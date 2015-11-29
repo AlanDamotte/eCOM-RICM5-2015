@@ -252,8 +252,8 @@
                         <h4 class="modal-title">Vos infos :</h4>
                     </div>
                      <form method="post" action="<c:url value="/connection" />">
-            <fieldset>
-                
+            
+                <div class="modal-body">
                 <label for="email">  Email<span class="requis">*</span></label>
                 <input type="email" class="form-control" name="email" id="email" placeholder="Votre Email"  value="<c:out value="${customer.email}"/>">
                 <span class="erreur">${form.errors['email']}</span>
@@ -278,7 +278,7 @@
                     <%-- Si l'utilisateur existe en session, alors on affiche son adresse email. --%>
                 	<p class="succes">Vous êtes connecté(e) avec l'adresse : ${sessionScope.customerSession.email}</p>
                 </c:if>
-            </fieldset>
+            </div>
         </form>
                     <div class="modal-footer">
                         <button class="btn btn-info" data-dismiss="modal">Annuler</button>

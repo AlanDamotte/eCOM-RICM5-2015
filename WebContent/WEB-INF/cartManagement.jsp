@@ -146,8 +146,12 @@
                 <div class="col-md-5 text-left">
                  <p>Total : <c:out value="${ sessionScope.cart_products.getTotal() }"/> euros</p>
             <a href="<c:url value="/customerInformationManagement"></c:url>">
-            </a>
-                  <button data-toggle="modal fade" data-backdrop="truc" href="#formulaire" class="btn btn-info">&nbsp; &nbsp; &nbsp; Payer &nbsp; &nbsp; &nbsp;</button>
+            </a>  <c:if test="${empty sessionScope.customerSession}">
+                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href="#formulaire">Payer</a>
+                                </c:if>
+                                <c:if test="${not empty sessionScope.customerSession}">
+                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href="./paymentManagement">Payer</a>
+                                 </c:if>
                  
                 </div>
                 <div class="col-md-6 text-right">
@@ -168,7 +172,7 @@
                         <h4 class="modal-title">Vos infos :</h4>
                     </div>
                      <form method="post" action="<c:url value="/connection" />">
-            <fieldset>
+            <div class="modal-body">
                 
                 <label for="email">  Email<span class="requis">*</span></label>
                 <input type="email" class="form-control" name="email" id="email" placeholder="Votre Email"  value="<c:out value="${customer.email}"/>">
@@ -194,7 +198,7 @@
                     <%-- Si l'utilisateur existe en session, alors on affiche son adresse email. --%>
                 	<p class="succes">Vous êtes connecté(e) avec l'adresse : ${sessionScope.customerSession.email}</p>
                 </c:if>
-            </fieldset>
+            </div>
         </form>
                     <div class="modal-footer">
                         <button class="btn btn-info" data-dismiss="modal">Annuler</button>
@@ -205,7 +209,88 @@
         <script src="bootstrap/js/jquery.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
         
+      <div id="formulaire3" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">x</button>
+                        <h4 class="modal-title">Vos infos :  Etape 1/3</h4>
+                    </div>
+                     <form method="post" action="<c:url value="/paymentManagement"/>">
+                <fieldset>
+                    <legend>Informations de payment</legend>
+                    
+                    <label for="cardName">Nom du titulaire de la carte <span class="requis">*</span></label>
+                    <input type="text" id="cardName" name="cardName" size="30" maxlength="30"/>
+                    <span class="erreur">${form.errors['support']}</span>
+                    <br />
+                    
+                    <label for="cardNumber">Numéro de carte bancaire <span class="requis">*</span></label>
+                    <input type="text" id="cardNumber" name="cardNumber" size="30" maxlength="30"/>
+                    <span class="erreur">${form.errors['support']}</span>
+                    <br />
+                    
+                    <label for="securityCode">Code de sécurité <span class="requis">*</span></label>
+                    <input type="text" id="securityCode" name="securityCode" size="30" maxlength="30" />
+                    <span class="erreur">${form.errors['shape']}</span>
+                    <br />
+                                        
+                    <p class="info">${ form.result }</p>
+                </fieldset>
+                <input type="submit" value="suivant" href="#recapitulatif" />
+                <input type="reset" value="Remettre à zéro" /> <br />
+            </form>
+                    <div class="modal-footer">
+                        <button class="btn btn-info" data-dismiss="modal">Annuler</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="bootstrap/js/jquery.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>   
         
+        
+        
+        
+        <div id="recapitulatif" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">x</button>
+                        <h4 class="modal-title">Vos infos :  Etape 2/3</h4>
+                    </div>
+                     <form method="post" action="<c:url value="/paymentManagement"/>">
+                <fieldset>
+                    <legend>Informations de payment</legend>
+                    
+                    <label for="cardName">Nom du titulaire de la carte <span class="requis">*</span></label>
+                    <input type="text" id="cardName" name="cardName" size="30" maxlength="30"/>
+                    <span class="erreur">${form.errors['support']}</span>
+                    <br />
+                    
+                    <label for="cardNumber">Numéro de carte bancaire <span class="requis">*</span></label>
+                    <input type="text" id="cardNumber" name="cardNumber" size="30" maxlength="30"/>
+                    <span class="erreur">${form.errors['support']}</span>
+                    <br />
+                    
+                    <label for="securityCode">Code de sécurité <span class="requis">*</span></label>
+                    <input type="text" id="securityCode" name="securityCode" size="30" maxlength="30" />
+                    <span class="erreur">${form.errors['shape']}</span>
+                    <br />
+                                        
+                    <p class="info">${ form.result }</p>
+                </fieldset>
+                <input type="submit" value="suivant" href="#recapitulatif" />
+                <input type="reset" value="Remettre à zéro" /> <br />
+            </form>
+                    <div class="modal-footer">
+                        <button class="btn btn-info" data-dismiss="modal">Annuler</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="bootstrap/js/jquery.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>   
         
         
         
