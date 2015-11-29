@@ -6,10 +6,10 @@
   	<persistence-unit name="ecom_PU" transaction-type="JTA">
   		<jta-data-source>jdbc/bonecp_resource</jta-data-source>
   		<class>com.ecom.entities.Customer</class>
-		<class>com.ecom.entities.Order</class>	
-		<class>com.ecom.entities.Product</class>
-		<class>com.ecom.entities.Cart</class>	
-		<class>com.ecom.entities.Category</class>
+  		<class>com.ecom.entities.Order</class>
+  		<class>com.ecom.entities.Product</class>
+  		<class>com.ecom.entities.Cart</class>
+  		<class>com.ecom.entities.Category</class>
 		<properties>
   			<property name="eclipselink.ddl-generation" value="create-tables"/>
 		</properties>	

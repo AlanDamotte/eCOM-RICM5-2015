@@ -1,6 +1,8 @@
 package com.ecom.dao;
 
+import java.awt.Dimension;
 import java.util.List;
+import java.util.Map;
 
 import javax.ejb.Local;
 
@@ -16,4 +18,6 @@ public interface CategoryDaoLocal {
 	public List<Category> list();
 
 	public void remove(Category category);
+	
+	public Map<String,List<Dimension>> getCategories();
 }

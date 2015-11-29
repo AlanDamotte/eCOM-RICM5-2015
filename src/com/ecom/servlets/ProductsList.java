@@ -22,7 +22,6 @@ import com.ecom.entities.Product;
 public class ProductsList extends HttpServlet {
 	public static final String ATT_PRODUCT = "product";
 	public static final String ATT_PRODUCTS_SESSION = "products";
-	public static final String ATT_CATEGORIES_SESSION = "categories";
 	public static final String ATT_FORM = "form";
 
 	public static final String VIEW_ADMIN = "/WEB-INF/productsList.jsp";
@@ -30,9 +29,6 @@ public class ProductsList extends HttpServlet {
 
 	@EJB
 	private ProductDaoRemote productDao;
-	
-	@EJB
-	private CategoryDaoRemote categoryDao;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -49,17 +45,6 @@ public class ProductsList extends HttpServlet {
 			mapProducts.put(product.getId(), product);
 		}
 		session.setAttribute(ATT_PRODUCTS_SESSION, mapProducts);
-		
-		/*
-		 * Récupération de la list des catégories existantes (en cas de mise à jour), et
-		 * enregistrement en session
-		 */
-		List<Category> listCategory = categoryDao.list();
-		Map<Long, Category> mapCategory = new HashMap<Long, Category>();
-		for (Category category : listCategory) {
-			mapCategory.put(category.getId(), category);
-		}
-		session.setAttribute(ATT_CATEGORIES_SESSION, mapCategory);
 
 		/*
 		 * À la réception d'une requête GET, affichage de la liste des clients

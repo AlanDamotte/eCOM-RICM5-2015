@@ -15,6 +15,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 
 import com.ecom.beans.ShoppingCart;
+import com.ecom.entities.Order;
 import com.ecom.entities.Product;
 
 @Stateless(mappedName = "ProductDao")
@@ -90,5 +91,20 @@ public class ProductDao implements ProductDaoLocal, ProductDaoRemote, Serializab
 			product.setQuantity(product.getQuantity() - mapProducts.get(key));
 			em.merge(product);	
 		}
+	}
+
+	@Override
+	public boolean checkAvailability(Order order) {
+		Map<Product,Integer> cart = order.getCart();
+		Set<Product> keys = cart.keySet();
+		Iterator<Product> it = keys.iterator();
+		while (it.hasNext()) {
+			Product product = (Product) it.next();
+			Product bdd_product = this.find(product.getId());
+			if(cart.get(product)>bdd_product.getQuantity()){
+				return false;
+			}
+		}
+		return true;
 	}
 }

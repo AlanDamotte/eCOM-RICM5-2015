@@ -5,6 +5,7 @@ import java.util.List;
 import javax.ejb.Remote;
 
 import com.ecom.beans.ShoppingCart;
+import com.ecom.entities.Order;
 import com.ecom.entities.Product;
 
 @Remote
@@ -21,4 +22,6 @@ public interface ProductDaoRemote {
 	public List<Product> listWithTag(List<String> tags);
 	
 	public void updateProductQuantity(ShoppingCart shoppingCart);
+	
+	public boolean checkAvailability(Order order);
 }

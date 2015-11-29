@@ -29,6 +29,14 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+   <script>
+    var dd2options = ${dd2optionsAsJSObject};
+    function dd1change(dd1) {
+        // Fill dd2 options based on selected dd1 value.
+        var selected = dd1.options[dd1.selectedIndex].value;
+        dd2options = ${ sessionScope.categories[selected].value };
+    }
+  </script>
   </head><body>
     <div class="section">
       <div class="container">
@@ -110,9 +118,8 @@
 		<p>
 		<form method="post" action="<c:url value="/addToCart"/>">
 			<label for="quantityCart">Quantité<span class="requis">*</span></label>
-			<input type="text" id="quantityCart" name="quantityCart" size="30"
+			<input type="text" id="quantityCart" name="quantityCart" size="30" min="1" max="${productView.quantity}"
 				maxlength="30"
-				constraints="{min:1,max:${productView.quantity},places:0}"
 				promptMessage="Entrer une quantité entre 1 et ${productView.quantity}"
 				required="true" invalidMessage="Valeur Invalide." /> <input
 				type="hidden" name="idProduct" value="${ productView.id }">
@@ -125,13 +132,23 @@
 			<c:out value="${ productView.description }" />
 		</p>
             <h1>
-              <select class="form-control">
-                <option>Rond</option>
-                <option>Carré</option>
-                <option>Rectangle</option>
-                <option>Triangulaire</option>
+              <select class="form-control" name="dd1" onchange="dd1change(this)">
+	              <c:forEach items="${ sessionScope.categories }" var="option">
+	              <%-- 	<option ><c:out value="${ mapCategories.key }"/></option> --%>
+	              	 <option value="${option.key}" ${param.dd1 == option.key ? 'selected' : ''}>${option.key}</option>
+	              </c:forEach>
               </select>
             </h1>
+            <h1>
+            <select class="form-control" name="dd2" >
+              <c:if test="${empty dd2options}">
+       				 <option>Please select parent</option>
+   			  </c:if>
+    			<c:forEach items="${dd2options}" var="option">
+       				 <option value="${option.key}" ${param.dd2 == option.key ? 'selected' : ''}>${option.key}</option>
+    			</c:forEach>
+            </h1>
+            </select>
             <h1>Price:</h1>
            <p>
 			<c:out value="${ productView.price }" />

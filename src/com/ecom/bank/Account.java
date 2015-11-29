@@ -14,7 +14,7 @@ public class Account {
 		this.securityCode = securityCode;
 	}
 	
-	public Double getBalance(){
+	public double getBalance(){
 		return this.balance;
 	}
 	

@@ -51,7 +51,8 @@ public class UserServiceImpl {
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public synchronized static void proceedPayment(HttpServletRequest request, OrderDaoRemote orderDao, ProductDaoRemote productDao, OrderHistoryDaoRemote orderHistory, MailSenderBean mailSender) throws Exception {
+	public synchronized static void proceedPayment(HttpServletRequest request, OrderDaoRemote orderDao, 
+			ProductDaoRemote productDao, OrderHistoryDaoRemote orderHistory, MailSenderBean mailSender) throws Exception {
 		
 		HttpSession session = request.getSession();
 		
@@ -87,6 +88,11 @@ public class UserServiceImpl {
 				// TODO
 				order.setDeliveryStatus("");
 				order.setPaymentStatus("");
+				
+				boolean availability = productDao.checkAvailability(order);
+				if(!availability){
+					throw new Exception();
+				}
 
 				// orderDao.create(order);
 

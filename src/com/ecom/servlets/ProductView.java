@@ -1,6 +1,10 @@
 package com.ecom.servlets;
 
+import java.awt.Dimension;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
@@ -10,21 +14,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.ecom.dao.CategoryDaoRemote;
 import com.ecom.dao.DAOException;
 import com.ecom.dao.ProductDaoRemote;
+import com.ecom.entities.Category;
 import com.ecom.entities.Product;
 
 @WebServlet(name = "ProductView", urlPatterns = { "/productView" })
 public class ProductView extends HttpServlet {
 
 	public static final String PARAM_ID_PRODUCT = "idProduct";
-	public static final String PARAM_PRODUCT_VIEW = "productView";
 	public static final String PRODUCTS_SESSION = "products";
-
+	public static final String ATT_CATEGORIES_SESSION = "categories";
+	public static final String ATT_PRODUCT_VIEW = "productView";
 	public static final String VIEW_PRODUCT = "/WEB-INF/productView.jsp";
 
 	@EJB
 	private ProductDaoRemote productDao;
+	
+	@EJB
+	private CategoryDaoRemote categoryDao;
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -44,8 +53,18 @@ public class ProductView extends HttpServlet {
 			} catch (DAOException e) {
 				e.printStackTrace();
 			}
-			session.setAttribute(PARAM_PRODUCT_VIEW, product);
+			session.setAttribute(ATT_PRODUCT_VIEW, product);
 		}
+		
+		/*
+		 * Récupération de la list des catégories existantes (en cas de mise à jour), et
+		 * enregistrement en session
+		 */
+		List<Category> listCategory = categoryDao.list();
+		Map<String,List<Dimension>> mapCategory = new HashMap<String,List<Dimension>>();
+		mapCategory = categoryDao.getCategories();
+		session.setAttribute(ATT_CATEGORIES_SESSION, mapCategory);
+		
 		this.getServletContext().getRequestDispatcher(VIEW_PRODUCT).forward(request, response);
 	}
 

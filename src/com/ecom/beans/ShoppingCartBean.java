@@ -106,11 +106,20 @@ public class ShoppingCartBean implements ShoppingCartLocal, ShoppingCart, Serial
 		if (items.isEmpty()) {
 			this.total = 0;
 		}
-		int oldQuantity = getQuantity(product.getId());
-		items.put(product.getId(), oldQuantity + quantity);
-		double subtotal = this.total;
-		subtotal = subtotal + product.getPrice() * quantity;
-		this.total = subtotal;
+		if(quantity!=0){
+			int quantityToPut = 0;
+			int oldQuantity = getQuantity(product.getId());
+			if(oldQuantity + quantity > productDao.find(product.getId()).getQuantity()){
+				quantityToPut = productDao.find(product.getId()).getQuantity();
+			}else{
+				quantityToPut = oldQuantity + quantity;
+			}
+			double subtotal1 = productDao.find(product.getId()).getPrice() * getQuantity(product.getId());
+			double subtotal = this.total - subtotal1;
+			subtotal = subtotal + productDao.find(product.getId()).getPrice() * quantityToPut;
+			this.total = subtotal;
+			items.put(product.getId(), quantityToPut);
+		}
 	}
 
 	@Override
@@ -118,23 +127,38 @@ public class ShoppingCartBean implements ShoppingCartLocal, ShoppingCart, Serial
 		if (items.isEmpty()) {
 			this.total = 0;
 		}
-		int oldQuantity = getQuantity(id);
-		items.put(id, oldQuantity + quantity);
-		double subtotal = this.total;
-		subtotal = subtotal + productDao.find(id).getPrice() * quantity;
-		this.total = subtotal;
+		if(quantity!=0){
+			int quantityToPut = 0;
+			int oldQuantity = getQuantity(id);
+			if(oldQuantity + quantity > productDao.find(id).getQuantity()){
+				quantityToPut = productDao.find(id).getQuantity();
+			}else{
+				quantityToPut = oldQuantity + quantity;
+			}
+			double subtotal1 = productDao.find(id).getPrice() * getQuantity(id);
+			double subtotal = this.total - subtotal1;
+			subtotal = subtotal + productDao.find(id).getPrice() * quantityToPut;
+			this.total = subtotal;
+			items.put(id, quantityToPut);
+		}
+
 	}
 
 	@Override
 	public void updateQuantity(Long id, int quantity) {
 		double subtotal1 = productDao.find(id).getPrice() * getQuantity(id);
 		double subtotal = this.total - subtotal1;
-		subtotal = subtotal + productDao.find(id).getPrice() * quantity;
+
 		if(quantity == 0){
 			items.remove(id);
 		}else{
-			items.replace(id, quantity);
-			
+			if(quantity > productDao.find(id).getQuantity()){
+				items.replace(id,productDao.find(id).getQuantity());
+				subtotal = subtotal + productDao.find(id).getPrice() * productDao.find(id).getQuantity();
+			}else{
+				items.replace(id, quantity);
+				subtotal = subtotal + productDao.find(id).getPrice() * quantity;
+			}
 		}
 		this.total = subtotal;
 	}
