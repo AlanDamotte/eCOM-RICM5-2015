@@ -112,7 +112,7 @@ public class UserServiceImpl {
 				
 				System.out.println("Sending mail");
 				
-				sendEmailOrderComplete(customer, order, mailSender);
+				//sendEmailOrderComplete(customer, order, mailSender);
 				
 				System.out.println("Mail sent");
 				

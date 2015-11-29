@@ -98,12 +98,11 @@ public class CreateOrder extends HttpServlet {
 
 		try {
 			UserServiceImpl.proceedPayment(request, orderDao, productDao, orderHistory, mailSender);
-
+			this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
+			
 		} catch (Exception e) {
 			session.setAttribute(ATT_PAYMENT_STATUS, "Error");
 			this.getServletContext().getRequestDispatcher(VIEW_PAYMENT).forward(request, response);
-		} finally {
-			this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 		}
 
 	}
