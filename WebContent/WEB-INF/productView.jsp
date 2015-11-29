@@ -37,41 +37,36 @@
         dd2options = ${ sessionScope.categories[selected].value };
     }
   </script>
-  </head><body>
-    <div class="section">
-      <div class="container">
-        <div class="row">
-          <div class="section">
-            <div class="container">
-              <div class="row"></div>
-              <div class="row">
-                <div class="col-md-3">
-                  <div class="col-md-12">
-                    <h1 class="text-muted">Stick-Gump</h1>
-                  </div>
-                </div>
-                <div class="col-sm-2 col-md-3"></div>
-                <div class="col-sm-2 col-md-3"></div>
-                <div class="col-md-3 col-sm-2 text-right">
-                  <a class="btn btn-info btn-lg" href="./cartManagement">Panier</a>
-                   <c:if test="${empty sessionScope.customerSession}">
+  </head>
+   <body data-spy="scroll">
+        <div class="container">
+            <!-- The justified navigation menu is meant for single line per list item.
+            Multiple lines will require custom code not provided by Bootstrap. -->
+            <div class="masthead">
+                <div class="section">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h1 class="text-muted">Stick-Gump</h1>
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            <div class="col-sm-2 col-md-2"></div><div class="col-sm-2 col-md-4"></div><div class="col-md-3 col-sm-2 text-center">
+                                <a class="btn btn-info btn-lg" href="./cartManagement">Panier</a>
+                                <c:if test="${empty sessionScope.customerSession}">
                                 <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href="#formulaire">Connecte toi</a>
                                 </c:if>
                                 <c:if test="${not empty sessionScope.customerSession}">
                                 <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./disconnection>Déconnexion</a>
                                  </c:if>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container">
-      <!-- The justified navigation menu is meant for single line per list item.
-      Multiple lines will require custom code not provided by Bootstrap. -->
-      <div class="masthead">
-       <form method="post" class="navbar-form navbar-right" action="<c:url value="/search"/>">
+                <form method="post" class="navbar-form navbar-right" action="<c:url value="/search"/>">
                     <div class="input-group">
                         <input type="text" id="search" name="search" style="width:150px" class="input-sm form-control" placeholder="Search">
                         <input type="submit" value="Rechercher" class="btn btn-primary btn-sm" />
@@ -195,7 +190,7 @@
                         <h4 class="modal-title">Vos infos :</h4>
                     </div>
                      <form method="post" action="<c:url value="/connection" />">
-            <fieldset>
+            <div class="modal-body">
                 
                 <label for="email">  Email<span class="requis">*</span></label>
                 <input type="email" class="form-control" name="email" id="email" placeholder="Votre Email"  value="<c:out value="${customer.email}"/>">
@@ -221,7 +216,7 @@
                     <%-- Si l'utilisateur existe en session, alors on affiche son adresse email. --%>
                 	<p class="succes">Vous êtes connecté(e) avec l'adresse : ${sessionScope.customerSession.email}</p>
                 </c:if>
-            </fieldset>
+            </div>
         </form>
                     <div class="modal-footer">
                         <button class="btn btn-info" data-dismiss="modal">Annuler</button>
