@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.ejb.Asynchronous;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -54,6 +55,10 @@ public class CreateOrder extends HttpServlet {
 	
 	@EJB
 	private MailSenderBean mailSender;
+	
+	Customer customer;
+	
+	Order order;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -62,49 +67,47 @@ public class CreateOrder extends HttpServlet {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
-//	@Override
-//	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//		// TODO Auto-generated method stub
-//		super.service(req, resp);
-//
-//		try {
-//
-//			String fromEmail = "alan.damotte@gmail.com";
-//			String username = "alan.damotte";
-//			String password = "xxx";
-//
-//			String toEmail = customer.getEmail();
-//			String subject = "Confirmation de commande"; // +
-//			order.getId().toString();
-//			String message = "Test";
-//
-//			// Call to mail sender bean
-//			mailSender.sendEmail(fromEmail, username, password, toEmail, subject, message);
-//			// ----------------------
-//
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		} finally {
-//			this.getServletContext().getRequestDispatcher(VIEW).forward(req, resp);
-//		}
-//	}
+	
 
 	public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		HttpSession session = request.getSession();
 
 		session.removeAttribute(ATT_PAYMENT_STATUS);
+		
+		/*
+		 * Récupération et conversion de la date en String selon le
+		 * format choisi.
+		 */
+		DateTime dt = new DateTime();
 
-		try {
-			UserServiceImpl.proceedPayment(request, orderDao, productDao, orderHistory, mailSender);
-			this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
-			
-		} catch (Exception e) {
-			session.setAttribute(ATT_PAYMENT_STATUS, "Error");
+		order = new Order();
+		ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute(CART_PRODUCTS_SESSION);
+		customer = (Customer) session.getAttribute(ATT_SESSION_CUSTOMER);
+		
+		order.setAmount(shoppingCart.getTotal());
+		order.setCart(shoppingCart.getProductsMap());
+		order.setCustomer(customer);
+		order.setDate(dt);
+		// TODO
+		order.setDeliveryStatus("");
+		order.setPaymentStatus("");
+		
+		boolean availability = productDao.checkAvailability(order);
+		System.out.println(availability);
+		if(!availability){
 			this.getServletContext().getRequestDispatcher(VIEW_PAYMENT).forward(request, response);
+		}else{
+			try {
+				UserServiceImpl.proceedPayment(request, customer, order, shoppingCart, mailSender);
+				UserServiceImpl.persistOrder(request, productDao, orderHistory, customer, order, shoppingCart);
+				shoppingCart.clear();
+				this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
+			} catch (Exception e) {
+				session.setAttribute(ATT_PAYMENT_STATUS, "Error");
+				this.getServletContext().getRequestDispatcher(VIEW_PAYMENT).forward(request, response);
+			}
 		}
-
 	}
 
 }

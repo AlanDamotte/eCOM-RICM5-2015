@@ -38,4 +38,8 @@ public class Bank{
 		double actualBalance = ((Account) listAccount.get(accountNumber)).getBalance();
 		((Account) listAccount.get(accountNumber)).setBalance(actualBalance - amount);
 	}
+	
+	public Map<Long, Account> getAccount(){
+		return this.listAccount;
+	}
 }

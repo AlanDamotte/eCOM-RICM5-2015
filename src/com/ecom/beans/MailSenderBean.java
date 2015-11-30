@@ -26,8 +26,7 @@ public class MailSenderBean {
 	}
 
 	public void sendEmail(String fromEmail, String username, String password, String toEmail, String subject,
-			String message) {
-
+			String message){
 		try {
 			//Set mail service properties
 			Properties props = System.getProperties();
@@ -37,7 +36,6 @@ public class MailSenderBean {
 			props.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 			props.put("mail.smtp.socketFacrory.port", "465");
 			props.put("mail.smtp.socketFactory.fallback", "false");
-			
 			//Set mail service stateless session
 			javax.mail.Session mailSession = javax.mail.Session.getDefaultInstance(props, null);
 			//Set alive mail session debug
@@ -50,18 +48,17 @@ public class MailSenderBean {
 			mailMessage.setContent(message,"text/html");
 			mailMessage.setSubject(subject);
 			mailMessage.setSentDate(new Date());
-			
 			javax.mail.Transport transport = mailSession.getTransport("smtps");
 			transport.connect("smtp.gmail.com", username, password);
-			
 			transport.sendMessage(mailMessage, mailMessage.getAllRecipients());
 //			transport.close();
 		} catch (AddressException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
 		} catch (MessagingException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println(e.getMessage());
+			//e.printStackTrace();
 		}
 
 	}

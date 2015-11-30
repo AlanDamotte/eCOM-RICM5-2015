@@ -1,5 +1,8 @@
 package com.ecom.service;
 
+import java.io.IOException;
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.ejb.Asynchronous;
 import javax.ejb.EJBContext;
@@ -7,15 +10,14 @@ import javax.ejb.SessionContext;
 import javax.ejb.Stateless;
 import javax.ejb.TransactionAttribute;
 import javax.ejb.TransactionAttributeType;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.joda.time.DateTime;
-
+import com.ecom.bank.Account;
 import com.ecom.bank.Bank;
 import com.ecom.beans.MailSenderBean;
 import com.ecom.beans.ShoppingCart;
-import com.ecom.dao.OrderDaoRemote;
 import com.ecom.dao.OrderHistoryDaoRemote;
 import com.ecom.dao.ProductDaoRemote;
 import com.ecom.entities.Customer;
@@ -31,96 +33,82 @@ public class UserServiceImpl {
 
 	public static final String FIELD_CARD_NUMBER = "cardNumber";
 	public static final String FIELD_CARD_SECURITYCODE = "securityCode";
-	
-	@Resource static SessionContext context;
+
+	private static boolean validate = false;
+
+	@Resource
+	static SessionContext context;
 	
 	@Asynchronous
-	public static void sendEmailOrderComplete(Customer customer, Order order, MailSenderBean mailSender){
-		String fromEmail = "alan.damotte@gmail.com";
-		String username = "alan.damotte";
-		String password = "XXX";
+	public static void sendUserMail(Customer customer, Order order, MailSenderBean mailSender) throws ServletException, IOException{
+		try{
+			System.out.println("Envoi de mail");
+			String fromEmail = "wizardkeven@live.com";
+			String username = "wizardkeven";
+			String password = "**********";
 
-		String toEmail = customer.getEmail();
-		//TODO : modifier le sujet et le corps de message
-		String subject = "Confirmation de commande" + order.getId().toString();
-		String message = "Bonjour M/Mme" + customer.getLastname() + customer.getFirstname() + ":\n"
-						+ "Nous vous confirmation votre commande numéro " + order.getId().toString() + "d'un montant de " + order.getAmount();
+			String toEmail = customer.getEmail();
+			System.out.println(toEmail);
+			// TODO : modifier le sujet et le corps de message
+			String subject = "Confirmation de commande" + order.getId().toString();
+			String message = "Bonjour M/Mme" + customer.getLastname() + customer.getFirstname() + ":\n"
+					+ "Nous vous confirmation votre commande numéro " + order.getId().toString() + "d'un montant de "
+					+ order.getAmount();
 
-		// Call to mail sender bean
-		mailSender.sendEmail(fromEmail, username, password, toEmail, subject, message);
+			// Call to mail sender bean
+
+			mailSender.sendEmail(fromEmail, username, password, toEmail, subject, message);
+
+			System.out.println("Mail envoyé");
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+
+	}
+
+
+	public static void persistOrder(HttpServletRequest request, ProductDaoRemote productDao,
+			OrderHistoryDaoRemote orderHistory, Customer customer, Order order, ShoppingCart shoppingCart)
+					throws Exception {
+		if (validate) {
+			// Mise à jour des quantités de produits restantes
+			productDao.updateProductQuantity(shoppingCart);
+
+			shoppingCart.clear();
+			request.getSession().setAttribute(CART_PRODUCTS_SESSION, shoppingCart);
+
+			OrderHistory orderH = new OrderHistory();
+			orderH.setCustomer(customer);
+			orderH.setOrder(order);
+			orderHistory.create(orderH);
+			System.out.println("Payment finished");
+		}
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
-	public synchronized static void proceedPayment(HttpServletRequest request, OrderDaoRemote orderDao, 
-			ProductDaoRemote productDao, OrderHistoryDaoRemote orderHistory, MailSenderBean mailSender) throws Exception {
-		
+	public synchronized static void proceedPayment(HttpServletRequest request, Customer customer, Order order,
+			ShoppingCart shoppingCart, MailSenderBean mailSender) throws Exception {
 		HttpSession session = request.getSession();
-		
-		Customer customer;
-
-		Order order;
 
 		Bank bank = new Bank();
-		
+		//Map<Long, Account> listAccount = bank.getAccount();
+		//System.out.println(listAccount.get(123456).getBalance());
 		try {
 			System.out.println("Preparing payment");
-			
-			ShoppingCart shoppingCart = (ShoppingCart) session.getAttribute(CART_PRODUCTS_SESSION);
-			customer = (Customer) session.getAttribute(ATT_SESSION_CUSTOMER);
 
 			Long cardNumber = Long.parseLong((String) session.getAttribute(FIELD_CARD_NUMBER));
 			int securityCode = Integer.parseInt((String) session.getAttribute(FIELD_CARD_SECURITYCODE));
-
-			boolean validate = bank.paymentProcess(cardNumber, shoppingCart.getTotal(), securityCode);
-			if (validate) {
-				System.out.println("Proceed to payment");
-				/*
-				 * Récupération et conversion de la date en String selon le
-				 * format choisi.
-				 */
-				DateTime dt = new DateTime();
-
-				order = new Order();
-				order.setAmount(shoppingCart.getTotal());
-				order.setCart(shoppingCart.getProductsMap());
-				order.setCustomer(customer);
-				order.setDate(dt);
-				// TODO
-				order.setDeliveryStatus("");
-				order.setPaymentStatus("");
-				
-				boolean availability = productDao.checkAvailability(order);
-				if(!availability){
-					throw new Exception();
-				}
-
-				// orderDao.create(order);
-
-				// Mise à jour des quantités de produits restantes
-				productDao.updateProductQuantity(shoppingCart);
-
-				shoppingCart.clear();
-				request.getSession().setAttribute(CART_PRODUCTS_SESSION, shoppingCart);
-
-				OrderHistory orderH = new OrderHistory();
-				orderH.setCustomer(customer);
-				orderH.setOrder(order);
-				orderHistory.create(orderH);
-				System.out.println("Payment finished");
-				
-				//----------------------------------------
-				
-				System.out.println("Sending mail");
-				
-				//sendEmailOrderComplete(customer, order, mailSender);
-				
-				System.out.println("Mail sent");
-				
-			}else{
+			
+			boolean validatePayment = bank.paymentProcess(cardNumber, shoppingCart.getTotal(), securityCode);
+			if (!validatePayment) {
 				throw new Exception();
+			}else{
+				sendUserMail(customer,order,mailSender);
 			}
 		} catch (Exception up) {
-			System.out.println("Exception catched");
+			//System.out.println(listAccount.get(123456).getBalance());
+			System.out.println("Exception catched : " + up.getMessage());
 			((EJBContext) context).setRollbackOnly();
 			throw up;
 		}

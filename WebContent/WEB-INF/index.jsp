@@ -143,28 +143,14 @@
                 </div>
             </div>
             <div class="container">
-                <img src="bootstrap/img/images-5.png" width="200" class="img-thumbnail">
-                <img src="bootstrap/img/img6.jpg" width="200" class="img-responsive img-thumbnail">
-                <img src="bootstrap/img/img7.jpg" width="200" class="img-rounded">
-                <img src="bootstrap/img/img4.jpg" width="200" class="img-thumbnail">
-                <img src="bootstrap/img/img2.jpg" width="200" class="img-thumbnail">
-                <img src="bootstrap/img/img7.jpg" width="200" class="img-thumbnail">
-                <img src="bootstrap/img/img4.jpg" width="200" class="img-thumbnail">
-                <img src="bootstrap/img/img8.jpg" width="200" class="img-thumbnail">
-                <img src="bootstrap/img/img8.jpg" width="200" class="img-thumbnail">
-                <img src="bootstrap/img/img8.jpg" width="200" class="img-thumbnail">
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <ul class="pager">
-                        <li>
-                            <a href="#"> <-- </a>
-                        </li>
-                        <li>
-                            <a href="#">--></a>
-                        </li>
-                    </ul>
-                </div>
+             <c:forEach items="${ sessionScope.lastProducts }" var="mapProducts" varStatus="boucle">
+                 		<c:if test="${ !empty mapProducts.value.image }">
+                            <c:set var="image"><c:out value="${ mapProducts.value.image }"/></c:set>
+                            <a href="<c:url value="/productView"><c:param name="idProduct" value="${ mapProducts.key }" /></c:url>">
+	                             <img src="${pageContext.request.contextPath}/img/${ image }" height="200" width="200" class="img-rounded">
+	                        </a>
+                        </c:if>   
+            </c:forEach>
             </div>
         </div>
         <script src="bootstrap/js/jquery.js"></script>
@@ -187,18 +173,6 @@
         </script> -->
         <script src="bootstrap/js/jquery.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
-        <script>
-            $(function (){
-          $('a').click(function () {
-            with($(this)) {
-              button('loading');
-              setTimeout(function () {
-                button('reset');
-              }, 4000);
-            }
-          })
-        });
-        </script>
         <!-- Example row of columns -->
         <div class="col-lg-4"></div>
         <footer class="section section-primary">

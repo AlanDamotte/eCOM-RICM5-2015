@@ -56,12 +56,21 @@ public class ProductDao implements ProductDaoLocal, ProductDaoRemote, Serializab
 		}
 	}
 	
+	public List<Product> listLastProducts() throws DAOException {
+		try {
+			TypedQuery<Product> query2 = em.createQuery("SELECT o FROM Product o ORDER BY o.id DESC", Product.class);
+			return query2.setMaxResults(10).getResultList();
+		} catch (Exception e) {
+			throw new DAOException(e);
+		}
+	}
+	
 	public List<Product> listWithTag(List<String> tags) throws DAOException {
 		List<Product> searchList = new LinkedList<Product>();
 		List<Product> tempList = new LinkedList<Product>();
 		for (String tag : tags) {
-			TypedQuery<Product> query = em.createQuery("SELECT o FROM Product o WHERE :tag IN (o.tags) ORDER BY o.id", Product.class);
-			tempList = query.setParameter("tag", tag).getResultList();
+			TypedQuery<Product> query3 = em.createQuery("SELECT o FROM Product o WHERE :tag IN (o.tags) ORDER BY o.id", Product.class);
+			tempList = query3.setParameter("tag", tag).getResultList();
 			for (Product product : tempList) {
 				if(!searchList.contains(product)){
 					searchList.add(product);

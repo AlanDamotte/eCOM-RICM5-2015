@@ -16,6 +16,8 @@ public interface ProductDaoLocal {
 	public void create(Product product);
 
 	public List<Product> list();
+	
+	public List<Product> listLastProducts();
 
 	public void remove(Product product);
 	
