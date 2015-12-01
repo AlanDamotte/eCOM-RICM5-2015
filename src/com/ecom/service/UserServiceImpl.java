@@ -104,7 +104,7 @@ public class UserServiceImpl {
 			if (!validatePayment) {
 				throw new Exception();
 			}else{
-				sendUserMail(customer,order,mailSender);
+				//sendUserMail(customer,order,mailSender);
 			}
 		} catch (Exception up) {
 			//System.out.println(listAccount.get(123456).getBalance());

@@ -21,7 +21,7 @@ import com.ecom.dao.CustomerDaoRemote;
 import com.ecom.entities.Customer;
 import com.ecom.forms.CustomerCreationForm;
 
-@WebServlet( name = "CustomerCreation", urlPatterns = { "/customerCreation" })
+@WebServlet( name = "CustomerCreation", urlPatterns = { "/customerCreation", "/inscription" })
 public class CustomerCreation extends HttpServlet {
 	public static final String PATH = "path";
 	public static final String ATT_CLIENT = "customer";
@@ -30,6 +30,7 @@ public class CustomerCreation extends HttpServlet {
 
 	public static final String VIEW_SUCCES = "/WEB-INF/displayCustomer.jsp";
 	public static final String VIEW_FORM = "/WEB-INF/createCustomer.jsp";
+	public static final String INSCRIPTION_SUCCESS = "/index";
 
 	@EJB
 	private CustomerDaoRemote customerDao;
@@ -50,15 +51,24 @@ public class CustomerCreation extends HttpServlet {
 		/* Ajout du bean et de l'objet métier à l'objet requête */
 		request.setAttribute(ATT_CLIENT, customer);
 		request.setAttribute(ATT_FORM, form);
+		
 
+		
 		/* Si aucune erreur */
 		if (form.getErrors().isEmpty()) {
-
-			/* Affichage de la fiche récapitulative */
-			this.getServletContext().getRequestDispatcher(VIEW_SUCCES).forward(request, response);
+			if (request.getRequestURI().equals(request.getContextPath() + "/inscription")) {
+				response.sendRedirect(request.getContextPath() + INSCRIPTION_SUCCESS);
+			}else{
+				/* Affichage de la fiche récapitulative */
+				this.getServletContext().getRequestDispatcher(VIEW_SUCCES).forward(request, response);
+			}
 		} else {
-			/* Sinon, ré-affichage du formulaire de création avec les erreurs */
-			this.getServletContext().getRequestDispatcher(VIEW_FORM).forward(request, response);
+			if (request.getRequestURI().equals(request.getContextPath() + "/inscription")) {
+				//response.sendRedirect(request.getContextPath() + INSCRIPTION_SUCCESS);
+			}else{
+				/* Sinon, ré-affichage du formulaire de création avec les erreurs */
+				this.getServletContext().getRequestDispatcher(VIEW_FORM).forward(request, response);
+			}
 		}
 	}
 }
