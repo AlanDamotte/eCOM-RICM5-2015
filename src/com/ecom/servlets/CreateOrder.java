@@ -99,7 +99,7 @@ public class CreateOrder extends HttpServlet {
 			this.getServletContext().getRequestDispatcher(VIEW_PAYMENT).forward(request, response);
 		}else{
 			try {
-				UserServiceImpl.proceedPayment(request, customer, order, shoppingCart, mailSender);
+				UserServiceImpl.proceedPayment(request, customer, order, shoppingCart, productDao, mailSender);
 				UserServiceImpl.persistOrder(request, productDao, orderHistory, customer, order, shoppingCart);
 				shoppingCart.clear();
 				this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);

@@ -59,12 +59,8 @@ public class CustomerCreation extends HttpServlet {
 				this.getServletContext().getRequestDispatcher(VIEW_SUCCES).forward(request, response);
 			}
 		} else {
-			if (request.getRequestURI().equals(request.getContextPath() + "/inscription")) {
-				//response.sendRedirect(request.getContextPath() + INSCRIPTION_SUCCESS);
-			}else{
 				/* Sinon, ré-affichage du formulaire de création avec les erreurs */
 				this.getServletContext().getRequestDispatcher(VIEW_FORM).forward(request, response);
-			}
 		}
 	}
 }

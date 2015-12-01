@@ -15,7 +15,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
 @Entity
-public class OrderHistory implements Serializable{
+public class OrderHistory implements Serializable {
 
 	/**
 	 * 
@@ -26,14 +26,14 @@ public class OrderHistory implements Serializable{
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	/* Propriétés du bean */
 	private Integer id;
-	
+
 	@OneToOne
 	@JoinColumn(name = "id_customer")
 	private Customer customer;
-	
+
 	@OneToOne(cascade = CascadeType.PERSIST)
 	private Order order;
-	
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -41,7 +41,7 @@ public class OrderHistory implements Serializable{
 	public int getId() {
 		return id;
 	}
-	
+
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -49,12 +49,12 @@ public class OrderHistory implements Serializable{
 	public void setCustomer(Customer customer) {
 		this.customer = customer;
 	}
-	
-	public Order getOrder(){
+
+	public Order getOrder() {
 		return this.order;
 	}
-	
-	public void setOrder(Order order){
+
+	public void setOrder(Order order) {
 		this.order = order;
 	}
 }
