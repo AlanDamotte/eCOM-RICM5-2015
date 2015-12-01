@@ -34,57 +34,81 @@
         <title>Liste des produits existants</title>
         <link type="text/css" rel="stylesheet" href="<c:url value="/inc/style.css"/>" />
     </head>
-    <body>
-      
-   
-    <div class="container">
-      <!-- The justified navigation menu is meant for single line per list item.
-      Multiple lines will require custom code not provided by Bootstrap. -->
-      <div class="masthead">
-        <div class="section">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-3">
-                <h1 class="text-muted">Stick-Gump</h1>
-              </div>
-              <div class="col-sm-2 col-md-2"></div>
-              <div class="col-sm-2 col-md-5"></div>
-              <div class="col-md-2 col-sm-2 text-center">
-                 <c:if test="${empty sessionScope.customerSession}">
+ <body data-spy="scroll">
+        <div class="container">
+            <!-- The justified navigation menu is meant for single line per list item.
+            Multiple lines will require custom code not provided by Bootstrap. -->
+            <div class="masthead">
+                <div class="section">
+                    <div class="container">
+                        <div class="row">
+                            <c:if test="${empty sessionScope.customerSession}">
+                        		<div class="col-md-3">
+                                <h1 class="text-muted">Stick-Gump</h1>
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            <div class="col-sm-2 col-md-2"></div><div class="col-sm-2 col-md-4"></div><div class="col-md-3 col-sm-2 text-center">
+                                <a class="btn btn-info btn-lg" href="./cartManagement">Panier</a>
+                                
                                 <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href="#formulaire">Connecte toi</a>
-                                </c:if>
-                                <c:if test="${not empty sessionScope.customerSession}">
+                            </div>
+                        		</c:if>
+                        
+                        <c:if test="${not empty sessionScope.customerSession}">
+                                    <div class="col-md-3">
+                                <h1 class="text-muted">Stick-Gump</h1>
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                             <div class="col-sm-2 col-md-2"></div>
+              <div class="col-md-2 col-sm-2 text-right"></div>
+              <div class="col-md-5 col-sm-2 text-center">
+                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./orderHistory>&nbsp;Historique &nbsp;</a>
+
+                                <a class="btn btn-info btn-lg" href="./cartManagement">&nbsp; &nbsp; &nbsp;  Panier &nbsp; &nbsp;  &nbsp;</a>
+                               
                                 <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./disconnection>Déconnexion</a>
-                                 </c:if>
-              </div>
-            </div>
-          </div>
-        </div>
-         <form method="post" class="navbar-form navbar-right" action="<c:url value="/search"/>">
+                                
+                                 
+                            </div>
+                            </c:if>
+                        </div>
+                    </div>
+                </div>
+                <form method="post" class="navbar-form navbar-right" action="<c:url value="/search"/>">
                     <div class="input-group">
                         <input type="text" id="search" name="search" style="width:150px" class="input-sm form-control" placeholder="Search">
                         <input type="submit" value="Rechercher" class="btn btn-primary btn-sm" />
 
                     </div>
                 </form>
-        <nav>
-          <ul class="nav nav-justified nav-tabs">
-            <li class="disabled">
-              <a href="./index">Acueil</a>
-            </li>
-            <li class="">
-              <a href="./create-your-stick">Imagine ton Sticker</a>
-            </li>
-            <li>
-              <a href="./catalog">&nbsp;Liste des stickers</a>
-            </li>
-            <li>
-              <a href="./contact-us">Nous Contacter</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-      <div class=" logging"></div>
+                <nav>
+                    <ul class="nav nav-justified">
+                        <li>
+                            <a href="./index">Accueil</a>
+                        </li>
+                        <li>
+                            <a href="./create-your-stick">Imagine ton Sticker</a>
+                        </li>
+                        <li class="active">
+                            <a href="./catalog">Liste de Stickers</a>
+                        </li>
+                        <li>
+                            <a href="./contact-us">Nous Contacter</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+            
+            <!-- Site footer -->
+        </div>
       <!-- Jumbotron -->
       <h1 class="text-center text-muted">Contenu du Panier
         <br>
@@ -100,7 +124,6 @@
           <a href="#"><i class="fa fa-3x fa-mobile fa-fw"></i></a>
         </div>
       </div>
-    </div>
     <c:forEach items="${ sessionScope.cart_products.getMapProducts() }" var="mapCartProducts" varStatus="boucle">
     <div class="section">
       <div class="container">
@@ -109,18 +132,18 @@
              <img src="${pageContext.request.contextPath}/img/${ mapCartProducts.value.image }" class="img-responsive img-thumbnail" id="rt" height="400" width="400" >
           </div>
           <div class="col-md-6">
-            <h2><td><c:out value="${ mapCartProducts.value.name }"/></td></h2>
-            <p>Description :<td><c:out value="${ mapCartProducts.value.description }"/></td></p>
-            <p>Prix : <td><c:out value="${ mapCartProducts.value.price }"/></td><p>		
-            <td>
+            <h2><c:out value="${ mapCartProducts.value.name }"/></h2>
+            <p>Description :<c:out value="${ mapCartProducts.value.description }"/></p>
+            <p>Prix :<c:out value="${ mapCartProducts.value.price }"/><p>		
+            
 						<form method="post" action="<c:url value="/removeFromCart"/>">
-						<label for="quantityCart">Quantité : <td><c:out value="${ sessionScope.cart_products.getQuantity(mapCartProducts.key) }"/></td>		
--                    <td>	 <span class="requis"></span></label>
+						<label for="quantityCart">Quantité :<c:out value="${ sessionScope.cart_products.getQuantity(mapCartProducts.key) }"/>		
+                     	<span class="requis"></span></label>
                     	<input type="text" id="quantityCart" name="quantityCart" size="30" maxlength="30"/>
                     	<input type="hidden" name="idProduct" value="${ mapCartProducts.key }">
 						<input type="submit" class="btn btn-info btn-sm" value="Modifier" />
 						 </form>
-                    </td>
+                    
             <a href="<c:url value="/removeFromCart"><c:param name="idProduct" value="${ mapCartProducts.key }" /></c:url>" class="btn btn-info btn-lg">Supprimer</a>
           </div>
          
@@ -133,7 +156,7 @@
     
     
     
-        </div>
+       
         <div class="row">
           <div class="col-md-12">
             <div class="container">
@@ -164,7 +187,7 @@
         
         
         
-          <div id="formulaire" class="modal fade">
+          <div id="formulaireConnexion" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -172,8 +195,8 @@
                         <h4 class="modal-title">Vos infos :</h4>
                     </div>
                      <form method="post" action="<c:url value="/connection" />">
-            <div class="modal-body">
-                
+            
+				<div class="modal-body">
                 <label for="email">  Email<span class="requis">*</span></label>
                 <input type="email" class="form-control" name="email" id="email" placeholder="Votre Email"  value="<c:out value="${customer.email}"/>">
                 <span class="erreur">${form.errors['email']}</span>
@@ -198,7 +221,8 @@
                     <%-- Si l'utilisateur existe en session, alors on affiche son adresse email. --%>
                 	<p class="succes">Vous êtes connecté(e) avec l'adresse : ${sessionScope.customerSession.email}</p>
                 </c:if>
-            </div>
+                </div>
+           
         </form>
                     <div class="modal-footer">
                         <button class="btn btn-info" data-dismiss="modal">Annuler</button>
@@ -208,130 +232,50 @@
         </div>
         <script src="bootstrap/js/jquery.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
-        
-      <div id="formulaire3" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">x</button>
-                        <h4 class="modal-title">Vos infos :  Etape 1/3</h4>
-                    </div>
-                     <form method="post" action="<c:url value="/paymentManagement"/>">
-                <fieldset>
-                    <legend>Informations de payment</legend>
+       
                     
-                    <label for="cardName">Nom du titulaire de la carte <span class="requis">*</span></label>
-                    <input type="text" id="cardName" name="cardName" size="30" maxlength="30"/>
-                    <span class="erreur">${form.errors['support']}</span>
-                    <br />
-                    
-                    <label for="cardNumber">Numéro de carte bancaire <span class="requis">*</span></label>
-                    <input type="text" id="cardNumber" name="cardNumber" size="30" maxlength="30"/>
-                    <span class="erreur">${form.errors['support']}</span>
-                    <br />
-                    
-                    <label for="securityCode">Code de sécurité <span class="requis">*</span></label>
-                    <input type="text" id="securityCode" name="securityCode" size="30" maxlength="30" />
-                    <span class="erreur">${form.errors['shape']}</span>
-                    <br />
-                                        
-                    <p class="info">${ form.result }</p>
-                </fieldset>
-                <input type="submit" value="suivant" href="#recapitulatif" />
-                <input type="reset" value="Remettre à zéro" /> <br />
-            </form>
-                    <div class="modal-footer">
-                        <button class="btn btn-info" data-dismiss="modal">Annuler</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <script src="bootstrap/js/jquery.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>   
-        
-        
-        
-        
-        <div id="recapitulatif" class="modal fade">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">x</button>
-                        <h4 class="modal-title">Vos infos :  Etape 2/3</h4>
-                    </div>
-                     <form method="post" action="<c:url value="/paymentManagement"/>">
-                <fieldset>
-                    <legend>Informations de payment</legend>
-                    
-                    <label for="cardName">Nom du titulaire de la carte <span class="requis">*</span></label>
-                    <input type="text" id="cardName" name="cardName" size="30" maxlength="30"/>
-                    <span class="erreur">${form.errors['support']}</span>
-                    <br />
-                    
-                    <label for="cardNumber">Numéro de carte bancaire <span class="requis">*</span></label>
-                    <input type="text" id="cardNumber" name="cardNumber" size="30" maxlength="30"/>
-                    <span class="erreur">${form.errors['support']}</span>
-                    <br />
-                    
-                    <label for="securityCode">Code de sécurité <span class="requis">*</span></label>
-                    <input type="text" id="securityCode" name="securityCode" size="30" maxlength="30" />
-                    <span class="erreur">${form.errors['shape']}</span>
-                    <br />
-                                        
-                    <p class="info">${ form.result }</p>
-                </fieldset>
-                <input type="submit" value="suivant" href="#recapitulatif" />
-                <input type="reset" value="Remettre à zéro" /> <br />
-            </form>
-                    <div class="modal-footer">
-                        <button class="btn btn-info" data-dismiss="modal">Annuler</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <script src="bootstrap/js/jquery.js"></script>
-        <script src="bootstrap/js/bootstrap.min.js"></script>   
-        
-        
-        
-        
-        
-        
-    
-    <div id="formulaire2" class="modal fade">
+          
+     <div id="formulaire" class="modal fade">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">x</button>
-            <h4 class="modal-title">Réglement:</h4>
+            <h4 class="modal-title">Connections</h4>
           </div>
+           <div class="modal-body">
+            
+              <a class="btn btn-info btn-lg" class="close" data-toggle="modal"data-dismiss="modal" data-backdrop="false" href="#formulaireInscription">Inscription</a>
+           	 <a class="btn btn-info btn-lg" class="close" data-toggle="modal" data-dismiss="modal"data-backdrop="false" href="#formulaireConnexion">Connexion</a>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+          
+    
+    
+    
+    
+    
+    <div id="formulaireInscription" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">x</button>
+            <h4 class="modal-title">Informations client</h4>
+          </div>
+          
           <div class="modal-body">
-            <form action="test.php">
+            <form method="post" action="<c:url value="/inscription"/>">
               <div class="form-group">
-                <label for="nom">* Nom</label>
-                <input type="text" class="form-control" name="nom" id="nom" placeholder="Votre nom">
-              </div>
-              <div class="form-group">
-                <label for="email">* Email</label>
-                <input type="email" class="form-control" name="email" id="email" placeholder="Votre Email">
-              </div>
-              <div class="form-group">
-                <label for="adresse">* Adresse</label>
-                <input type="text" class="form-control" name="adresse" id="adresse" placeholder="Rue des asticots">
-              </div>
-              <div class="form-group">
-                <label for="code-postal">* Code-postal</label>
-                <input type="adresse" class="form-control" name="adresse" id="adresse" placeholder="38400">
-              </div>
-              <div class="form-group">
-                <label for="telephone">* Téléphone</label>
-                <input type="adresse" class="form-control" name="Téléphone" id="adresse" placeholder="+33609785992">
+              <c:import url="/inc/inc_customer_form.jsp" />
+               <p class="info">${ form.result }</p>
               </div>
               <button type="submit" class="btn btn-default">Envoyer</button>
             </form>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-info" data-dismiss="modal">Annuler</button>
+            <button type="reset" class="btn btn-info" data-dismiss="modal">Annuler</button>
           </div>
         </div>
       </div>

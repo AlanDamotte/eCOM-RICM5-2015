@@ -30,41 +30,76 @@
         <title>Liste des produits existants</title>
     </head>
    <body data-spy="scroll">
-        <div class="section"><div class="container"><div class="row"></div><div class="row"><div class="col-md-4"><div class="col-md-12">
-                                <h1 class="text-muted">Stick-Gump</h1>
-                            </div></div><div class="col-sm-2 col-md-3"></div><div class="col-sm-2 col-md-2"></div><div class="col-md-3 col-sm-2 text-center">
-                                <a class="btn btn-info btn-lg" href="./cartManagement">&nbsp; Panier &nbsp;&nbsp;</a>
-                                <c:if test="${empty sessionScope.customerSession}">
-                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href="#formulaire">Connecte toi</a>
-                                </c:if>
-                            </div></div></div></div><div class="container">
+        <div class="container">
             <!-- The justified navigation menu is meant for single line per list item.
             Multiple lines will require custom code not provided by Bootstrap. -->
             <div class="masthead">
-                
-                 <form method="post" class="navbar-form navbar-right" action="<c:url value="/search"/>">
+                <div class="section">
+                    <div class="container">
+                        <div class="row">
+<c:if test="${empty sessionScope.customerSession}">
+                        		<div class="col-md-3">
+                                <h1 class="text-muted">Stick-Gump</h1>
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            <div class="col-sm-2 col-md-2"></div><div class="col-sm-2 col-md-4"></div><div class="col-md-3 col-sm-2 text-center">
+                                <a class="btn btn-info btn-lg" href="./cartManagement">Panier</a>
+                                
+                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href="#formulaire">Connecte toi</a>
+                            </div>
+                        		</c:if>
+                        
+                        <c:if test="${not empty sessionScope.customerSession}">
+                                    <div class="col-md-3">
+                                <h1 class="text-muted">Stick-Gump</h1>
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                             <div class="col-sm-2 col-md-2"></div>
+              <div class="col-md-2 col-sm-2 text-right"></div>
+              <div class="col-md-5 col-sm-2 text-center">
+                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./orderHistory>&nbsp;Historique &nbsp;</a>
+
+                                <a class="btn btn-info btn-lg" href="./cartManagement">&nbsp; &nbsp; &nbsp;  Panier &nbsp; &nbsp;  &nbsp;</a>
+                               
+                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./disconnection>Déconnexion</a>
+                                
+                                 
+                            </div>
+                            </c:if>
+                        </div>
+                    </div>
+                </div>
+                <form method="post" class="navbar-form navbar-right" action="<c:url value="/search"/>">
                     <div class="input-group">
                         <input type="text" id="search" name="search" style="width:150px" class="input-sm form-control" placeholder="Search">
                         <input type="submit" value="Rechercher" class="btn btn-primary btn-sm" />
 
                     </div>
                 </form>
-                <nav>
-                    <ul class="nav nav-justified">
-                        <li>
-                            <a href="./index">Accueil</a>
-                        </li>
-                        <li>
-                            <a href="./create-your-stick">Imagine ton Sticker</a>
-                        </li>
-                        <li class="active">
-                            <a href="./catalog">View Sticker List</a>
-                        </li>
-                        <li>
-                            <a href="./contact-us">Nous Contacter</a>
-                        </li>
-                    </ul>
-                </nav>
+        <nav>
+          <ul class="nav nav-justified">
+            <li>
+              <a href="./index">Accueil</a>
+            </li>
+            <li class="disabled">
+              <a href="./create-your-stick">Imagine ton sticker</a>
+            </li>
+            <li>
+              <a href="./catalog">liste des Stickers</a>
+            </li>
+            <li>
+              <a href="./contact-us">Nous contacter</a>
+            </li>
+          </ul>
+        </nav>
             </div>
             
             <!-- Site footer -->
@@ -79,7 +114,11 @@
                     
                         <h1 class="text-center text-muted" contenteditable="true">Sticker Gallery</h1>
                     </div>
-                    
+                <c:if test="${empty sessionScope.searchProducts}">
+                <p  class="text-center text-muted" class="erreur">Aucun produit ne correspond à votre recherche, veuillez réessayer.</p>
+
+				</c:if>
+				<c:if test="${!empty sessionScope.searchProducts}">
                 </div>
                   <c:forEach items="${ sessionScope.searchProducts }" var="mapProducts" varStatus="boucle">
                  <div class="col-md-3">
@@ -90,6 +129,7 @@
 	                        </a>
                         </c:if>                     </div>
                    </c:forEach>
+                  </c:if>
                  <div class="container">
                     <ul class="pager">
                         <li>

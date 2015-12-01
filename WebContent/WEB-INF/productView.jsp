@@ -46,7 +46,8 @@
                 <div class="section">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-3">
+<c:if test="${empty sessionScope.customerSession}">
+                        		<div class="col-md-3">
                                 <h1 class="text-muted">Stick-Gump</h1>
                             </div>
                             
@@ -56,13 +57,32 @@
                             
                             <div class="col-sm-2 col-md-2"></div><div class="col-sm-2 col-md-4"></div><div class="col-md-3 col-sm-2 text-center">
                                 <a class="btn btn-info btn-lg" href="./cartManagement">Panier</a>
-                                <c:if test="${empty sessionScope.customerSession}">
+                                
                                 <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href="#formulaire">Connecte toi</a>
-                                </c:if>
-                                <c:if test="${not empty sessionScope.customerSession}">
-                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./disconnection>Déconnexion</a>
-                                 </c:if>
                             </div>
+                        		</c:if>
+                        
+                        <c:if test="${not empty sessionScope.customerSession}">
+                                    <div class="col-md-3">
+                                <h1 class="text-muted">Stick-Gump</h1>
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                             <div class="col-sm-2 col-md-2"></div>
+              <div class="col-md-2 col-sm-2 text-right"></div>
+              <div class="col-md-5 col-sm-2 text-center">
+                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./orderHistory>&nbsp;Historique &nbsp;</a>
+
+                                <a class="btn btn-info btn-lg" href="./cartManagement">&nbsp; &nbsp; &nbsp;  Panier &nbsp; &nbsp;  &nbsp;</a>
+                               
+                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./disconnection>Déconnexion</a>
+                                
+                                 
+                            </div>
+                            </c:if>
                         </div>
                     </div>
                 </div>
@@ -85,7 +105,7 @@
               <a href="./catalog">liste des Stickers</a>
             </li>
             <li>
-              <a href="./contact-us">Rejoint Nous</a>
+              <a href="./contact-us">Nous contacter</a>
             </li>
           </ul>
         </nav>
@@ -182,7 +202,7 @@
     </div>
     
     
-      <div id="formulaire" class="modal fade">
+      <div id="formulaireConnexion" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -190,8 +210,8 @@
                         <h4 class="modal-title">Vos infos :</h4>
                     </div>
                      <form method="post" action="<c:url value="/connection" />">
-            <div class="modal-body">
-                
+            
+				<div class="modal-body">
                 <label for="email">  Email<span class="requis">*</span></label>
                 <input type="email" class="form-control" name="email" id="email" placeholder="Votre Email"  value="<c:out value="${customer.email}"/>">
                 <span class="erreur">${form.errors['email']}</span>
@@ -216,7 +236,8 @@
                     <%-- Si l'utilisateur existe en session, alors on affiche son adresse email. --%>
                 	<p class="succes">Vous êtes connecté(e) avec l'adresse : ${sessionScope.customerSession.email}</p>
                 </c:if>
-            </div>
+                </div>
+           
         </form>
                     <div class="modal-footer">
                         <button class="btn btn-info" data-dismiss="modal">Annuler</button>
@@ -226,58 +247,54 @@
         </div>
         <script src="bootstrap/js/jquery.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <br>
-    <div class="modal fade" id="formulaire2">
+       
+                    
+          
+     <div id="formulaire" class="modal fade">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">x</button>
-            <h4 class="modal-title">Vos infos :</h4>
+            <h4 class="modal-title">Connections</h4>
           </div>
+           <div class="modal-body">
+            
+              <a class="btn btn-info btn-lg" class="close" data-toggle="modal" data-backdrop="false" data-dismiss="modal"href="#formulaireInscription">Inscription</a>
+           	 <a class="btn btn-info btn-lg" class="close" data-toggle="modal" data-backdrop="false"data-dismiss="modal" href="#formulaireConnexion">Connexion</a>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+          
+    
+    
+    
+    
+    
+    <div id="formulaireInscription" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">x</button>
+            <h4 class="modal-title">Informations client</h4>
+          </div>
+          
           <div class="modal-body">
-            <form action="test.php">
+            <form method="post" action="<c:url value="/inscription"/>">
               <div class="form-group">
-                <label for="nom">* Nom</label>
-                <input type="text" class="form-control" name="nom" id="nom" placeholder="Votre nom">
-              </div>
-              <div class="form-group">
-                <label for="email">* Email</label>
-                <input type="email" class="form-control" name="email" id="email" placeholder="Votre Email">
-              </div>
-              <div class="form-group">
-                <label for="adresse">* Adresse</label>
-                <input type="adresse" class="form-control" name="adresse" id="adresse" placeholder="Rue des asticots">
-              </div>
-              <div class="form-group">
-                <label for="code-postal">* Code-postal</label>
-                <input type="adresse" class="form-control" name="adresse" id="adresse" placeholder="38400">
-              </div>
-              <div class="form-group">
-                <label for="telephone">* Téléphone</label>
-                <input type="adresse" class="form-control" name="Téléphone" id="adresse" placeholder="+33609785992">
+              <c:import url="/inc/inc_customer_form.jsp" />
+               <p class="info">${ form.result }</p>
               </div>
               <button type="submit" class="btn btn-default">Envoyer</button>
             </form>
           </div>
           <div class="modal-footer">
-            <button class="btn btn-info" data-dismiss="modal">Annuler</button>
+            <button type="reset" class="btn btn-info" data-dismiss="modal">Annuler</button>
           </div>
         </div>
       </div>
     </div>
-    <script src="bootstrap/js/jquery.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
    
   
 

@@ -60,19 +60,43 @@
         <div class="section">
           <div class="container">
             <div class="row">
-              <div class="col-md-3">
-                <h1 class="text-muted">Stick-Gump</h1>
-              </div>
-              <div class="col-sm-2 col-md-2"></div>
-              <div class="col-sm-2 col-md-5"></div>
-              <div class="col-md-2 col-sm-2 text-center">
-                 <c:if test="${empty sessionScope.customerSession}">
+               <c:if test="${empty sessionScope.customerSession}">
+                        		<div class="col-md-3">
+                                <h1 class="text-muted">Stick-Gump</h1>
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            <div class="col-sm-2 col-md-2"></div><div class="col-sm-2 col-md-4"></div><div class="col-md-3 col-sm-2 text-center">
+                                <a class="btn btn-info btn-lg" href="./cartManagement">Panier</a>
+                                
                                 <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href="#formulaire">Connecte toi</a>
-                                </c:if>
-                                <c:if test="${not empty sessionScope.customerSession}">
+                            </div>
+                        		</c:if>
+                        
+                        <c:if test="${not empty sessionScope.customerSession}">
+                                    <div class="col-md-3">
+                                <h1 class="text-muted">Stick-Gump</h1>
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                             <div class="col-sm-2 col-md-2"></div>
+              <div class="col-md-2 col-sm-2 text-right"></div>
+              <div class="col-md-5 col-sm-2 text-center">
+                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./orderHistory>&nbsp;Historique &nbsp;</a>
+
+                                <a class="btn btn-info btn-lg" href="./cartManagement">&nbsp; &nbsp; &nbsp;  Panier &nbsp; &nbsp;  &nbsp;</a>
+                               
                                 <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./disconnection>Déconnexion</a>
-                                 </c:if>
-              </div>
+                                
+                                 
+                            </div>
+                            </c:if>
             </div>
           </div>
         </div>
