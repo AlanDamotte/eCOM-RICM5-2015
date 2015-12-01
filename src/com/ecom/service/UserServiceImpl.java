@@ -86,7 +86,7 @@ public class UserServiceImpl {
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
 	public synchronized static void proceedPayment(HttpServletRequest request, Customer customer, Order order,
-			ShoppingCart shoppingCart, MailSenderBean mailSender) throws Exception {
+			ShoppingCart shoppingCart, ProductDaoRemote productDao, MailSenderBean mailSender) throws Exception {
 		HttpSession session = request.getSession();
 
 		Bank bank = new Bank();
@@ -102,6 +102,8 @@ public class UserServiceImpl {
 			if (!validatePayment) {
 				throw new Exception();
 			}else{
+				// Mise à jour des quantités de produits restantes
+				productDao.updateProductQuantity(shoppingCart);
 				//sendUserMail(customer,order,mailSender);
 			}
 		} catch (Exception up) {
