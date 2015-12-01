@@ -34,7 +34,6 @@ public class UserServiceImpl {
 	public static final String FIELD_CARD_NUMBER = "cardNumber";
 	public static final String FIELD_CARD_SECURITYCODE = "securityCode";
 
-	private static boolean validate = false;
 
 	@Resource
 	static SessionContext context;
@@ -71,7 +70,6 @@ public class UserServiceImpl {
 	public static void persistOrder(HttpServletRequest request, ProductDaoRemote productDao,
 			OrderHistoryDaoRemote orderHistory, Customer customer, Order order, ShoppingCart shoppingCart)
 					throws Exception {
-		if (validate) {
 			// Mise à jour des quantités de produits restantes
 			productDao.updateProductQuantity(shoppingCart);
 
@@ -83,7 +81,7 @@ public class UserServiceImpl {
 			orderH.setOrder(order);
 			orderHistory.create(orderH);
 			System.out.println("Payment finished");
-		}
+		
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)

@@ -1,28 +1,24 @@
 package com.ecom.servlets;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.ejb.EJB;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebInitParam;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import com.ecom.dao.CategoryDaoRemote;
 import com.ecom.dao.CustomerDaoRemote;
 import com.ecom.entities.Customer;
 import com.ecom.forms.CustomerCreationForm;
 
 @WebServlet( name = "CustomerCreation", urlPatterns = { "/customerCreation", "/inscription" })
 public class CustomerCreation extends HttpServlet {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final String PATH = "path";
 	public static final String ATT_CLIENT = "customer";
 	public static final String ATT_FORM = "form";
