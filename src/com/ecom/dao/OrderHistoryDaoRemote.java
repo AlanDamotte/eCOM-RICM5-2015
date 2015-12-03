@@ -11,7 +11,7 @@ public interface OrderHistoryDaoRemote {
 
 	public OrderHistory find(long id);
 
-	public void create(OrderHistory orderH);
+	public long create(OrderHistory orderH);
 
 	public List<OrderHistory> list();
 

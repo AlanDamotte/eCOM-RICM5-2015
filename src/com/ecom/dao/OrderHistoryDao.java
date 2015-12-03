@@ -32,9 +32,11 @@ public class OrderHistoryDao implements OrderHistoryDaoLocal, OrderHistoryDaoRem
 		}
 	}
 
-	public void create(OrderHistory orderH) throws DAOException {
+	public long create(OrderHistory orderH) throws DAOException {
 		try {
 			em.persist(orderH);
+			em.flush();
+			return orderH.getOrder().getId();
 		} catch (Exception e) {
 			throw new DAOException(e);
 		}

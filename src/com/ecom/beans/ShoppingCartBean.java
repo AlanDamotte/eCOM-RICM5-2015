@@ -68,6 +68,9 @@ public class ShoppingCartBean implements ShoppingCartLocal, ShoppingCart, Serial
 		}
 	}
 	
+	/**
+	 * Method for merging session cart and client cart
+	 */
 	@Override
 	public void mergeClientCart(){
 		try{
@@ -86,21 +89,33 @@ public class ShoppingCartBean implements ShoppingCartLocal, ShoppingCart, Serial
 		}
 	}
 
+	/**
+	 * Set cart id
+	 */
 	@Override
 	public void setId(Long id) {
 		this.id = id;
 	}
 
+	/**
+	 * Get cart id
+	 */
 	@Override
 	public Long getId() {
 		return this.id;
 	}
 
+	/**
+	 * Return cart total
+	 */
 	@Override
 	public double getTotal() {
 		return this.total;
 	}
 
+	/**
+	 * Add product to a cart
+	 */
 	@Override
 	public void addProduct(Product product, int quantity) {
 		if (items.isEmpty()) {
@@ -122,6 +137,9 @@ public class ShoppingCartBean implements ShoppingCartLocal, ShoppingCart, Serial
 		}
 	}
 
+	/**
+	 * Add product to a cart
+	 */
 	@Override
 	public void addProduct(Long id, int quantity) {
 		if (items.isEmpty()) {
@@ -144,6 +162,9 @@ public class ShoppingCartBean implements ShoppingCartLocal, ShoppingCart, Serial
 
 	}
 
+	/**
+	 * Update quantity of a product and update total
+	 */
 	@Override
 	public void updateQuantity(Long id, int quantity) {
 		double subtotal1 = productDao.find(id).getPrice() * getQuantity(id);
@@ -163,6 +184,9 @@ public class ShoppingCartBean implements ShoppingCartLocal, ShoppingCart, Serial
 		this.total = subtotal;
 	}
 
+	/**
+	 * Remove product from a cart and update total
+	 */
 	@Override
 	public void removeProduct(Product product, int quantity) {
 		int initialQuantity = getQuantity(product.getId());
@@ -176,6 +200,9 @@ public class ShoppingCartBean implements ShoppingCartLocal, ShoppingCart, Serial
 		this.total = subtotal;
 	}
 
+	/**
+	 * Remove product from the cart and update total
+	 */
 	@Override
 	public void removeProduct(Long id, int quantity) {
 		int initialQuantity = getQuantity(id);
@@ -189,6 +216,9 @@ public class ShoppingCartBean implements ShoppingCartLocal, ShoppingCart, Serial
 		this.total = subtotal;
 	}
 
+	/**
+	 * Return the list of the products in the cart
+	 */
 	@Override
 	public List<Long> getProductsById() {
 		List<Long> list = new ArrayList<Long>(items.keySet());
@@ -213,6 +243,9 @@ public class ShoppingCartBean implements ShoppingCartLocal, ShoppingCart, Serial
 	 * items.get(product.getId()); } return quantity; }
 	 */
 
+	/**
+	 * Return the quantity of a product
+	 */
 	@Override
 	public int getQuantity(Long id) {
 		int quantity = 0;
@@ -222,6 +255,9 @@ public class ShoppingCartBean implements ShoppingCartLocal, ShoppingCart, Serial
 		return quantity;
 	}
 
+	/**
+	 * Return the map of products => id of the product associated to the product
+	 */
 	@Override
 	public Map<Long, Product> getMapProducts() {
 		Map<Long, Product> cart = new HashMap<Long, Product>();
@@ -234,6 +270,9 @@ public class ShoppingCartBean implements ShoppingCartLocal, ShoppingCart, Serial
 		return cart;
 	}
 	
+	/**
+	 * Return the cart => Product associated to the quantity
+	 */
 	@Override
 	public Map<Product, Integer> getProductsMap() {
 		 Map<Product, Integer> cart = new HashMap<Product, Integer>();
@@ -246,11 +285,17 @@ public class ShoppingCartBean implements ShoppingCartLocal, ShoppingCart, Serial
 		return cart;
 	}
 	
+	/**
+	 * Return the cart
+	 */
 	@Override
 	public Map<Long, Integer> getCart() {
 		return this.items;
 	}
 
+	/**
+	 * Update a quantity of a product
+	 */
 	@Override
 	public void updateQuantity(Product product, int quantity) {
 		double subtotal1 = product.getPrice() * getQuantity(product.getId());
@@ -260,6 +305,10 @@ public class ShoppingCartBean implements ShoppingCartLocal, ShoppingCart, Serial
 		this.total = subtotal;
 	}
 	
+	
+	/**
+	 * Method called when the session time
+	 */
 	// Méthode de sauvegarde du panier associé à l'utilisateur lors de la déconnexion
 	@Override
 	public void saveCart() {

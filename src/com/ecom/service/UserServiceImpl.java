@@ -39,23 +39,21 @@ public class UserServiceImpl {
 	static SessionContext context;
 	
 	@Asynchronous
-	public static void sendUserMail(Customer customer, Order order, MailSenderBean mailSender) throws ServletException, IOException{
+	public static void sendUserMail(Customer customer, Order order, MailSenderBean mailSender, long orderId) throws ServletException, IOException{
 		try{
 			System.out.println("Envoi de mail");
-			String fromEmail = "wizardkeven@live.com";
-			String username = "wizardkeven";
-			String password = "**********";
+			String fromEmail = "ecom.franois@gmail.com";
+			String username = "ecom.franois";
+			String password = "ecom1990";
 
 			String toEmail = customer.getEmail();
 			System.out.println(toEmail);
 			// TODO : modifier le sujet et le corps de message
-			String subject = "Confirmation de commande" + order.getId().toString();
-			String message = "Bonjour M/Mme" + customer.getLastname() + customer.getFirstname() + ":\n"
-					+ "Nous vous confirmation votre commande numéro " + order.getId().toString() + "d'un montant de "
-					+ order.getAmount();
+			String subject = "Confirmation de commande numéro " + orderId + " du " + order.getDate().toString();
+			String message = "Bonjour M/Mme " + customer.getLastname() + " " + customer.getFirstname() + ":\n"
+					+ "Nous vous confirmation votre commande numéro " + orderId + " du " + order.getDate().toString() + " d'un montant total de " + order.getAmount().toString() + " euros";
 
 			// Call to mail sender bean
-
 			mailSender.sendEmail(fromEmail, username, password, toEmail, subject, message);
 
 			System.out.println("Mail envoyé");
@@ -63,11 +61,9 @@ public class UserServiceImpl {
 			e.printStackTrace();
 		}
 		
-
 	}
 
-
-	public static void persistOrder(HttpServletRequest request, ProductDaoRemote productDao,
+	public static long persistOrder(HttpServletRequest request, ProductDaoRemote productDao,
 			OrderHistoryDaoRemote orderHistory, Customer customer, Order order, ShoppingCart shoppingCart)
 					throws Exception {
 			// Mise à jour des quantités de produits restantes
@@ -79,9 +75,9 @@ public class UserServiceImpl {
 			OrderHistory orderH = new OrderHistory();
 			orderH.setCustomer(customer);
 			orderH.setOrder(order);
-			orderHistory.create(orderH);
+			long orderId = orderHistory.create(orderH);
 			System.out.println("Payment finished");
-		
+			return orderId;		
 	}
 
 	@TransactionAttribute(TransactionAttributeType.REQUIRED)
@@ -104,7 +100,6 @@ public class UserServiceImpl {
 			}else{
 				// Mise à jour des quantités de produits restantes
 				productDao.updateProductQuantity(shoppingCart);
-				//sendUserMail(customer,order,mailSender);
 			}
 		} catch (Exception up) {
 			//System.out.println(listAccount.get(123456).getBalance());

@@ -25,10 +25,15 @@ public class MailSenderBean {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Méthode d'envoi de mail
+	 */
 	public void sendEmail(String fromEmail, String username, String password, String toEmail, String subject,
 			String message){
+		System.out.println("0");
 		try {
 			//Set mail service properties
+			System.out.println("1");
 			Properties props = System.getProperties();
 			props.put("mail.smtp.host", "smtp.gmail.com");
 			props.put("mail.smtp.auth", "true");	

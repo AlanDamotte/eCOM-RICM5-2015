@@ -33,6 +33,7 @@ public class OrderDao implements OrderDaoLocal, OrderDaoRemote, Serializable{
 			throw new DAOException(e);
 		}
 	}
+	
 
 	public void create(Order order) throws DAOException {
 		try {
