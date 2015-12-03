@@ -37,7 +37,8 @@
                 <div class="section">
                     <div class="container">
                         <div class="row">
-                            <div class="col-md-3">
+                        <c:if test="${empty sessionScope.customerSession}">
+                        		<div class="col-md-3">
                                 <h1 class="text-muted">Stick-Gump</h1>
                             </div>
                             
@@ -47,13 +48,32 @@
                             
                             <div class="col-sm-2 col-md-2"></div><div class="col-sm-2 col-md-4"></div><div class="col-md-3 col-sm-2 text-center">
                                 <a class="btn btn-info btn-lg" href="./cartManagement">Panier</a>
-                                <c:if test="${empty sessionScope.customerSession}">
+                                
                                 <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href="#formulaire">Connecte toi</a>
-                                </c:if>
-                                <c:if test="${not empty sessionScope.customerSession}">
-                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./disconnection>Déconnexion</a>
-                                 </c:if>
                             </div>
+                        		</c:if>
+                        
+                        <c:if test="${not empty sessionScope.customerSession}">
+                                    <div class="col-md-3">
+                                <h1 class="text-muted">Stick-Gump</h1>
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                             <div class="col-sm-2 col-md-2"></div>
+              <div class="col-md-2 col-sm-2 text-right"></div>
+              <div class="col-md-5 col-sm-2 text-center">
+                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./orderHistory>&nbsp;Historique &nbsp;</a>
+
+                                <a class="btn btn-info btn-lg" href="./cartManagement">&nbsp; &nbsp; &nbsp;  Panier &nbsp; &nbsp;  &nbsp;</a>
+                               
+                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./disconnection>Déconnexion</a>
+                                
+                                 
+                            </div>
+                            </c:if>
                         </div>
                     </div>
                 </div>
@@ -126,7 +146,7 @@
         </div>
         
   
-        <div id="formulaire" class="modal fade">
+        <div id="formulaireConnexion" class="modal fade">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -171,6 +191,54 @@
         </div>
         <script src="bootstrap/js/jquery.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
+       
+                    
+          
+     <div id="formulaire" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">x</button>
+            <h4 class="modal-title">Connections</h4>
+          </div>
+           <div class="modal-body">
+            
+              <a class="btn btn-info btn-lg" class="close" data-toggle="modal" data-backdrop="false"data-dismiss="modal" href="#formulaireInscription">Inscription</a>
+           	 <a class="btn btn-info btn-lg" class="close" data-toggle="modal" data-backdrop="false"data-dismiss="modal" href="#formulaireConnexion">Connexion</a>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+          
+    
+    
+    
+    
+    
+    <div id="formulaireInscription" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">x</button>
+            <h4 class="modal-title">Informations client</h4>
+          </div>
+          
+          <div class="modal-body">
+            <form method="post" action="<c:url value="/inscription"/>">
+              <div class="form-group">
+              <c:import url="/inc/inc_customer_form.jsp" />
+               <p class="info">${ form.result }</p>
+              </div>
+              <button type="submit" class="btn btn-default">Envoyer</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="reset" class="btn btn-info" data-dismiss="modal">Annuler</button>
+          </div>
+        </div>
+      </div>
+    </div>
        
     
 
