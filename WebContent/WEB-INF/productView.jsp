@@ -29,14 +29,7 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-   <script>
-    var dd2options = ${dd2optionsAsJSObject};
-    function dd1change(dd1) {
-        // Fill dd2 options based on selected dd1 value.
-        var selected = dd1.options[dd1.selectedIndex].value;
-        dd2options = ${ sessionScope.categories[selected].value };
-    }
-  </script>
+
   </head>
    <body data-spy="scroll">
         <div class="container">
@@ -127,6 +120,7 @@
 			<c:out value="${ productView.description }" />
 		</p>
             <h1>
+               
               <select class="form-control" name="dd1" onchange="dd1change(this)">
 	              <c:forEach items="${ sessionScope.categories }" var="option">
 	              <%-- 	<option ><c:out value="${ mapCategories.key }"/></option> --%>
@@ -278,7 +272,14 @@
     </div>
     <script src="bootstrap/js/jquery.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
-   
+   <script type="text/javascript">
+   $(document).ready(function dd1change(dd1) {
+        // Fill dd2 options based on selected dd1 value.
+        console.log("TEST");
+        var selected = dd1.options[dd1.selectedIndex].value;
+        var dd2options = ${ sessionScope.categories[selected].value };
+    });
+  </script>
   
 
 </body></html>

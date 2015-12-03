@@ -100,7 +100,8 @@ public class CreateOrder extends HttpServlet {
 		}else{
 			try {
 				UserServiceImpl.proceedPayment(request, customer, order, shoppingCart, productDao, mailSender);
-				UserServiceImpl.persistOrder(request, productDao, orderHistory, customer, order, shoppingCart);
+				long orderId = UserServiceImpl.persistOrder(request, productDao, orderHistory, customer, order, shoppingCart);
+				UserServiceImpl.sendUserMail(customer,order,mailSender, orderId);
 				shoppingCart.clear();
 				this.getServletContext().getRequestDispatcher(VIEW).forward(request, response);
 			} catch (Exception e) {
