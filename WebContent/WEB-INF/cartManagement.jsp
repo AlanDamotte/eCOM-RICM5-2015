@@ -42,7 +42,7 @@
                 <div class="section">
                     <div class="container">
                         <div class="row">
-                            <c:if test="${empty sessionScope.customerSession}">
+                        <c:if test="${empty sessionScope.customerSession}">
                         		<div class="col-md-3">
                                 <h1 class="text-muted">Stick-Gump</h1>
                             </div>
@@ -72,7 +72,7 @@
               <div class="col-md-5 col-sm-2 text-center">
                                 <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./orderHistory>&nbsp;Historique &nbsp;</a>
 
-                                <a class="btn btn-info btn-lg" href="./cartManagement">&nbsp; &nbsp; &nbsp;  Panier &nbsp; &nbsp;  &nbsp;</a>
+                                <a class="btn btn-info btn-lg" href="./cartManagement">&nbsp;  Panier   &nbsp;</a>
                                
                                 <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./disconnection>Déconnexion</a>
                                 
@@ -85,7 +85,7 @@
                 <form method="post" class="navbar-form navbar-right" action="<c:url value="/search"/>">
                     <div class="input-group">
                         <input type="text" id="search" name="search" style="width:150px" class="input-sm form-control" placeholder="Search">
-                        <input type="submit" value="Rechercher" class="btn btn-primary btn-sm" />
+                        <input type="submit" value="Rechercher" class="btn btn-sm btn-info" />
 
                     </div>
                 </form>
@@ -232,7 +232,13 @@
         </div>
         <script src="bootstrap/js/jquery.js"></script>
         <script src="bootstrap/js/bootstrap.min.js"></script>
-       
+        <div class="section">
+            <div class="container">
+                <footer class="footer">
+                    <p>© ECOM 2015</p>
+                </footer>
+            </div>
+        </div>
                     
           
      <div id="formulaire" class="modal fade">

@@ -80,7 +80,7 @@
                 <form method="post" class="navbar-form navbar-right" action="<c:url value="/search"/>">
                     <div class="input-group">
                         <input type="text" id="search" name="search" style="width:150px" class="input-sm form-control" placeholder="Search">
-                        <input type="submit" value="Rechercher" class="btn btn-primary btn-sm" />
+                        <input type="submit" value="Rechercher" class="btn btn-sm btn-info" />
 
                     </div>
                 </form>
@@ -116,15 +116,16 @@
                     </div>
                     
                 </div>
-                 <c:forEach items="${ sessionScope.products }" var="mapProducts" varStatus="boucle">
-                 <div class="col-md-3">
+                 <div class="text-center  class="container">
+             <c:forEach items="${ sessionScope.lastProducts }" var="mapProducts" varStatus="boucle">
                  		<c:if test="${ !empty mapProducts.value.image }">
                             <c:set var="image"><c:out value="${ mapProducts.value.image }"/></c:set>
                             <a href="<c:url value="/productView"><c:param name="idProduct" value="${ mapProducts.key }" /></c:url>">
-	                            <img src="${pageContext.request.contextPath}/img/${ image }" height="200" width="200"class="img-responsive img-rounded"> 
+	                             <img src="${pageContext.request.contextPath}/img/${ image }" height="200" width="200" class="img-rounded">
 	                        </a>
-                        </c:if>                     </div>
-                   </c:forEach>
+                        </c:if>   
+            </c:forEach>
+            </div>
                
             </div>
              </div>

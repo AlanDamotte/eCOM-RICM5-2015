@@ -35,71 +35,78 @@
         <title>Liste des produits existants</title>
         <link type="text/css" rel="stylesheet" href="<c:url value="/inc/style.css"/>" />
     </head>
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-<body>
-     <div class="container">
-      <!-- The justified navigation menu is meant for single line per list item.
-      Multiple lines will require custom code not provided by Bootstrap. -->
-      <div class="masthead">
-        <div class="section">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-3">
-                <h1 class="text-muted">Stick-Gump</h1>
-              </div>
-              <div class="col-sm-2 col-md-2"></div>
-              <div class="col-sm-2 col-md-5"></div>
-              <div class="col-md-2 col-sm-2 text-center">
-                 <c:if test="${empty sessionScope.customerSession}">
+ <body data-spy="scroll">
+        <div class="container">
+            <!-- The justified navigation menu is meant for single line per list item.
+            Multiple lines will require custom code not provided by Bootstrap. -->
+            <div class="masthead">
+                <div class="section">
+                    <div class="container">
+                        <div class="row">
+                        <c:if test="${empty sessionScope.customerSession}">
+                        		<div class="col-md-3">
+                                <h1 class="text-muted">Stick-Gump</h1>
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                            <div class="col-sm-2 col-md-2"></div><div class="col-sm-2 col-md-4"></div><div class="col-md-3 col-sm-2 text-center">
+                                <a class="btn btn-info btn-lg" href="./cartManagement">Panier</a>
+                                
                                 <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href="#formulaire">Connecte toi</a>
-                                </c:if>
-                                <c:if test="${not empty sessionScope.customerSession}">
+                            </div>
+                        		</c:if>
+                        
+                        <c:if test="${not empty sessionScope.customerSession}">
+                                    <div class="col-md-3">
+                                <h1 class="text-muted">Stick-Gump</h1>
+                            </div>
+                            
+                            
+                            
+                            
+                            
+                             <div class="col-sm-2 col-md-2"></div>
+              <div class="col-md-2 col-sm-2 text-right"></div>
+              <div class="col-md-5 col-sm-2 text-center">
+                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./orderHistory>&nbsp;Historique &nbsp;</a>
+
+                                <a class="btn btn-info btn-lg" href="./cartManagement">&nbsp; &nbsp; &nbsp;  Panier &nbsp; &nbsp;  &nbsp;</a>
+                               
                                 <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./disconnection>Déconnexion</a>
-                                 </c:if>
-              </div>
-            </div>
-          </div>
-        </div>
-         <form method="post" class="navbar-form navbar-right" action="<c:url value="/search"/>">
+                                
+                                 
+                            </div>
+                            </c:if>
+                        </div>
+                    </div>
+                </div>
+                <form method="post" class="navbar-form navbar-right" action="<c:url value="/search"/>">
                     <div class="input-group">
                         <input type="text" id="search" name="search" style="width:150px" class="input-sm form-control" placeholder="Search">
-                        <input type="submit" value="Rechercher" class="btn btn-primary btn-sm" />
+                        <input type="submit" value="Rechercher" class="btn btn-sm btn-info" />
 
                     </div>
                 </form>
-        <nav>
-          <ul class="nav nav-justified nav-tabs">
-            <li class="disabled">
-              <a href="./index">Acueil</a>
-            </li>
-            <li class="">
-              <a href="./create-your-stick">Imagine ton Sticker</a>
-            </li>
-            <li>
-              <a href="./catalog">&nbsp;Liste des stickers</a>
-            </li>
-            <li>
-              <a href="./contact-us">Nous Contacter</a>
-            </li>
-          </ul>
-        </nav>
-      </div>
+                <nav>
+                    <ul class="nav nav-justified">
+                        <li>
+                            <a href="./index">Accueil</a>
+                        </li>
+                        <li>
+                            <a href="./create-your-stick">Imagine ton Sticker</a>
+                        </li>
+                        <li class="active">
+                            <a href="./catalog">Liste de Stickers</a>
+                        </li>
+                        <li>
+                            <a href="./contact-us">Nous Contacter</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
       <div class=" logging"></div>
       
             <!-- Site footer -->

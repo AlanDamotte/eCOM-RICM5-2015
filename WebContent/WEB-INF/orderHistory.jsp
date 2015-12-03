@@ -80,7 +80,7 @@
                 <form method="post" class="navbar-form navbar-right" action="<c:url value="/search"/>">
                     <div class="input-group">
                         <input type="text" id="search" name="search" style="width:150px" class="input-sm form-control" placeholder="Search">
-                        <input type="submit" value="Rechercher" class="btn btn-primary btn-sm" />
+                        <input type="submit" value="Rechercher" class="btn btn-sm btn-info" />
 
                     </div>
                 </form>
@@ -117,6 +117,7 @@
 			</c:when>
 			<%-- Sinon, affichage du tableau. --%>
 			<c:otherwise>
+			<form method="post" action="<c:url value="/connection" />">
 			<c:forEach items="${ sessionScope.orderHistory }" var="listOrder" varStatus="boucle">
 			<fieldset>
 						<%-- Simple test de parité sur l'index de parcours, pour alterner la couleur de fond de chaque ligne du tableau. --%>
@@ -140,18 +141,24 @@
 					                        </c:if> 
           </div>
           <div class="col-md-6">
-            <h2><c:out value="${ mapProducts.value }"/></h2>		
+            <h2>Quantité commande<c:out value="${ mapProducts.value }"/></h2>		
             
           </div>
       </div>
     </div></div>
     
-</c:forEach></fieldset></c:forEach>
+</c:forEach></fieldset></form></c:forEach>
 			</c:otherwise>
 		</c:choose>
         
         
-
+ <div class="section">
+            <div class="container">
+                <footer class="footer">
+                    <p>© ECOM 2015</p>
+                </footer>
+            </div>
+        </div>
 	
 </body>
 </html>

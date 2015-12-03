@@ -89,7 +89,7 @@
                 <form method="post" class="navbar-form navbar-right" action="<c:url value="/search"/>">
                     <div class="input-group">
                         <input type="text" id="search" name="search" style="width:150px" class="input-sm form-control" placeholder="Search">
-                        <input type="submit" value="Rechercher" class="btn btn-primary btn-sm" />
+                        <input type="submit" value="Rechercher" class="btn btn-sm btn-info" />
 
                     </div>
                 </form>
