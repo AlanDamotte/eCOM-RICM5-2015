@@ -80,7 +80,7 @@
                 <form method="post" class="navbar-form navbar-right" action="<c:url value="/search"/>">
                     <div class="input-group">
                         <input type="text" id="search" name="search" style="width:150px" class="input-sm form-control" placeholder="Search">
-                        <input type="submit" value="Rechercher" class="btn btn-primary btn-sm" />
+                        <input type="submit" value="Rechercher" class="btn btn-sm btn-info" />
 
                     </div>
                 </form>
@@ -162,7 +162,7 @@
                     <a href="#"><i class="fa fa-3x fa-mobile fa-fw"></i></a>
                 </div>
             </div>
-            <div class="container">
+            <div class="text-center  class="container">
              <c:forEach items="${ sessionScope.lastProducts }" var="mapProducts" varStatus="boucle">
                  		<c:if test="${ !empty mapProducts.value.image }">
                             <c:set var="image"><c:out value="${ mapProducts.value.image }"/></c:set>
@@ -171,6 +171,13 @@
 	                        </a>
                         </c:if>   
             </c:forEach>
+            </div>
+        </div>
+         <div class="section">
+            <div class="container">
+                <footer class="footer">
+                    <p>© ECOM 2015</p>
+                </footer>
             </div>
         </div>
         <script src="bootstrap/js/jquery.js"></script>

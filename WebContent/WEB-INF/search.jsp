@@ -29,7 +29,7 @@
         <![endif]-->
         <title>Liste des produits existants</title>
     </head>
-   <body data-spy="scroll">
+ <body data-spy="scroll">
         <div class="container">
             <!-- The justified navigation menu is meant for single line per list item.
             Multiple lines will require custom code not provided by Bootstrap. -->
@@ -37,7 +37,7 @@
                 <div class="section">
                     <div class="container">
                         <div class="row">
-<c:if test="${empty sessionScope.customerSession}">
+                        <c:if test="${empty sessionScope.customerSession}">
                         		<div class="col-md-3">
                                 <h1 class="text-muted">Stick-Gump</h1>
                             </div>
@@ -80,26 +80,26 @@
                 <form method="post" class="navbar-form navbar-right" action="<c:url value="/search"/>">
                     <div class="input-group">
                         <input type="text" id="search" name="search" style="width:150px" class="input-sm form-control" placeholder="Search">
-                        <input type="submit" value="Rechercher" class="btn btn-primary btn-sm" />
+                        <input type="submit" value="Rechercher" class="btn btn-sm btn-info" />
 
                     </div>
                 </form>
-        <nav>
-          <ul class="nav nav-justified">
-            <li>
-              <a href="./index">Accueil</a>
-            </li>
-            <li class="disabled">
-              <a href="./create-your-stick">Imagine ton sticker</a>
-            </li>
-            <li>
-              <a href="./catalog">liste des Stickers</a>
-            </li>
-            <li>
-              <a href="./contact-us">Nous contacter</a>
-            </li>
-          </ul>
-        </nav>
+                <nav>
+                    <ul class="nav nav-justified">
+                        <li>
+                            <a href="./index">Accueil</a>
+                        </li>
+                        <li>
+                            <a href="./create-your-stick">Imagine ton Sticker</a>
+                        </li>
+                        <li class="active">
+                            <a href="./catalog">Liste de Stickers</a>
+                        </li>
+                        <li>
+                            <a href="./contact-us">Nous Contacter</a>
+                        </li>
+                    </ul>
+                </nav>
             </div>
             
             <!-- Site footer -->
