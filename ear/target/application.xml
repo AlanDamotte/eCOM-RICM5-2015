@@ -5,7 +5,7 @@
 <application>
   <display-name>ear</display-name>
   <module>
-    <ejb>ejb.ejb</ejb>
+    <ejb>ejb.jar</ejb>
   </module>
   <module>
     <web>

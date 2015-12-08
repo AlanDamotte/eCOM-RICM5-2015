@@ -55,7 +55,7 @@
 								<groupId>ecom.stickers</groupId>
 								<artifactId>ejb</artifactId>
 								<!-- <bundleDir>lib</bundleDir> -->
-								<bundleFileName>ejb.ejb</bundleFileName>
+								<bundleFileName>ejb.jar</bundleFileName>
 								<!--<contextRoot>/ecom</contextRoot> -->
 							</ejbModule>
 							<webModule>
