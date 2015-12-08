@@ -1,0 +1,116 @@
+<project>
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>ecom.stickers</groupId>
+	<artifactId>ear</artifactId>
+	<packaging>ear</packaging>
+	<!-- <version>1.0</version> -->
+	<name>${project.artifactId}</name>
+	<!-- <name>ear</name> -->
+	<parent>
+		<groupId>ecom</groupId>
+		<artifactId>stickers</artifactId>
+		<version>1.0</version>
+	</parent>
+
+	<dependencies>
+		<dependency>
+			<groupId>ecom.stickers</groupId>
+			<artifactId>ejb</artifactId>
+			<version>1.0</version>
+			<type>ejb</type>
+		</dependency>
+		<dependency>
+			<groupId>ecom.stickers</groupId>
+			<artifactId>web</artifactId>
+			<version>1.0</version>
+			<type>war</type>
+		</dependency>
+	</dependencies>
+	<build>
+		<pluginManagement>
+			<plugins>
+				<!-- <plugin> <artifactId>maven-compiler-plugin</artifactId> <configuration> 
+					<source>1.5</source> <target>1.5</target> <encoding>UTF-8</encoding> </configuration> 
+					</plugin> <plugin> <artifactId>maven-resources-plugin</artifactId> <version>2.3</version> 
+					<configuration> <encoding>UTF-8</encoding> </configuration> </plugin> -->
+				<!-- <plugin> <groupId>org.apache.maven.plugins</groupId> <artifactId>maven-archetype-plugin</artifactId> 
+					<version>2.10</version> </plugin> -->
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.3</version>
+					<configuration>
+						<source>1.7</source>
+						<target>1.7</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-ear-plugin</artifactId>
+					<version>2.10.1</version>
+					<configuration>
+						<!-- <finalName>ear</finalName> -->
+						<modules>
+							<ejbModule>
+								<groupId>ecom.stickers</groupId>
+								<artifactId>ejb</artifactId>
+								<!-- <bundleDir>lib</bundleDir> -->
+								<bundleFileName>ejb.ejb</bundleFileName>
+								<!--<contextRoot>/ecom</contextRoot> -->
+							</ejbModule>
+							<webModule>
+								<groupId>ecom.stickers</groupId>
+								<artifactId>web</artifactId>
+								<bundleFileName>web.war</bundleFileName>
+								<!-- <contextRoot>/ecom</contextRoot> -->
+							</webModule>
+						</modules>
+						<archive>
+							<manifest>
+								<addClasspath>true</addClasspath>
+							</manifest>
+						</archive>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.glassfish.maven.plugin</groupId>
+					<artifactId>maven-glassfish-plugin</artifactId>
+					<version>2.1</version>
+					<executions>                    
+                    <execution>
+                        <id>gf-deploy</id>
+                        <goals>
+                            <goal>redeploy</goal>
+                        </goals>
+                        <phase>package</phase>
+                    </execution>
+                </executions>
+                <configuration>
+                    <user>admin</user>
+                    <glassfishDirectory>${glassfish.directory}</glassfishDirectory>
+                    <domainDirectory>${glassfish.directory}/glassfish/domains/</domainDirectory>
+                    <passwordFile>${basedir}/glassfishpasswordfile</passwordFile>
+		    <debug>true</debug>
+		    <echo>true</echo>
+		    <force>true</force>
+                    <domain>
+                        <name>domain1</name>
+		        <host>localhost</host>
+                        <adminPort>4848</adminPort>
+                        <httpPort>80</httpPort>
+                        <httpsPort>8443</httpsPort>
+                    </domain>
+                    <components>
+                        <component>
+                            <name>SushiParty</name>
+                            <artifact>target/ear.ear</artifact>
+                        </component>
+                    </components>
+                </configuration>
+				</plugin>
+
+			</plugins>
+		</pluginManagement>
+		<finalName>ear</finalName>
+	</build>
+</project>
