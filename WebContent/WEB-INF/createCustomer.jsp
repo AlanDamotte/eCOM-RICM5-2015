@@ -111,8 +111,8 @@
                     <c:import url="/inc/inc_customer_form.jsp" />
                 </fieldset>
                 <p class="info">${ form.result }</p>
-                <input type="submit" value="Valider"  />
-                <input type="reset" value="Remettre à zéro" /> <br />
+                <input class="btn btn-info" type="submit" value="Valider"  />
+                <input class="btn btn-info" type="reset" value="Remettre à zéro" /> <br />
             </form>
 				</div>
 			</div>

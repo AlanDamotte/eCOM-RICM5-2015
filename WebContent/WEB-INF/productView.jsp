@@ -188,7 +188,7 @@
         </div>
       </div>
     </div>
-    <p>© ECOM Groupe 2 2015</p>
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;© ECOM Groupe 2 2015</p>
     <div class="row">
       <div class="col-md-12">
         <hr>
@@ -253,8 +253,8 @@
           </div>
            <div class="modal-body">
             
-              <a class="btn btn-info btn-lg" class="close" data-toggle="modal" data-backdrop="false" data-dismiss="modal"href="#formulaireInscription">Inscription</a>
-           	 <a class="btn btn-info btn-lg" class="close" data-toggle="modal" data-backdrop="false"data-dismiss="modal" href="#formulaireConnexion">Connexion</a>
+              <a class="btn btn-info btn-lg" class="close" data-toggle="modal" data-backdrop="false" href="#formulaireInscription">Inscription</a>
+           	 <a class="btn btn-info btn-lg" class="close" data-toggle="modal"data-dismiss="modal" data-backdrop="false" href="#formulaireConnexion">Connexion</a>
           </div>
           
         </div>
@@ -265,7 +265,7 @@
     
     
     
-    
+     <script src="bootstrap/js/ie10-viewport-bug-workaround.js"></script>
     <div id="formulaireInscription" class="modal fade">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -287,6 +287,8 @@
             <button type="reset" class="btn btn-info" data-dismiss="modal">Annuler</button>
           </div>
         </div>
+          <script src="bootstrap/js/jquery.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
       </div>
     </div>
     <script src="bootstrap/js/jquery.js"></script>

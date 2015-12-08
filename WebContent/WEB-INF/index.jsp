@@ -249,7 +249,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">x</button>
+                        <button type="button" class="close" data-dismiss="modal" style ="overflow-y:scroll" >x</button>
                         <h4 class="modal-title">Vos infos :</h4>
                     </div>
                      <form method="post" action="<c:url value="/connection" />">
@@ -302,7 +302,7 @@
           </div>
            <div class="modal-body">
             
-              <a class="btn btn-info btn-lg" class="close" data-toggle="modal"data-dismiss="modal" data-backdrop="false" href="#formulaireInscription">Inscription</a>
+              <a class="btn btn-info btn-lg" class="close" data-toggle="modal" data-backdrop="false" href="#formulaireInscription">Inscription</a>
            	 <a class="btn btn-info btn-lg" class="close" data-toggle="modal"data-dismiss="modal" data-backdrop="false" href="#formulaireConnexion">Connexion</a>
           </div>
           
@@ -315,8 +315,8 @@
     
     
     
-    <div id="formulaireInscription" class="modal fade">
-      <div class="modal-dialog">
+    <div id="formulaireInscription" class="modal fade"  >
+      <div class="modal-dialog" >
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">x</button>

@@ -138,16 +138,17 @@
 							<legend>Connexion</legend>
 
 							<label for="name">Adresse email <span class="requis">*</span></label>
-							<input type="email" id="email" name="email"
+							<input type="email" id="email" name="email" class="form-control" placeholder="alice@ca-glice.fr" type="email" 
 								value="<c:out value="${customer.email}"/>" size="20"
 								maxlength="60" /> <span class="erreur">${form.errors['email']}</span>
 							<br /> <label for="password">Mot de passe <span
-								class="requis">*</span></label> <input type="password" id="password"
+								class="requis">*</span></label> <input class="form-control" placeholder="Mots passe" type="password" id="password"
 								name="password" value="" size="20" maxlength="20" /> <span
 								class="erreur">${form.errors['motdepasse']}</span> <br /> <br />
 							<label for="memory">Se souvenir de moi</label> <input
-								type="checkbox" id="memory" name="memory" /> <br /> <input
-								type="submit" value="Connexion" class="sansLabel" /> <br />
+								type="checkbox" id="memory" name="memory" /> <br /> 
+								<input class="btn btn-info" type="submit" value="Valider"  />
+                				<input class="btn btn-info" type="reset" value="Remettre à zéro" /> <br />
 
 							<p class="${empty form.errors ? 'succes' : 'erreur'}">${form.result}</p>
 
@@ -162,5 +163,101 @@
 				</div>
 			</div>
 		</div>
+		
+		  <div id="formulaireConnexion" class="modal fade">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">x</button>
+                        <h4 class="modal-title">Vos infos :</h4>
+                    </div>
+                     <form method="post" action="<c:url value="/connection" />">
+            
+				<div class="modal-body">
+                <label for="email">  Email<span class="requis">*</span></label>
+                <input type="email" class="form-control" name="email" id="email" placeholder="Votre Email"  value="<c:out value="${customer.email}"/>">
+                <span class="erreur">${form.errors['email']}</span>
+                <br />
+
+                <label for="password">  Mot de passe <span class="requis">*</span></label>
+                <input type="password" class="form-control" id="password" name="password"placeholder="Votre Mots de passe" value="" size="20" maxlength="20" />
+                <span class="erreur">${form.errors['motdepasse']}</span>
+                <br />
+            
+                <label for="memory">  Se souvenir de moi</label>
+                <input type="checkbox" id="memory" name="memory" />
+                <br />
+
+                <button type="submit" class="btn btn-default">Envoyer</button>
+                <br />
+                
+                <p class="${empty form.errors ? 'succes' : 'erreur'}">${form.result}</p>
+                
+                <%-- Vérification de la présence d'un objet utilisateur en session --%>
+                <c:if test="${!empty sessionScope.customerSession}">
+                    <%-- Si l'utilisateur existe en session, alors on affiche son adresse email. --%>
+                	<p class="succes">Vous êtes connecté(e) avec l'adresse : ${sessionScope.customerSession.email}</p>
+                </c:if>
+                </div>
+           
+        </form>
+                    <div class="modal-footer">
+                        <button class="btn btn-info" data-dismiss="modal">Annuler</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="bootstrap/js/jquery.js"></script>
+        <script src="bootstrap/js/bootstrap.min.js"></script>
+       
+                    
+          
+     <div id="formulaire" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">x</button>
+            <h4 class="modal-title">Connections</h4>
+          </div>
+           <div class="modal-body">
+            
+              <a class="btn btn-info btn-lg" class="close" data-toggle="modal" data-backdrop="false"data-dismiss="modal" href="#formulaireInscription">Inscription</a>
+           	 <a class="btn btn-info btn-lg" class="close" data-toggle="modal" data-backdrop="false"data-dismiss="modal" href="#formulaireConnexion">Connexion</a>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+          
+    
+    
+    
+    
+    
+    <div id="formulaireInscription" class="modal fade">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">x</button>
+            <h4 class="modal-title">Informations client</h4>
+          </div>
+          
+          <div class="modal-body">
+            <form method="post" action="<c:url value="/inscription"/>">
+              <div class="form-group">
+              <c:import url="/inc/inc_customer_form.jsp" />
+               <p class="info">${ form.result }</p>
+              </div>
+              <button type="submit" class="btn btn-default">Envoyer</button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="reset" class="btn btn-info" data-dismiss="modal">Annuler</button>
+          </div>
+        </div>
+      </div>
+    </div>
+       
+		
 </body>
 </html>
