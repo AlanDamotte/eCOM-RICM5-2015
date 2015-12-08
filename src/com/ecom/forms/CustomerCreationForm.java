@@ -28,9 +28,8 @@ public class CustomerCreationForm {
 	private static final String FIELD_CONF = "confirmation";
 
 	private String result;
-	
+
 	private CustomerDaoRemote customerDao;
-	
 
 	public CustomerCreationForm(CustomerDaoRemote customerDao) {
 
@@ -121,6 +120,7 @@ public class CustomerCreationForm {
 		}
 		customer.setPostCode(postcode);
 	}
+
 	private void processCity(String city, Customer customer) {
 		try {
 			cityValidation(city);
@@ -129,6 +129,7 @@ public class CustomerCreationForm {
 		}
 		customer.setCity(city);
 	}
+
 	private void processPhonenumber(String phonenumber, Customer customer) {
 		try {
 			phonenumberValidation(phonenumber);
@@ -193,15 +194,11 @@ public class CustomerCreationForm {
 	}
 
 	private void addressValidation(String address) throws FormValidationException {
-		if (address != null) {
-			if (address.length() < 10) {
-				throw new FormValidationException("L'adresse de livraison doit contenir au moins 10 caractères.");
-			}
-		} else {
+		if (address == null) {
 			throw new FormValidationException("Merci d'entrer une adresse de livraison.");
 		}
 	}
-	
+
 	private void postCodeValidation(String postcode) throws FormValidationException {
 		if (postcode != null) {
 			if (postcode.length() != 5) {
@@ -211,7 +208,7 @@ public class CustomerCreationForm {
 			throw new FormValidationException("Merci d'entrer un code postal");
 		}
 	}
-	
+
 	private void cityValidation(String city) throws FormValidationException {
 		if (city == null) {
 			throw new FormValidationException("Merci d'entrer une ville");
@@ -237,7 +234,7 @@ public class CustomerCreationForm {
 		if (email == null) {
 			throw new FormValidationException("Merci d'entrer un email");
 		}
-		if(customerDao.emailExists(email)){
+		if (customerDao.emailExists(email)) {
 			throw new FormValidationException("Un compte client existe déjà avec cet email");
 		}
 	}

@@ -29,7 +29,19 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
+  <script type="text/javascript">
+   function dd1change() {
+        // Fill dd2 options based on selected dd1 value.
+        console.log("TEST");
+        var dd1 = document.getElementById("dd1");
+        var selected = dd1.options[dd1.selectedIndex].value;
+        //var dd2options = session.getAttribute("categories").get(selected).value;
+        var c = ${categories};
+        var dd2options = c.get(selected).value;
+        console.log(dd2options);
+        //var dd2options = "${ sessionScope.categories[selected].value }";
+    }
+  </script>
   </head>
    <body data-spy="scroll">
         <div class="container">
@@ -39,7 +51,7 @@
                 <div class="section">
                     <div class="container">
                         <div class="row">
-<c:if test="${empty sessionScope.customerSession}">
+						<c:if test="${empty sessionScope.customerSession}">
                         		<div class="col-md-3">
                                 <h1 class="text-muted">Stick-Gump</h1>
                             </div>
@@ -95,7 +107,7 @@
               <a href="./create-your-stick">Imagine ton sticker</a>
             </li>
             <li>
-              <a href="./catalog">liste des Stickers</a>
+              <a href="./catalog">Liste des Stickers</a>
             </li>
             <li>
               <a href="./contact-us">Nous contacter</a>
@@ -126,7 +138,7 @@
 		<p>
 		<form method="post" action="<c:url value="/addToCart"/>">
 			<label for="quantityCart">Quantité<span class="requis">*</span></label>
-			<input type="text" id="quantityCart" name="quantityCart" size="30" min="1" max="${productView.quantity}"
+			<input type="number" id="quantityCart" name="quantityCart" size="30" min="1" max="${productView.quantity}"
 				maxlength="30"
 				promptMessage="Entrer une quantité entre 1 et ${productView.quantity}"
 				required="true" invalidMessage="Valeur Invalide." /> <input
@@ -141,7 +153,7 @@
 		</p>
             <h1>
                
-              <select class="form-control" name="dd1" onchange="dd1change(this)">
+              <select class="form-control" name="dd1" id="dd1" onchange="dd1change()">
 	              <c:forEach items="${ sessionScope.categories }" var="option">
 	              <%-- 	<option ><c:out value="${ mapCategories.key }"/></option> --%>
 	              	 <option value="${option.key}" ${param.dd1 == option.key ? 'selected' : ''}>${option.key}</option>
@@ -153,12 +165,12 @@
               <c:if test="${empty dd2options}">
        				 <option>Please select parent</option>
    			  </c:if>
-    			<c:forEach items="${dd2options}" var="option">
-       				 <option value="${option.key}" ${param.dd2 == option.key ? 'selected' : ''}>${option.key}</option>
+    			<c:forEach items="${dd2options}" var="option2">
+       				 <option value="${option2.key}" ${param.dd2 == option2.key ? 'selected' : ''}>${option2.key}</option>
     			</c:forEach>
             </h1>
             </select>
-            <h1>Price:</h1>
+            <h1>Prix:</h1>
            <p>
 			<c:out value="${ productView.price }" />
 		</p>
@@ -292,16 +304,6 @@
       </div>
     </div>
     <script src="bootstrap/js/jquery.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-   <script type="text/javascript">
-   $(document).ready(function dd1change(dd1) {
-        // Fill dd2 options based on selected dd1 value.
-        console.log("TEST");
-        var selected = dd1.options[dd1.selectedIndex].value;
-        var dd2options = ${ sessionScope.categories[selected].value };
-    });
-  </script>
-
-  
+    <script src="bootstrap/js/bootstrap.min.js"></script>  
 
 </body></html>

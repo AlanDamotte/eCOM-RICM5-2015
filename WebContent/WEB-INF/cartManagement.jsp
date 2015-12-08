@@ -139,7 +139,12 @@
 						<form method="post" action="<c:url value="/removeFromCart"/>">
 						<label for="quantityCart">Quantité :<c:out value="${ sessionScope.cart_products.getQuantity(mapCartProducts.key) }"/>		
                      	<span class="requis"></span></label>
-                    	<input type="text" id="quantityCart" name="quantityCart" size="30" maxlength="30"/>
+                     	<input type="number" id="quantityCart" name="quantityCart" size="30" min="1" max="${mapCartProducts.value.quantity}"
+						maxlength="30"
+						promptMessage="Entrer une quantité entre 1 et ${mapCartProducts.value.quantity}"
+						required="true" invalidMessage="Valeur Invalide." /> <input
+						type="hidden" name="idProduct" value="${ mapCartProducts.value.id }">
+                    	<!-- <input type="text" id="quantityCart" name="quantityCart" size="30" maxlength="30"/> -->
                     	<input type="hidden" name="idProduct" value="${ mapCartProducts.key }">
 						<input type="submit" class="btn btn-info btn-sm" value="Modifier" />
 						 </form>
