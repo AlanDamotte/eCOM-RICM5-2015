@@ -117,19 +117,19 @@
 			</c:when>
 			<%-- Sinon, affichage du tableau. --%>
 			<c:otherwise>
+			<fieldset>
 			<form method="post" action="<c:url value="/connection" />">
 			<c:forEach items="${ sessionScope.orderHistory }" var="listOrder" varStatus="boucle">
-			<fieldset>
+			
 						<%-- Simple test de parité sur l'index de parcours, pour alterner la couleur de fond de chaque ligne du tableau. --%>
-						<p>    </p>
-						<p>    </p>
+	
 						<p>    </p>
 						<tr class="${boucle.index % 2 == 0 ? 'pair' : 'impair'}"></tr>
-						<h3>  Date de commande : ${ listOrder.order.date } </h3>
-						<h4 class="text-center text-muted"> Prix : ${ listOrder.order.amount } </h4>
-							
-							
-							
+						<pre><h4>  Date de la  commande :  ${ listOrder.order.date }  </h4></pre>
+						
+			</fieldset>				
+		
+		
 		<c:forEach items="${ listOrder.order.cart }" var="mapProducts" varStatus="boucle">
     		<div class="section">
       <div class="container">
@@ -141,8 +141,8 @@
 					                        </c:if> 
           </div>
           <div class="col-md-6">
-            <h2>Quantité commande<c:out value="${ mapProducts.value }"/></h2>		
-            
+          <p><font size="3" face="georgia" color="black"> Quantité commandé : </font> <c:out value="${ mapProducts.value }"/>	</p>	
+          <p> <font size="3" face="georgia" color="black"> Prix :&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp; </font> ${ listOrder.order.amount } </p>
           </div>
       </div>
     </div></div>
