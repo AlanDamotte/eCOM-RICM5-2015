@@ -1,0 +1,796 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Dossier de conception système &mdash; ecomRicm 0 documentation</title>
+    
+    <link rel="stylesheet" href="../_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="ecomRicm 0 documentation" href="../index.html" />
+    <link rel="next" title="Divers" href="../divers/index.html" />
+    <link rel="prev" title="Configuration" href="../dev/index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="../divers/index.html" title="Divers"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="../dev/index.html" title="Configuration"
+             accesskey="P">previous</a> |</li>
+        <li><a href="../index.html">ecomRicm 0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="dossier-de-conception-systeme">
+<h1>Dossier de conception système<a class="headerlink" href="#dossier-de-conception-systeme" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="schema-d-architecture-systeme-sas">
+<h2>Schéma d&#8217;Architecture Système (SAS)<a class="headerlink" href="#schema-d-architecture-systeme-sas" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/SAS.jpg" src="../_images/SAS.jpg" />
+</div>
+<div class="section" id="entites">
+<h2>Entités<a class="headerlink" href="#entites" title="Permalink to this headline">¶</a></h2>
+<img alt="../_images/entites.jpg" src="../_images/entites.jpg" />
+<p>Pour développer notre version v1 de notre site de vente de stickers personnalisés, nous avons mis en place divers composants.
+Tout d&#8217;abord voici le contenu des divers entités qui compose notre application : Client, Produit, Catégorie, Panier, Commande.
+Chaque entité correspond à une table dans notre base de données, et nous verrons dans ce document les liens entre chacune des ces entités.</p>
+<ul>
+<li><dl class="first docutils">
+<dt>Customer</dt>
+<dd><dl class="first last docutils">
+<dt>Attributs :</dt>
+<dd><ul class="first last simple">
+<li>id</li>
+<li>lastname : nom de l&#8217;utilisateur</li>
+<li>firstname : prénom de l&#8217;utilisateur</li>
+<li>address : adresse de l&#8217;utilisateur</li>
+<li>postCode : code postal</li>
+<li>city : ville</li>
+<li>phonenumber : numéro</li>
+<li>email : email</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Product</dt>
+<dd><dl class="first last docutils">
+<dt>Attributs :</dt>
+<dd><ul class="first last simple">
+<li>id</li>
+<li>name : nom du produit</li>
+<li>image : nom de l&#8217;image sur le serveur (dans notre cas, une image ne doit pas être enregistré le même nom). Une évolution consistera à utiliser des blobs et les stocker dans la base de données.</li>
+<li>description : descriptif du produit</li>
+<li>price : prix du produit</li>
+<li>quantity : quantité du produit disponible</li>
+<li>date : date de création du produit</li>
+<li>List&lt;Category&gt; categories : liste des catégories associées à un produit</li>
+<li>List&lt;String&gt; tags : liste des étiquettes ajoutées à la création du produit. Ces étiquettes vont permettre de rechercher un produit via la fonction de recherche. A l&#8217;avenir cette fonctionnalité pourrait être améliorée avec une recherche plus générale : recherche avec les noms de produits, mots de la description, etc...</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Category</dt>
+<dd><dl class="first last docutils">
+<dt>Attributs :</dt>
+<dd><ul class="first last simple">
+<li>id</li>
+<li>support : support du produit (sticker, magnette, etc...)</li>
+<li>shape : forme du produit (rectangle, rond, carré, etc...)</li>
+<li>dimension : Dimension2D, dimension (hauteur, largeur) du produit</li>
+<li>List&lt;Product&gt; products : liste des produits associés à cette catégorie</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Cart</dt>
+<dd><dl class="first last docutils">
+<dt>Attributs :</dt>
+<dd><ul class="first last simple">
+<li>id</li>
+<li>customer : client associé au panier</li>
+<li>Map&lt;Long, Integer&gt; cart : Map des produits présents dans le panier utilisateur (association produit/quantité)</li>
+<li>totalPrice : prix total du panier</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>Order</dt>
+<dd><dl class="first last docutils">
+<dt>Attributs :</dt>
+<dd><ul class="first last simple">
+<li>id</li>
+<li>customer : client associé à la commande</li>
+<li>date : date de la commande</li>
+<li>amount : montant de la commande</li>
+<li>paymentStatus : status du paiement</li>
+<li>deliveryStatus : status de la livraison</li>
+<li>Map&lt;Product, Integer&gt; cart : Map des produits présents dans le panier utilisateur (association produit/quantité)</li>
+<li>orderHistory : historique auquel la commande est associée</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+<li><dl class="first docutils">
+<dt>OrderHistory</dt>
+<dd><dl class="first last docutils">
+<dt>Attributs :</dt>
+<dd><ul class="first last simple">
+<li>id</li>
+<li>customer : client associé à l&#8217;historique</li>
+<li>order : commande associée à l&#8217;historique (un client peut avoir plusieurs commandes dans son historique stocké dans la base de données)</li>
+</ul>
+</dd>
+</dl>
+</dd>
+</dl>
+</li>
+</ul>
+<p>Nous pouvons donc voir dans un premier temps la relation ManyToMany entre les entités Category et Product. En effet, chaque catégorie peut-être associée à divers produits. Lors de l&#8217;initialisation d&#8217;un produit, celui-ci n&#8217;est associé à aucune catégorie. C&#8217;est au moment d&#8217;une commande qu&#8217;un utilisateur va choisir un produit et lui associer une catégorie. De manière réciproque, un produit peut être associé à plusieurs catégories.</p>
+<p>Un autre point intéressant à soulever dans l&#8217;entité Product est la gestion des tags. A chaque produit à associé un ou plusieurs tags correspondant à des étiquettes qui vont permettre de recherche un produit grâce à des mots clés. Pour ce faire, on utilise l&#8217;annotation &#64;ElementCollection : JPA va alors créer une nouvelle table qui contient deux colonnes et qui associe l&#8217;id d&#8217;un produit à une String correspondant à cette étiquettes.</p>
+<p>Ensuite, nous avons une relation OneToOne entre une commande (Order) et un historique (OrderHistory). Nous aurions pu implémenter l&#8217;historique de manière différente (ManyToOne : à un historique est associé une ou plusieurs commande), mais cette technique nous simplifie le requêtage via la DAO. De plus on utilise l&#8217;annotation &#64;OneToOne(cascade = CascadeType.PERSIST) : lors de la finalisation d&#8217;une commande, on crée une nouvelle commande (Order), que l&#8217;on associe à un historique (OrderHistory). Lors de la persistence en base de l&#8217;historique ainsi créé, la commande est automatiquement persisté elle aussi.</p>
+</div>
+<div class="section" id="les-beans">
+<h2>Les beans<a class="headerlink" href="#les-beans" title="Permalink to this headline">¶</a></h2>
+<p>Chaque entité est associée à une bean stateless correspondant à une DAO (Data Access Object). Chaque DAO possède des méthodes permettant de communiquer avec la base de données (persist, merge, remove).</p>
+<p>CartDao :</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Renvoi le panier dont l&#8217;identifiant est id</li>
+</ul>
+<p class="last"><a href="#id1"><span class="problematic" id="id2">*</span></a>/</p>
+</dd>
+</dl>
+<p>public Cart find(long id);</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Persiste dans la bdd le panier en paramètre</li>
+</ul>
+<p class="last"><a href="#id3"><span class="problematic" id="id4">*</span></a>/</p>
+</dd>
+</dl>
+<p>public void create(Cart cart);</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Renvoie la liste de panier présent en bdd</li>
+</ul>
+<p class="last"><a href="#id5"><span class="problematic" id="id6">*</span></a>/</p>
+</dd>
+</dl>
+<p>public List&lt;Cart&gt; list();</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Renvoie le panier associé à un utilisateur</li>
+<li>Utilisé lors de la connexion</li>
+</ul>
+<p class="last"><a href="#id7"><span class="problematic" id="id8">*</span></a>/</p>
+</dd>
+</dl>
+<p>public Cart findCartByIdCustomer(long id);</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Supprimer un panier de la bdd</li>
+</ul>
+<p class="last"><a href="#id9"><span class="problematic" id="id10">*</span></a>/</p>
+</dd>
+</dl>
+<p>public void remove(Cart cart);</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Merge un panier dans la bdd</li>
+</ul>
+<p class="last"><a href="#id11"><span class="problematic" id="id12">*</span></a>/</p>
+</dd>
+</dl>
+<p>public void merge(Cart cart);</p>
+</div></blockquote>
+<p>CategoryDao :</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Renvoi la catégorie dont l&#8217;identifiant est id</li>
+</ul>
+<p class="last"><a href="#id13"><span class="problematic" id="id14">*</span></a>/</p>
+</dd>
+</dl>
+<p>public Category find(long id);</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Persiste dans la bdd la catégorie en paramètre</li>
+</ul>
+<p class="last"><a href="#id15"><span class="problematic" id="id16">*</span></a>/</p>
+</dd>
+</dl>
+<p>public void create(Category category);</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Renvoie la liste de catégories présent en bdd</li>
+</ul>
+<p class="last"><a href="#id17"><span class="problematic" id="id18">*</span></a>/</p>
+</dd>
+</dl>
+<p>public List&lt;Category&gt; list();</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Supprimer une catégorie de la bdd</li>
+</ul>
+<p class="last"><a href="#id19"><span class="problematic" id="id20">*</span></a>/</p>
+</dd>
+</dl>
+<p>public void remove(Category category);</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Renvoie une Map associant à une forme la liste des dimensions disponibles</li>
+</ul>
+<p class="last"><a href="#id21"><span class="problematic" id="id22">*</span></a>/</p>
+</dd>
+</dl>
+<p>public Map&lt;String,List&lt;Dimension&gt;&gt; getCategories();</p>
+</div></blockquote>
+<p>CustomerDao :</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Renvoi le client dont l&#8217;identifiant est id</li>
+</ul>
+<p class="last"><a href="#id23"><span class="problematic" id="id24">*</span></a>/</p>
+</dd>
+</dl>
+<p>public Customer find(long id);</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Persiste dans la bdd le client en paramètre</li>
+</ul>
+<p class="last"><a href="#id25"><span class="problematic" id="id26">*</span></a>/</p>
+</dd>
+</dl>
+<p>public void create(Customer customer);</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Renvoie la liste de clients présent en bdd</li>
+</ul>
+<p class="last"><a href="#id27"><span class="problematic" id="id28">*</span></a>/</p>
+</dd>
+</dl>
+<p>public List&lt;Customer&gt; list();</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Méthode de vérification du mot de passe lors de la connexion</li>
+<li>Renvoie le client associé à l&#8217;email si le mot de passe est correct, null sinon</li>
+</ul>
+<p class="last"><a href="#id29"><span class="problematic" id="id30">*</span></a>/</p>
+</dd>
+</dl>
+<p>public Customer checkPassword(String email, String password);</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Supprimer un client de la bdd</li>
+</ul>
+<p class="last"><a href="#id31"><span class="problematic" id="id32">*</span></a>/</p>
+</dd>
+</dl>
+<p>public void remove(Customer customer);</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Méthode de vérification d&#8217;existance d&#8217;un client dans la bdd</li>
+<li>Renvoie true si l&#8217;email existe, false sinon</li>
+</ul>
+<p class="last"><a href="#id33"><span class="problematic" id="id34">*</span></a>/</p>
+</dd>
+</dl>
+<p>boolean emailExists(String email);</p>
+</div></blockquote>
+<p>OrderDao :</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Renvoi la commande dont l&#8217;identifiant est id</li>
+</ul>
+<p class="last"><a href="#id35"><span class="problematic" id="id36">*</span></a>/</p>
+</dd>
+</dl>
+<p>public Order find(long id);</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Persiste dans la bdd la commande en paramètre, cette méthode n&#8217;est pas utilisée lors de la validation de commande,</li>
+<li>en effet la persistence se fait en cascade avec l&#8217;enregitrement d&#8217;un orderHistory</li>
+</ul>
+<p class="last"><a href="#id37"><span class="problematic" id="id38">*</span></a>/</p>
+</dd>
+</dl>
+<p>public void create(Order order);</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Renvoie la liste de commande présent en bdd</li>
+</ul>
+<p class="last"><a href="#id39"><span class="problematic" id="id40">*</span></a>/</p>
+</dd>
+</dl>
+<p>public List&lt;Order&gt; list();</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Supprimer une commande de la bdd</li>
+</ul>
+<p class="last"><a href="#id41"><span class="problematic" id="id42">*</span></a>/</p>
+</dd>
+</dl>
+<p>public void remove(Order order);</p>
+</div></blockquote>
+<p>OrderHistoryDao :</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Renvoi l&#8217;hitorique dont l&#8217;identifiant est id</li>
+</ul>
+<p class="last"><a href="#id43"><span class="problematic" id="id44">*</span></a>/</p>
+</dd>
+</dl>
+<p>public OrderHistory find(long id);</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Persiste dans la bdd l&#8217;historique en paramètre</li>
+</ul>
+<p class="last"><a href="#id45"><span class="problematic" id="id46">*</span></a>/</p>
+</dd>
+</dl>
+<p>public void create(OrderHistory orderH);</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Renvoie la liste d&#8217;historiques présent en bdd</li>
+</ul>
+<p class="last"><a href="#id47"><span class="problematic" id="id48">*</span></a>/</p>
+</dd>
+</dl>
+<p>public List&lt;OrderHistory&gt; list();</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Supprimer un historique de la bdd</li>
+</ul>
+<p class="last"><a href="#id49"><span class="problematic" id="id50">*</span></a>/</p>
+</dd>
+</dl>
+<p>public void remove(OrderHistory orderH);</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Renvoie l&#8217;historique associé à un client</li>
+</ul>
+<p class="last"><a href="#id51"><span class="problematic" id="id52">*</span></a>/</p>
+</dd>
+</dl>
+<p>public List&lt;OrderHistory&gt; findHistoryByIdCustomer(long id);</p>
+</div></blockquote>
+<p>ProductDao :</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Renvoi le produit dont l&#8217;identifiant est id</li>
+</ul>
+<p class="last"><a href="#id53"><span class="problematic" id="id54">*</span></a>/</p>
+</dd>
+</dl>
+<p>public Product find(long id);</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Persiste dans la bdd le produit en paramètre</li>
+</ul>
+<p class="last"><a href="#id55"><span class="problematic" id="id56">*</span></a>/</p>
+</dd>
+</dl>
+<p>public void create(Product product);</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Renvoie la liste de produit présent en bdd</li>
+</ul>
+<p class="last"><a href="#id57"><span class="problematic" id="id58">*</span></a>/</p>
+</dd>
+</dl>
+<p>public List&lt;Product&gt; list();</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Renvoie la liste des 10 derniers produits enregistrés (nouveautés)</li>
+</ul>
+<p class="last"><a href="#id59"><span class="problematic" id="id60">*</span></a>/</p>
+</dd>
+</dl>
+<p>public List&lt;Product&gt; listLastProducts();</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Supprimer un produit de la bdd</li>
+</ul>
+<p class="last"><a href="#id61"><span class="problematic" id="id62">*</span></a>/</p>
+</dd>
+</dl>
+<p>public void remove(Product product);</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Méthode permettant de lister les produits associés à un tag</li>
+<li>Renvoie la liste des produits</li>
+</ul>
+<p class="last"><a href="#id63"><span class="problematic" id="id64">*</span></a>/</p>
+</dd>
+</dl>
+<p>public List&lt;Product&gt; listWithTag(List&lt;String&gt; tags);</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Methode permettant de mettre à jour les stocks lors de la validation de commande</li>
+</ul>
+<p class="last"><a href="#id65"><span class="problematic" id="id66">*</span></a>/</p>
+</dd>
+</dl>
+<p>public void updateProductQuantity(ShoppingCart shoppingCart);</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Méthode de vérification de disponibilité de produits</li>
+<li>Renvoie true si tous les produits de la commande sont en stock, false sinon</li>
+</ul>
+<p class="last"><a href="#id67"><span class="problematic" id="id68">*</span></a>/</p>
+</dd>
+</dl>
+<p>public boolean checkAvailability(Order order);</p>
+</div></blockquote>
+</div>
+<div class="section" id="gestion-du-panier-utilisateur-stateful">
+<h2>Gestion du panier utilisateur (Stateful) :<a class="headerlink" href="#gestion-du-panier-utilisateur-stateful" title="Permalink to this headline">¶</a></h2>
+<blockquote>
+<div><dl class="docutils">
+<dt>Cette bean possède les attributs suivant :</dt>
+<dd><ul class="first last simple">
+<li>id : id correspondant au client</li>
+<li>Map&lt;Long, Integer&gt; items : Map permettant d&#8217;associer l&#8217;id d&#8217;un produit à la quantité</li>
+<li>total : montant total du panier</li>
+</ul>
+</dd>
+</dl>
+<p>Cette bean possède plusieurs méthodes permettant de mettre à jour la Map correspondant au panier et le total du panier (méthode d&#8217;ajout d&#8217;article, de mise à jour de la quantité d&#8217;un article, de suppression d&#8217;un article du panier). Elle possède également des méthodes appelées en fin de session utilisateur ou lors de la déconnexion d&#8217;un utilsateur : ces méthodes permette de persister en base un Cart associé à l&#8217;utilisateur courant. Pour ce faire, l&#8217;utilisateur doit bien entendu être connecté. Ainsi, lors de la connexion d&#8217;un utilisateur, on vérifie dans la base de données si cet utilisateur ne possédait pas déjà de panier, et on initialise la bean avec le contenu du panier de la précédente connexion.</p>
+<p>Méthodes :</p>
+<p>void initialize();</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Ajoute un produit au panier</li>
+<li>Met à jour la Map avec la clé produit et la quantité en valeur, ainsi que le prix total</li>
+</ul>
+<p class="last"><a href="#id69"><span class="problematic" id="id70">*</span></a>/</p>
+</dd>
+</dl>
+<p>void addProduct(Long id, int quantity);</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Met à jour la Map panier et le total</li>
+</ul>
+<p class="last"><a href="#id71"><span class="problematic" id="id72">*</span></a>/</p>
+</dd>
+</dl>
+<p>public void updateQuantity(Long id, int quantity);</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Retourne le montant total du panier</li>
+</ul>
+<p class="last"><a href="#id73"><span class="problematic" id="id74">*</span></a>/</p>
+</dd>
+</dl>
+<p>public double getTotal();</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Enlève une quantité d&#8217;une produit du panier, cette méthode est aussi utilisée pour supprimer un produit du panier</li>
+</ul>
+<p class="last"><a href="#id75"><span class="problematic" id="id76">*</span></a>/</p>
+</dd>
+</dl>
+<p>void removeProduct(Long id, int quantity);</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Retourne la liste des produits présents dans le panier</li>
+</ul>
+<p class="last"><a href="#id77"><span class="problematic" id="id78">*</span></a>/</p>
+</dd>
+</dl>
+<p>public List&lt;Long&gt; getProductsById();</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Retourne une Map associant un produit à son identifiant</li>
+</ul>
+<p class="last"><a href="#id79"><span class="problematic" id="id80">*</span></a>/</p>
+</dd>
+</dl>
+<p>public Map&lt;Long, Product&gt; getMapProducts();</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Retourne le panier utilisateur à la différence que la Map associe un produit à la quantité</li>
+</ul>
+<p class="last"><a href="#id81"><span class="problematic" id="id82">*</span></a>/</p>
+</dd>
+</dl>
+<p>public Map&lt;Product, Integer&gt; getProductsMap();</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Retourne la quantité d&#8217;un produit dans le panier en fonction de son id</li>
+</ul>
+<p class="last"><a href="#id83"><span class="problematic" id="id84">*</span></a>/</p>
+</dd>
+</dl>
+<p>int getQuantity(Long id);</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Set l&#8217;id du panier correspondant à l&#8217;identifiant du client</li>
+</ul>
+<p class="last"><a href="#id85"><span class="problematic" id="id86">*</span></a>/</p>
+</dd>
+</dl>
+<p>void setId(Long id);</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Retourne l&#8217;identifiant du panier (l&#8217;identifiant du client associé au panier)</li>
+</ul>
+<p class="last"><a href="#id87"><span class="problematic" id="id88">*</span></a>/</p>
+</dd>
+</dl>
+<p>public Long getId();</p>
+<p>public void initializeClientCart();</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Methode pour enregistrer le panier si utilisateur connecté lors de l&#8217;expiration d&#8217;une session</li>
+</ul>
+<p class="last"><a href="#id89"><span class="problematic" id="id90">*</span></a>/</p>
+</dd>
+</dl>
+<p>public void release();</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Méthode pour fusionner le panier client et le panier session</li>
+</ul>
+<p class="last"><a href="#id91"><span class="problematic" id="id92">*</span></a>/</p>
+</dd>
+</dl>
+<p>public void mergeClientCart();</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Retourne le panier</li>
+</ul>
+<p class="last"><a href="#id93"><span class="problematic" id="id94">*</span></a>/</p>
+</dd>
+</dl>
+<p>public Map&lt;Long, Integer&gt; getCart();</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Vide le panier et remet le montant de panier à 0</li>
+</ul>
+<p class="last"><a href="#id95"><span class="problematic" id="id96">*</span></a>/</p>
+</dd>
+</dl>
+<p>public void clear();</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Methode pour enregistrer le panier si utilisateur connecté lors d&#8217;une déconnexion</li>
+</ul>
+<p class="last"><a href="#id97"><span class="problematic" id="id98">*</span></a>/</p>
+</dd>
+</dl>
+<p>public void saveCart();</p>
+</div></blockquote>
+<p>Pour chaque bean, stateless ou stateful, ont été implémenté les interfaces respectives Local et Remote (via les annotations &#64;Local et &#64;Remote). Nous utilisons les interfaces Remote pour instancier nos EJB. Pour les beans stateless, nos DAO, l&#8217;instanciation se fait via l&#8217;utilisation de l&#8217;annotation &#64;EJB. Pour la gestion du panier (stateful), l&#8217;instanciation de la bean se fait par conservation de référence (RMI, récupération via un lookup dans le contexte).</p>
+</div>
+<div class="section" id="gestion-de-l-envoi-de-mail-mailsenderbean">
+<h2>Gestion de l&#8217;envoi de mail : MailSenderBean<a class="headerlink" href="#gestion-de-l-envoi-de-mail-mailsenderbean" title="Permalink to this headline">¶</a></h2>
+<p>Stateless, LocalBean :</p>
+<blockquote>
+<div><dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Default constructor.</li>
+</ul>
+<p class="last"><a href="#id99"><span class="problematic" id="id100">*</span></a>/</p>
+</dd>
+<dt>public MailSenderBean() {</dt>
+<dd>// TODO Auto-generated constructor stub</dd>
+</dl>
+<p>}</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Méthode d&#8217;envoi de mail</li>
+<li>params : fromEmail email de l&#8217;envoyeur, username nom d&#8217;utilisateur de la boite mail, password mote de passe</li>
+<li>toEmail email du client à qui envoyer le mail, subject sujet du mail, message corps du message</li>
+</ul>
+<p class="last"><a href="#id101"><span class="problematic" id="id102">*</span></a>/</p>
+</dd>
+</dl>
+<p>public void sendEmail(String fromEmail, String username, String password, String toEmail, String subject, String message}</p>
+</div></blockquote>
+<p>Pour l&#8217;envoi de mail, l&#8217;application utilise le serveur de mail Gmail. La méthode sendEmail s&#8217;occupe de paramétrer l&#8217;envoi de mail et d&#8217;envoyer le mail au destinataire passé en paramètre.</p>
+</div>
+<div class="section" id="gestion-de-la-newsletter-newsletterbean">
+<h2>Gestion de la newsletter : NewsLetterBean<a class="headerlink" href="#gestion-de-la-newsletter-newsletterbean" title="Permalink to this headline">¶</a></h2>
+<p>&#64;Singleton, &#64;LocalBean, &#64;Startup</p>
+<blockquote>
+<div><p>Attributs :</p>
+<p>&#64;Resource
+private TimerService timerService;</p>
+<p>&#64;EJB
+private MailSenderBean mailSender;</p>
+<p>&#64;EJB
+private CustomerDaoRemote customerDao;</p>
+<p>Méthodes :</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Initialisation de l&#8217;ejb timer qui permettra à son expiration d&#8217;envoyer un mail à tous les inscrits</li>
+</ul>
+<p class="last"><a href="#id103"><span class="problematic" id="id104">*</span></a>/</p>
+</dd>
+</dl>
+<p>&#64;PostConstruct
+private void init();</p>
+<dl class="docutils">
+<dt>/**</dt>
+<dd><ul class="first simple">
+<li>Méthode d&#8217;envoi de la newsletter à toutes les personnes inscrites</li>
+</ul>
+<p class="last"><a href="#id105"><span class="problematic" id="id106">*</span></a>/</p>
+</dd>
+</dl>
+<p>&#64;Asynchronous
+&#64;Timeout
+public void sendNewsLetter(Timer timer) throws ServletException, IOException;</p>
+</div></blockquote>
+<p>La newsletter utilise un EJBTimer qui va permettre à intervalle régulier (à la manière d&#8217;un cron) d&#8217;effectuer une tâche. A expiration du timer, la méthode contenant l&#8217;annotation &#64;Timeout est effectué. Elle utilise la DAO client afin de récupérer les adresses mail de tous les clients. Ensuite on utilise le mailSender vu précédemment pour procéder à l&#8217;envoi de la newsletter à chaque personne inscrite. Le mail contient notamment le nom des dernières nouveautées.</p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="../index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Dossier de conception système</a><ul>
+<li><a class="reference internal" href="#schema-d-architecture-systeme-sas">Schéma d&#8217;Architecture Système (SAS)</a></li>
+<li><a class="reference internal" href="#entites">Entités</a></li>
+<li><a class="reference internal" href="#les-beans">Les beans</a></li>
+<li><a class="reference internal" href="#gestion-du-panier-utilisateur-stateful">Gestion du panier utilisateur (Stateful) :</a></li>
+<li><a class="reference internal" href="#gestion-de-l-envoi-de-mail-mailsenderbean">Gestion de l&#8217;envoi de mail : MailSenderBean</a></li>
+<li><a class="reference internal" href="#gestion-de-la-newsletter-newsletterbean">Gestion de la newsletter : NewsLetterBean</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="../dev/index.html"
+                        title="previous chapter">Configuration</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="../divers/index.html"
+                        title="next chapter">Divers</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="../_sources/conceptionSys/index.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="../genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="../divers/index.html" title="Divers"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="../dev/index.html" title="Configuration"
+             >previous</a> |</li>
+        <li><a href="../index.html">ecomRicm 0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2015, Damotte, Hammerer, Codazzi, Torck, Kai.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.2.2.
+    </div>
+  </body>
+</html>

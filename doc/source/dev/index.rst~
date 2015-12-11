@@ -1,0 +1,35 @@
+Configuration
+=============
+
+
+
+Création de la base de données
+------------------------------
+Pour la base de données :
+::
+
+	mysql -h localhost -u root -p
+	CREATE DATABASE ecom DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+	GRANT ALL ON ecom.* TO 'java'@'localhost' IDENTIFIED BY 'ecom';
+	exit
+
+Pour accéder à la BDD
+
+::
+
+	mysql -h localhost -u java -p
+	use ecom
+
+
+Configuration de BoneCp
+-----------------------
+Récupérer le fichier bonecp-datasource.xml et le mettre dans le dossier glassfish4/bin
+Puis aller dans le dossier avec un terminal.
+Executer ./asadmin
+
+::
+	add-resources bonecp-datasource.xml
+
+
+
+

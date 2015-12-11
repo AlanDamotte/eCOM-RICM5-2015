@@ -14,6 +14,7 @@ Contents:
    intro/index
    dev/index
    conceptionSys/index
+   divers/index
 
 
 Indices and tables

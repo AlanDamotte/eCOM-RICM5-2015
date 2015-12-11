@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app>
+	<session-config> 
+		<session-timeout>30</session-timeout>
+	</session-config>
+	<listener>
+		<listener-class>ecom.stickers.session.SessionListener</listener-class>
+	</listener>
+	<!-- The main page for the site will be the MyCMS servlet (http://website/CMS) -->
+	<welcome-file-list>
+    	<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>
