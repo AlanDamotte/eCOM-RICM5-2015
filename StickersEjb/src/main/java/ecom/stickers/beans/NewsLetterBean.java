@@ -20,6 +20,7 @@ import javax.servlet.ServletException;
 
 import ecom.stickers.dao.CustomerDaoRemote;
 import ecom.stickers.dao.ProductDaoRemote;
+import ecom.stickers.entities.Customer;
 import ecom.stickers.entities.Product;
 
 @Singleton
@@ -73,18 +74,16 @@ public class NewsLetterBean{
 			    message = message + name + "<br>";
 			} 
 			
-			String toEmail = "Alan_dams@hotmail.fr";
-			mailSender.sendEmail(fromEmail, username, password, toEmail, subject, message);
 
-//			List<Customer> customerList = customerDao.list();
-//			Iterator<Customer> iter = customerList.iterator();
-//			while (iter.hasNext()) {
-//			    Customer customer = iter.next();
-//			    String toEmail = customer.getEmail();
-//			    
-//			    // Call to mail sender bean
-//				mailSender.sendEmail(fromEmail, username, password, toEmail, subject, message);
-//			} 
+			List<Customer> customerList = customerDao.list();
+			Iterator<Customer> iter = customerList.iterator();
+			while (iter.hasNext()) {
+			    Customer customer = iter.next();
+			    String toEmail = customer.getEmail();
+			    
+			    // Call to mail sender bean
+				mailSender.sendEmail(fromEmail, username, password, toEmail, subject, message);
+			} 
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
