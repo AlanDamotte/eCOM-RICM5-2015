@@ -19,8 +19,8 @@ L’application réalisée devra offrir deux interfaces distinctes :
 
 Chaque groupe devra élaborer un cahier des charges précis de l’application en termes de fonctionnalités et de critères d’ergonomie. Par ailleurs, le projet devra être réalisé en employant les méthodes et technologies présentées en cours. Ces différents aspects devront être validés par l’équipe pédagogique tout au long du projet.
 
-Génération de la documentation
-------------------------------
+Génération et consultation de la documentation
+----------------------------------------------
 1. Installer [Sphinx](http://sphinx-doc.org/latest/install.html#debian-ubuntu-install-sphinx-using-packaging-system)
 2. Aller dans le dossier *doc* du répertoire
 3. Effectuer la commande suivante : 
