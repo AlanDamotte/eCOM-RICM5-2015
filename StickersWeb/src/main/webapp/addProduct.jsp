@@ -39,7 +39,7 @@
                     <span class="erreur">${form.errors['tags']}</span>
                     <br />
                     
-                    <label for="image">Image</label>
+                    <label for="image">Image<span class="requis">*</span></label>
 					<input type="file" id="image" name="image" />
 					<span class="erreur">${form.errors['image']}</span>
 					<br />

@@ -6,7 +6,7 @@
 <span class="erreur">${form.errors['lastnameCustomer']}</span>
 <br />
 
-<label for="firstnameCustomer">Prénom </label>
+<label for="firstnameCustomer">Prénom <span class="requis">*</span></label>
 <input class="form-control" placeholder="Votre Prenom" type="text" id="firstnameCustomer" name="firstnameCustomer" value="<c:out value="${customer.firstname}"/>" size="30" maxlength="30" />
 <span class="erreur">${form.errors['firstnameCustomer']}</span>
 <br />
@@ -31,7 +31,7 @@
 <span class="erreur">${form.errors['postCodeCustomer']}</span>
 <br />
 
-<label for="cityCustomer">Ville<span class="requis">*</span></label>
+<label for="cityCustomer">Ville <span class="requis">*</span></label>
 <input class="form-control" placeholder="Vetraz Morel" type="text" id="cityCustomer" name="cityCustomer" value="<c:out value="${customer.city}"/>" size="30" maxlength="60" />
 <span class="erreur">${form.errors['cityCustomer']}</span>
 <br />
@@ -41,7 +41,7 @@
 <span class="erreur">${form.errors['phonenumberCustomer']}</span>
 <br />
 
-<label for="emailCustomer">Adresse email</label>
+<label for="emailCustomer">Adresse email <span class="requis">*</span></label>
 <input class="form-control" placeholder="alice@ca-glice.fr" type="email" id="emailCustomer" name="emailCustomer" value="<c:out value="${customer.email}"/>" size="30" maxlength="60" />
 <span class="erreur">${form.errors['emailCustomer']}</span>
 <br />

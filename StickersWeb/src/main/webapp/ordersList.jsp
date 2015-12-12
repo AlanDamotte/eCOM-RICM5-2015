@@ -22,9 +22,7 @@
                     <th>Client</th>
                     <th>Date</th>
                     <th>Montant</th>
-                    <th>Mode de paiement</th>
                     <th>Statut de paiement</th>
-                    <th>Mode de livraison</th>
                     <th>Statut de livraison</th>
                     <th class="action">Action</th>                    
                 </tr>
@@ -33,12 +31,10 @@
                 <%-- Simple test de parité sur l'index de parcours, pour alterner la couleur de fond de chaque ligne du tableau. --%>
                 <tr class="${boucle.index % 2 == 0 ? 'pair' : 'impair'}">
                     <%-- Affichage des propriétés du bean Ordere, qui est stocké en tant que valeur de l'entrée courante de la map --%>
-                    <td><c:out value="${ mapOrders.value.client.firstname } ${ mapOrders.value.client.lastname }"/></td>
+                    <td><c:out value="${ mapOrders.value.customer.firstname } ${ mapOrders.value.customer.lastname }"/></td>
                     <td><joda:format value="${ mapOrders.value.date }" pattern="dd/MM/yyyy HH:mm:ss"/></td>
                     <td><c:out value="${ mapOrders.value.amount }"/></td>
-                    <td><c:out value="${ mapOrders.value.paymentMode }"/></td>
                     <td><c:out value="${ mapOrders.value.paymentStatus }"/></td>
-                    <td><c:out value="${ mapOrders.value.deliveryMode }"/></td>
                     <td><c:out value="${ mapOrders.value.deliveryStatus }"/></td>
                     <%-- Lien vers la servlet de suppression, avec passage de la date de la ordere - c'est-à-dire la clé de la Map - en paramètre grâce à la balise <c:param/>. --%>
                     <td class="action">

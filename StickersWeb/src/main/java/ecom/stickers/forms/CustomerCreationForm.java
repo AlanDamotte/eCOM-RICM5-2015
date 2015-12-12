@@ -181,13 +181,15 @@ public class CustomerCreationForm {
 				throw new FormValidationException("Le nom d'utilisateur doit contenir au moins 2 caractères.");
 			}
 		} else {
-			throw new FormValidationException("Merci d'entrer un nom d'utilisateur.");
+			throw new FormValidationException("Merci d'entrer votre nom.");
 		}
 	}
 
 	private void firstnameValidation(String firstname) throws FormValidationException {
 		if (firstname != null && firstname.length() < 2) {
 			throw new FormValidationException("Le prénom d'utilisateur doit contenir au moins 2 caractères.");
+		}else {
+			throw new FormValidationException("Merci d'entrer votre prénom.");
 		}
 	}
 

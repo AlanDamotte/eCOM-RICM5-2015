@@ -29,7 +29,7 @@
                     <span class="erreur">${form.errors['height']}</span>
                     <br />
                     
-                    <label for="width">Largeur</label>
+                    <label for="width">Largeur <span class="requis">*</span></label>
                     <input type="text" id="width" name="width" size="30" maxlength="30" />
                     <span class="erreur">${form.errors['width']}</span>
                     <br />
