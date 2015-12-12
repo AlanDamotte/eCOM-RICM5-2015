@@ -118,24 +118,29 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="file:///Users/quentintorck/Pictures/fleche-blanche-droite.png" class="center-block img-circle img-responsive">
+                        <img src="bootstrap/img/quentin.jpg"  height="200" width="200" class="center-block img-circle img-responsive">
                         <h3 class="text-center">Quentin Torck</h3>
                         <p class="text-center">Scrum Master</p>
                     </div>
                     <div class="col-md-4">
-                        <img src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png" class="center-block img-circle img-responsive">
+                        <img src="bootstrap/img/jerem.jpg"  height="200" width="200" class="center-block img-circle img-responsive">
                         <h3 class="text-center">Jérèmy Hammerer</h3>
-                        <p class="text-center">Developer</p>
+                        <p class="text-center">Developeur</p>
                     </div>
                     <div class="col-md-4">
-                        <img src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png" class="center-block img-circle img-responsive">
-                        <h3 class="text-center">Rama Codazzy</h3>
-                        <p class="text-center">Developer</p>
+                        <img src="bootstrap/img/rama.jpg"  height="200" width="200" class="center-block img-circle img-responsive">
+                        <h3 class="text-center">Rama Codazzi</h3>
+                        <p class="text-center">Developeur</p>
                     </div>
                     <div class="col-md-4">
-                        <img src="http://pingendo.github.io/pingendo-bootstrap/assets/user_placeholder.png" class="center-block img-circle img-responsive">
+                        <img src="bootstrap/img/alan.jpg"  height="200" width="200" class="center-block img-circle img-responsive">
                         <h3 class="text-center">Alan Damotte</h3>
                         <p class="text-center">Chef de Projet</p>
+                    </div>
+                     <div class="col-md-4">
+                        <img src="bootstrap/img/kai.jpg"  height="200" width="200" class="center-block img-circle img-responsive">
+                        <h3 class="text-center">Guo Kai</h3>
+                        <p class="text-center">Developer</p>
                     </div>
             
                 </div>
@@ -212,8 +217,8 @@
           </div>
            <div class="modal-body">
             
-              <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false"data-dismiss="modal" href="#formulaireInscription">Inscription</a>
-           	 <a class="btn btn-info btn-lg"  data-toggle="modal" data-backdrop="false"data-dismiss="modal" href="#formulaireConnexion">Connexion</a>
+              <a class="btn btn-info btn-lg" class="close" data-toggle="modal" data-backdrop="false" href="#formulaireInscription">Inscription</a>
+           	 <a class="btn btn-info btn-lg" class="close" data-toggle="modal"data-dismiss="modal" data-backdrop="false" href="#formulaireConnexion">Connexion</a>
           </div>
           
         </div>

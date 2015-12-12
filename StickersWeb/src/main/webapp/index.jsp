@@ -1,7 +1,10 @@
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
 <!DOCTYPE html>
 <html><head>
+		<fmt:setLocale value="fr" scope="session"/>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -249,7 +252,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">x</button>
+                        <button type="button" class="close" data-dismiss="modal" style ="overflow-y:scroll" >x</button>
                         <h4 class="modal-title">Vos infos :</h4>
                     </div>
                      <form method="post" action="<c:url value="/connection" />">
@@ -302,7 +305,7 @@
           </div>
            <div class="modal-body">
             
-              <a class="btn btn-info btn-lg" class="close" data-toggle="modal"data-dismiss="modal" data-backdrop="false" href="#formulaireInscription">Inscription</a>
+              <a class="btn btn-info btn-lg" class="close" data-toggle="modal" data-backdrop="false" href="#formulaireInscription">Inscription</a>
            	 <a class="btn btn-info btn-lg" class="close" data-toggle="modal"data-dismiss="modal" data-backdrop="false" href="#formulaireConnexion">Connexion</a>
           </div>
           
@@ -315,8 +318,8 @@
     
     
     
-    <div id="formulaireInscription" class="modal fade">
-      <div class="modal-dialog">
+    <div id="formulaireInscription" class="modal fade"  >
+      <div class="modal-dialog" >
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal">x</button>
