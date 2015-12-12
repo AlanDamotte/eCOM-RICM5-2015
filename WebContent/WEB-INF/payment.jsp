@@ -35,7 +35,7 @@
         <title>Liste des produits existants</title>
         <link type="text/css" rel="stylesheet" href="<c:url value="/inc/style.css"/>" />
     </head>
- <body data-spy="scroll">
+    <body data-spy="scroll">
         <div class="container">
             <!-- The justified navigation menu is meant for single line per list item.
             Multiple lines will require custom code not provided by Bootstrap. -->
@@ -71,9 +71,9 @@
                              <div class="col-sm-2 col-md-2"></div>
               <div class="col-md-2 col-sm-2 text-right"></div>
               <div class="col-md-5 col-sm-2 text-center">
-                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./orderHistory>&nbsp;Historique &nbsp;</a>
+                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./orderHistory>Historique </a>
 
-                                <a class="btn btn-info btn-lg" href="./cartManagement">&nbsp; &nbsp; &nbsp;  Panier &nbsp; &nbsp;  &nbsp;</a>
+                                <a class="btn btn-info btn-lg" href="./cartManagement">&nbsp; &nbsp; Panier &nbsp;  &nbsp;</a>
                                
                                 <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./disconnection>Déconnexion</a>
                                 
@@ -121,7 +121,7 @@
           <h1 class="text-center text-muted">Procédure de Payement</h1>
           <div class="col-md-12">
             <div class="progress">
-              <div class="progress-bar" role="progressbar" style="width: 30%;">30% Complete</div>
+              <div class="progress-bar progress-bar-info" role="progressbar" style="width: 30%;">30% Complete</div>
             </div>
           </div>
         </div>
