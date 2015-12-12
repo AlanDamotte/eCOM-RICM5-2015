@@ -255,8 +255,8 @@
           </div>
            <div class="modal-body">
             
-              <a class="btn btn-info btn-lg" class="close" data-toggle="modal"data-dismiss="modal" data-backdrop="false" href="#formulaireInscription">Inscription</a>
-           	 <a class="btn btn-info btn-lg" class="close" data-toggle="modal" data-dismiss="modal"data-backdrop="false" href="#formulaireConnexion">Connexion</a>
+              <a class="btn btn-info btn-lg" class="close" data-toggle="modal" data-backdrop="false" href="#formulaireInscription">Inscription</a>
+           	 <a class="btn btn-info btn-lg" class="close" data-toggle="modal"data-dismiss="modal" data-backdrop="false" href="#formulaireConnexion">Connexion</a>
           </div>
           
         </div>
