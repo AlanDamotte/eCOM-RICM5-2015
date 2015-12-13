@@ -89,8 +89,9 @@ public class CreateOrder extends HttpServlet {
 		order.setPaymentStatus("");
 		
 		boolean availability = productDao.checkAvailability(order);
-		System.out.println(availability);
+		//System.out.println(availability);
 		if(!availability){
+			session.setAttribute(ATT_PAYMENT_STATUS, "ErrorQuantity");
 			this.getServletContext().getRequestDispatcher(VIEW_PAYMENT).forward(request, response);
 		}else{
 			try {

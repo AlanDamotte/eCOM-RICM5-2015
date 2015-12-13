@@ -188,7 +188,7 @@ public class CustomerCreationForm {
 	private void firstnameValidation(String firstname) throws FormValidationException {
 		if (firstname != null && firstname.length() < 2) {
 			throw new FormValidationException("Le prénom d'utilisateur doit contenir au moins 2 caractères.");
-		}else {
+		}if (firstname == null ){
 			throw new FormValidationException("Merci d'entrer votre prénom.");
 		}
 	}
@@ -204,7 +204,7 @@ public class CustomerCreationForm {
 			if (postcode.length() != 5) {
 				throw new FormValidationException("Le code postal doit contenir 5 caractères");
 			}
-		} else {
+		} if (postcode == null) {
 			throw new FormValidationException("Merci d'entrer un code postal");
 		}
 	}
@@ -222,7 +222,7 @@ public class CustomerCreationForm {
 			} else if (phonenumber.length() < 4) {
 				throw new FormValidationException("Le numéro de téléphone doit contenir au moins 4 chiffres.");
 			}
-		} else {
+		}if (phonenumber == null) {
 			throw new FormValidationException("Merci d'entrer un numéro de téléphone.");
 		}
 	}

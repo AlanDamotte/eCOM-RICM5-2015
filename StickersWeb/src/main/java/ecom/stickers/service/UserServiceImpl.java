@@ -65,7 +65,7 @@ public class UserServiceImpl {
 			OrderHistoryDaoRemote orderHistory, Customer customer, Order order, ShoppingCart shoppingCart)
 					throws Exception {
 			// Mise à jour des quantités de produits restantes
-			productDao.updateProductQuantity(shoppingCart);
+			//productDao.updateProductQuantity(shoppingCart);
 
 			shoppingCart.clear();
 			request.getSession().setAttribute(CART_PRODUCTS_SESSION, shoppingCart);
