@@ -20,7 +20,26 @@
 				${sessionScope.customerSession.city}<br>
 				${sessionScope.customerSession.phonenumber}<br>
 			</p>
-			<a href="<c:url value="/paymentManagement"/>">Valider</a>
+<%-- 			<a href="<c:url value="/paymentManagement"/>">Valider</a> --%>
+			     <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <hr>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 text-center">
+          <!-- <input type="submit" value="Payer" class="btn btn-info btn-lg"/> -->
+             <a class="btn btn-info btn-lg"  href="<c:url value="/paymentManagement"/>">Continuer</a>
+            </form>
+          </div>
+          <div class="col-md-6 text-center">
+            <a class="btn btn-info btn-lg"  href="<c:url value="/index"/>">Annuler</a>
+          </div>
+        </div>
+      </div>
+    </div>
 		</c:if>
 	</c:if>
 	<c:if test="${empty sessionScope.customerSession}">

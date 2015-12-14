@@ -13,7 +13,7 @@
         <c:choose>
             <%-- Si aucune ordere n'existe en session, affichage d'un message par défaut. --%>
             <c:when test="${ empty sessionScope.orders }">
-                <p class="erreur">Aucune ordere enregistrée.</p>
+                <p class="erreur">Aucune commande enregistrée.</p>
             </c:when>
             <%-- Sinon, affichage du tableau. --%>
             <c:otherwise>

@@ -67,7 +67,8 @@
                             
                             
                             
-                            <div class="col-sm-2 col-md-2"></div><div class="col-sm-2 col-md-4"></div><div class="col-md-3 col-sm-2 text-center">
+                            <div class="col-sm-2 col-md-2 text-center"><c:if test="${not empty sessionScope.cart_products}"><a>Total : <c:out value="${ sessionScope.cart_products.getTotal() }"/> euros</a></c:if></div>
+                            </div><div class="col-sm-2 col-md-4"></div><div class="col-md-3 col-sm-2 text-center">
                                 <a class="btn btn-info btn-lg" href="./cartManagement">Panier</a>
                                 
                                 <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href="#formulaire">Connecte toi</a>
@@ -83,7 +84,7 @@
                             
                             
                             
-                             <div class="col-sm-2 col-md-2"></div>
+                            <div class="col-sm-2 col-md-2 text-center"><c:if test="${not empty sessionScope.cart_products}"><a>Total : <c:out value="${ sessionScope.cart_products.getTotal() }"/> euros</a></c:if></div>
               <div class="col-md-2 col-sm-2 text-right"></div>
               <div class="col-md-5 col-sm-2 text-center">
                                 <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./orderHistory>Historique </a>
@@ -152,7 +153,26 @@
     <h4 class="modal-title">Données Bancaires :</h4>
     <p>  Nom du responsable de la carte : <label class="control-label" >${sessionScope.cardName}<br></label></p>
     <p>  Numéro de carte : <label class="control-label" >${sessionScope.cardNumber}<br></label></p>
-    <a class="btn btn-default"  href="<c:url value="/createOrder"/>">Payer</a>
+     <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <hr>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6 text-center">
+          <!-- <input type="submit" value="Payer" class="btn btn-info btn-lg"/> -->
+             <a class="btn btn-info btn-lg"  href="<c:url value="/createOrder"/>">Payer</a>
+            </form>
+          </div>
+          <div class="col-md-6 text-center">
+           <a class="btn btn-info btn-lg"  href="<c:url value="/index"/>">Annuler</a>
+          </div>
+        </div>
+      </div>
+    </div>
+   
      
     </div>
    

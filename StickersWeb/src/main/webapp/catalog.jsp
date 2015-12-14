@@ -46,7 +46,8 @@
                             
                             
                             
-                            <div class="col-sm-2 col-md-2"></div><div class="col-sm-2 col-md-4"></div><div class="col-md-3 col-sm-2 text-center">
+                            <div class="col-sm-2 col-md-2 text-center"><c:if test="${not empty sessionScope.cart_products}"><a>Total : <c:out value="${ sessionScope.cart_products.getTotal() }"/> euros</a></c:if></div>
+                            <div class="col-sm-2 col-md-4"></div><div class="col-md-3 col-sm-2 text-center">
                                 <a class="btn btn-info btn-lg" href="./cartManagement">Panier</a>
                                 
                                 <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href="#formulaire">Connecte toi</a>
@@ -62,7 +63,7 @@
                             
                             
                             
-                             <div class="col-sm-2 col-md-2"></div>
+                             <div class="col-sm-2 col-md-2 text-center"><c:if test="${not empty sessionScope.cart_products}"><a>Total : <c:out value="${ sessionScope.cart_products.getTotal() }"/> euros</a></c:if></div>
               <div class="col-md-2 col-sm-2 text-right"></div>
               <div class="col-md-5 col-sm-2 text-center">
                                 <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./orderHistory>&nbsp;Historique &nbsp;</a>

@@ -52,7 +52,8 @@
                             
                             
                             
-                            <div class="col-sm-2 col-md-2"></div><div class="col-sm-2 col-md-4"></div><div class="col-md-3 col-sm-2 text-center">
+                            <div class="col-sm-2 col-md-2 text-center"><c:if test="${not empty sessionScope.cart_products}"><a>Total : <c:out value="${ sessionScope.cart_products.getTotal() }"/> euros</a></c:if></div>
+                            <div class="col-sm-2 col-md-4"></div><div class="col-md-3 col-sm-2 text-center">
                                 <a class="btn btn-info btn-lg" href="./cartManagement">Panier</a>
                                 
                                 <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href="#formulaire">Connecte toi</a>
@@ -68,7 +69,7 @@
                             
                             
                             
-                             <div class="col-sm-2 col-md-2"></div>
+                             <div class="col-sm-2 col-md-2 text-center"><c:if test="${not empty sessionScope.cart_products}"><a>Total : <c:out value="${ sessionScope.cart_products.getTotal() }"/> euros</a></c:if></div>
               <div class="col-md-2 col-sm-2 text-right"></div>
               <div class="col-md-5 col-sm-2 text-center">
                                 <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./orderHistory>Historique </a>
@@ -152,8 +153,30 @@
           <br />
           <p class="info">${ form.result }</p>
          </fieldset>
-        <button type="submit" class="btn btn-default">Valider</button>
-         <button type="reset" class="btn btn-default">Remettre à zéro</button>
+        <!-- <button type="submit" class="btn btn-default">Valider</button>
+         <button type="reset" class="btn btn-default">Remettre à zéro</button> -->
+              <div class="section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <hr>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-4 text-center">
+          <input type="submit" value="Valider" class="btn btn-info btn-lg"/>
+            </form>
+          </div>
+           <div class="col-md-4 text-center">
+          <input type="reset" value="Remettre à zéro" class="btn btn-info btn-lg"/>
+            </form>
+          </div>
+          <div class="col-md-4 text-center">
+            <a class="btn btn-info btn-lg"  href="<c:url value="/index"/>">Annuler</a>
+          </div>
+        </div>
+      </div>
+    </div>
         </form>
         </div>
         </div>
