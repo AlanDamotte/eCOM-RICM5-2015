@@ -30,18 +30,24 @@ public class Search extends HttpServlet {
 	
 
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		String tags = getValueParameter(request, PARAM_TAGS);
-		List<String> tagsList = getTags(tags);
-
+		
 		/* Récupération de la Map des products enregistrés en session */
 		HttpSession session = request.getSession();
-		
-		List<Product> listProducts = productDao.listWithTag(tagsList);
+
+		String tags = getValueParameter(request, PARAM_TAGS);
 		Map<Long, Product> mapProducts = new HashMap<Long, Product>();
-		for (Product product : listProducts) {
-			mapProducts.put(product.getId(), product);
+		if(tags != null){
+			List<String> tagsList = getTags(tags);
+			
+			if(!tagsList.isEmpty()){
+				List<Product> listProducts = productDao.listWithTag(tagsList);
+				
+				for (Product product : listProducts) {
+					mapProducts.put(product.getId(), product);
+				}
+			}
 		}
+		
 		session.setAttribute(SEARCH_PRODUCTS_SESSION, mapProducts);
 		
 		response.sendRedirect(request.getContextPath() + VIEWSEARCH);
