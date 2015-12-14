@@ -10,4 +10,4 @@
     <body>
         <c:import url="/inc/adminMenu.jsp" />
     </body>
-</html>
+</html> 
