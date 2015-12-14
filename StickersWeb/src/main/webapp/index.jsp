@@ -32,7 +32,7 @@
             <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
             <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
         <![endif]-->
-    </head><body data-spy="scroll">
+    </head>  <body data-spy="scroll">
         <div class="container">
             <!-- The justified navigation menu is meant for single line per list item.
             Multiple lines will require custom code not provided by Bootstrap. -->
@@ -40,40 +40,40 @@
                 <div class="section">
                     <div class="container">
                         <div class="row">
-                                   <c:if test="${empty sessionScope.customerSession}">
+                        <c:if test="${empty sessionScope.customerSession}">
                         		<div class="col-md-3">
-                                <h1 class="text-muted">Stick-Gump</h1>
+                                <h1 class="text-muted">My Stick It</h1>
                             </div>
                             
                             
                             
                             
                             
-                            <div class="col-sm-2 col-md-2 text-center"><c:if test="${not empty sessionScope.cart_products}"><a>Total : <c:out value="${ sessionScope.cart_products.getTotal() }"/> euros</a></c:if></div>
+                            <div class="col-sm-2 col-md-2 text-center"></div>
                             <div class="col-sm-2 col-md-4"></div><div class="col-md-3 col-sm-2 text-center">
-                                <a class="btn btn-info btn-lg" href="./cartManagement">Panier</a>
+                                <a class="btn btn-info btn-lg" href="./cartManagement">Panier<c:if test="${not empty sessionScope.cart_products}">:<br /><c:out value="${ sessionScope.cart_products.getTotal() }"/>€</c:if></a>
                                 
-                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href="#formulaire">Connecte toi</a>
+                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href="#formulaire">Connecte toi<br />&nbsp;</a>
                             </div>
                         		</c:if>
                         
                         <c:if test="${not empty sessionScope.customerSession}">
                                     <div class="col-md-3">
-                                <h1 class="text-muted">Stick-Gump</h1>
+                                <h1 class="text-muted">My Stick It</h1>
                             </div>
                             
                             
                             
                             
                             
-                             <div class="col-sm-2 col-md-2 text-center"><c:if test="${not empty sessionScope.cart_products}"><a>Total : <c:out value="${ sessionScope.cart_products.getTotal() }"/> euros</a></c:if></div>
+                             <div class="col-sm-2 col-md-2 text-center"></div>
               <div class="col-md-2 col-sm-2 text-right"></div>
               <div class="col-md-5 col-sm-2 text-center">
-                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./orderHistory>&nbsp;Historique &nbsp;</a>
-
-                                <a class="btn btn-info btn-lg" href="./cartManagement">&nbsp; &nbsp; &nbsp;  Panier &nbsp; &nbsp;  &nbsp;</a>
-                               
-                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./disconnection>Déconnexion</a>
+              
+              
+              					<a class="btn btn-info btn-lg" href="./cartManagement"><c:if test="${not empty sessionScope.cart_products}">&nbsp; &nbsp; &nbsp;  Panier &nbsp; &nbsp;  &nbsp;:<br /><c:out value="${ sessionScope.cart_products.getTotal() }"/>€</c:if><c:if test="${ empty sessionScope.cart_products}">&nbsp; &nbsp; &nbsp;  Panier &nbsp; &nbsp;  &nbsp;<br />&nbsp;</c:if></a>
+                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./orderHistory>&nbsp;Historique &nbsp;<br />&nbsp;</a>
+                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./disconnection>Déconnexion<br />&nbsp;</a>
                                 
                                  
                             </div>
