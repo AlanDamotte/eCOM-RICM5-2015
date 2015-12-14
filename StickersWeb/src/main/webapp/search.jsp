@@ -109,11 +109,11 @@
         <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
         <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
         <div class="section">
-            <div class="container">
+            <div class="text-center class="container">
                 <div class="row">
                     <div class="col-md-12">
                     
-                        <h1 class="text-center text-muted" contenteditable="true">Sticker Gallery</h1>
+                        <h1 class="text-center text-muted" contenteditable="true">Gallerie de stickers</h1>
                     </div>
                 <c:if test="${empty sessionScope.searchProducts}">
                 <p  class="text-center text-muted" class="erreur">Aucun produit ne correspond à votre recherche, veuillez réessayer.</p>
