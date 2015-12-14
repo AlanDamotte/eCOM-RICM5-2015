@@ -53,7 +53,7 @@
                             
                              <div class="col-sm-2 col-md-2 text-center" ></div>
                              <div class="col-sm-2 col-md-4"></div><div class="col-md-3 col-sm-2 text-center">
-                                <a class="btn btn-info btn-lg" href="./cartManagement">Panier <c:if test="${not empty sessionScope.cart_products}">: <br /> <c:out value="${ sessionScope.cart_products.getTotal() }"/>€</c:if></a>
+                                <a class="btn btn-info btn-lg" href="./cartManagement">Panier: <c:if test="${not empty sessionScope.cart_products}"> <br /> <c:out value="${ sessionScope.cart_products.getTotal() }"/>€</c:if></a>
                                 
                                 <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href="#formulaire">Connecte toi<br /> &nbsp;</a>
                             </div>
