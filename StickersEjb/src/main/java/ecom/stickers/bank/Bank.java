@@ -16,7 +16,12 @@ public class Bank{
 		account2.setSecurityCode(123);
 		account2.setBalance(20);
 		
+		Account accountDemo = new Account();
+		accountDemo.setSecurityCode(123);
+		accountDemo.setBalance(2000);
+		
 		this.listAccount.put((long) 123456, account);
+		this.listAccount.put((long) 123456, accountDemo);
 		this.listAccount.put((long) 123, account2);
 	}
 	
