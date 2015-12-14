@@ -16,8 +16,8 @@ import ecom.stickers.dao.ProductDaoRemote;
 import ecom.stickers.entities.Product;
 import ecom.stickers.forms.ProductCreationForm;
 
-@WebServlet(name = "ProductCreation", urlPatterns = { "/productCreation" }, initParams = @WebInitParam( name = "path", value = "/home/alan/Documents/RICM5/eCOM-RICM5-2015/file/img") )
-@MultipartConfig( location = "/home/alan/Documents/RICM5/eCOM-RICM5-2015/file/img", maxFileSize = 2 * 1024 * 1024, maxRequestSize = 10 * 1024 * 1024, fileSizeThreshold = 1024 * 1024 )
+@WebServlet(name = "ProductCreation", urlPatterns = { "/productCreation" }, initParams = @WebInitParam( name = "path", value = "/home/glassfish/target/file/img/") )
+@MultipartConfig( location = "/home/glassfish/target/file/img/", maxFileSize = 2 * 1024 * 1024, maxRequestSize = 10 * 1024 * 1024, fileSizeThreshold = 1024 * 1024 )
 public class ProductCreation extends HttpServlet {
 	/**
 	 * 
