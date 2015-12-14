@@ -72,11 +72,10 @@
                              <div class="col-sm-2 col-md-2 text-center" ></div>
               <div class="col-md-2 col-sm-2 text-right"></div>
               <div class="col-md-5 col-sm-2 text-center">
-                                <a class="btn btn-info btn-lg"   href=./cartManagement >&nbsp;  Panier   &nbsp;<c:if test="${not empty sessionScope.cart_products}">: <br /> <c:out value="${ sessionScope.cart_products.getTotal() }"/>€</c:if></a>
+                                <a class="btn btn-info btn-lg"   href=./cartManagement >&nbsp;  Panier:   &nbsp;<c:if test="${not empty sessionScope.cart_products}"> <br /> <c:out value="${ sessionScope.cart_products.getTotal() }"/>€</c:if></a>
 
-                                <a class="btn btn-info btn-lg"data-toggle="modal" data-backdrop="false" href="./orderHistory">&nbsp;Historique &nbsp;<br /> &nbsp;</a>
-                               
-                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./disconnection>Déconnexion<br /> &nbsp;<br /> &nbsp;</a>
+                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./orderHistory>&nbsp;Historique &nbsp;<br/>&nbsp;</a>
+                                <a class="btn btn-info btn-lg" data-toggle="modal" data-backdrop="false" href=./disconnection>Déconnexion<br />&nbsp;</a>
                                 
                                  
                             </div>
