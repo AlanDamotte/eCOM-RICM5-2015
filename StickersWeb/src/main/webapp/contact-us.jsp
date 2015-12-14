@@ -119,27 +119,27 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
-                        <img src="bootstrap/img/quentin.jpg"  height="200" width="200" class="center-block img-circle img-responsive">
+                        <img src="bootstrap/img/quentin.png"  height="200" width="200" class="center-block img-circle img-responsive">
                         <h3 class="text-center">Quentin Torck</h3>
                         <p class="text-center">Scrum Master</p>
                     </div>
                     <div class="col-md-4">
-                        <img src="bootstrap/img/jerem.jpg"  height="200" width="200" class="center-block img-circle img-responsive">
+                        <img src="bootstrap/img/jerem.png"  height="200" width="200" class="center-block img-circle img-responsive">
                         <h3 class="text-center">Jérèmy Hammerer</h3>
                         <p class="text-center">Developeur</p>
                     </div>
                     <div class="col-md-4">
-                        <img src="bootstrap/img/rama.jpg"  height="200" width="200" class="center-block img-circle img-responsive">
+                        <img src="bootstrap/img/rama.png"  height="200" width="200" class="center-block img-circle img-responsive">
                         <h3 class="text-center">Rama Codazzi</h3>
                         <p class="text-center">Developeur</p>
                     </div>
                     <div class="col-md-4">
-                        <img src="bootstrap/img/alan.jpg"  height="200" width="200" class="center-block img-circle img-responsive">
+                        <img src="bootstrap/img/alan.png"  height="200" width="200" class="center-block img-circle img-responsive">
                         <h3 class="text-center">Alan Damotte</h3>
                         <p class="text-center">Chef de Projet</p>
                     </div>
                      <div class="col-md-4">
-                        <img src="bootstrap/img/kai.jpg"  height="200" width="200" class="center-block img-circle img-responsive">
+                        <img src="bootstrap/img/kai.png"  height="200" width="200" class="center-block img-circle img-responsive">
                         <h3 class="text-center">Guo Kai</h3>
                         <p class="text-center">Developer</p>
                     </div>
