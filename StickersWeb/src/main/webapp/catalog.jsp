@@ -113,7 +113,7 @@
                 <div class="row">
                     <div class="col-md-12">
                     
-                        <h1 class="text-center text-muted" contenteditable="true">Sticker Gallery</h1>
+                        <h1 class="text-center text-muted" contenteditable="true">Gallerie de stickers</h1>
                     </div>
                     
                 </div>

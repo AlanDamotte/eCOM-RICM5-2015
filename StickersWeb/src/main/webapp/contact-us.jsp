@@ -111,7 +111,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12"></div>
-                    <h1 class="text-center text-muted" contenteditable="true">The creators</h1>
+                    <h1 class="text-center text-muted" contenteditable="true">Les Concepteurs</h1>
                 </div>
             </div>
         </div>
