@@ -107,7 +107,7 @@ public class ProductCreationForm {
 	}
 	
 	public List<String> getTags(String tags) {
-		return Arrays.asList(tags.split(";"));
+		return Arrays.asList(tags.split(" "));
 	}
 	
 	private void processNameP(String nameP, Product product) {

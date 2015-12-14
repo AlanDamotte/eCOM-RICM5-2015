@@ -54,7 +54,7 @@ public class Search extends HttpServlet {
 	}
 
 	public List<String> getTags(String tags) {
-		return Arrays.asList(tags.split(";"));
+		return Arrays.asList(tags.split(" "));
 	}
 
 	/*
